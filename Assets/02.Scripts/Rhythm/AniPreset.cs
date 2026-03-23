@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class AniPreset : MonoBehaviour
 {
-    static AniPreset instance;
+    private static AniPreset instance;
     public static AniPreset Instance
     {
         get { return instance; }
     }
 
-    Dictionary<string, bool> signalDic = new Dictionary<string, bool>();
+    private Dictionary<string, bool> signalDic = new Dictionary<string, bool>();
 
     private void Awake()
     {

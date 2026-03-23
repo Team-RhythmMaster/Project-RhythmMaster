@@ -27,13 +27,11 @@ public class UIManager : MonoBehaviour
     {
         find = FindUI;
 
-        UIObject[] objs = FindObjectsOfType<UIObject>();
+        UIObject[] objs = FindObjectsByType<UIObject>(FindObjectsSortMode.None);
         foreach (UIObject obj in objs)
         {
             uiObjectDic.Add(obj.Name, new UIActor(obj, null));
         }
-
-        uiObjectDic["UI_S_SelectMode"].action = GameManager.Instance.ChangeMode;
 
         uiObjectDic["UI_G_Judgement"].action = Score.Instance.Ani;
         uiObjectDic["UI_G_Combo"].action = Score.Instance.Ani;

@@ -1,8 +1,8 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace Utils.GameDefinitions
 {
+    // 게임 상태
     public enum GameState
     {
         Game,
@@ -11,7 +11,15 @@ namespace Utils.GameDefinitions
         GameOver
     }
 
-    // 노래 상태
+    // 노래 난이도
+    public enum Difficulty 
+    { 
+        Easy, 
+        Normal, 
+        Hard 
+    }
+
+    // 노래 재생 상태
     public enum MusicState
     {
         Playing,   // 재생 상태
@@ -33,24 +41,8 @@ namespace Utils.GameDefinitions
         Perfect,
         Great,
         Good,
+        Bad,
         Miss
-    }
-
-    // Note 정보
-    public struct Note
-    {
-        public int time;
-        public int type;
-        public int line;
-        public int tail;
-
-        public Note(int time, int type, int line, int tail)
-        {
-            this.time = time;
-            this.type = type;
-            this.line = line;
-            this.tail = tail;
-        }
     }
 
     // Score 정보

@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     public MusicState state = MusicState.Stop;
     public AudioSource audioSource;
 
-    void Awake()
+    private void Awake()
     {
         if (instance != null && instance != this)
         {
@@ -20,9 +20,11 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        Init();
     }
 
-    void Start()
+    private void Init()
     {
         audioSource = GetComponent<AudioSource>();
     }

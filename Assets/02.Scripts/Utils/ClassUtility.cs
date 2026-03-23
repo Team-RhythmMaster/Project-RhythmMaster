@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
-using Utils.GameDefinitions;
 using System.Collections.Generic;
+using Utils.GameDefinitions;
 
 namespace Utils.ClassUtility
 {
@@ -18,7 +18,15 @@ namespace Utils.ClassUtility
         }
     }
 
-    // Sheet 정보
+    [Serializable]
+    public class Note
+    {
+        public NoteType type; // 노트 타입 (0: Short, 1: Long)
+        public float time;    // 노트 시작 시간 (언제 도착할지)
+        public float tail;    // 롱노트 끝
+        public int line;      // 레인 index
+    }
+
     [Serializable]
     public class Sheet
     {

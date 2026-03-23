@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIText : MonoBehaviour
 {
-    TextMeshProUGUI text;
+    private TextMeshProUGUI text;
     public UIObject uiObject;
 
     private void Start()

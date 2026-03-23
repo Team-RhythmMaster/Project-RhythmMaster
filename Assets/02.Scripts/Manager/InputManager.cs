@@ -1,24 +1,98 @@
 using UnityEngine;
+using Utils.GameDefinitions;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    private static InputManager instance;
+    public static InputManager Instance {  get { return instance; } }
+
     public LayerMask noteLayer;
 
-    void Update()
+    public GameObject[] keyEffects = new GameObject[4];
+    private Judgement judgement = null;
+    private Sync sync = null;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(instance != null && instance != this)
         {
-            DetectHit();
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
         }
     }
 
-    void DetectHit()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(Vector2.zero, Vector2.up, 10f, noteLayer);
+    public Vector2 mousePos;
 
-        if (hit.collider != null)
+    private void Start()
+    {
+        foreach (var effect in keyEffects)
         {
-            hit.collider.GetComponent<NoteObject>().TryHit();
+            effect.gameObject.SetActive(false);
+        }
+        judgement = FindObjectOfType<Judgement>();
+        sync = FindObjectOfType<Sync>();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.state == GameState.Edit)
+            mousePos = Mouse.current.position.ReadValue();
+    }
+
+    public void OnNoteLine0(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            judgement.Judge(0);
+            keyEffects[0].gameObject.SetActive(true);
+        }
+        else if (context.canceled)
+        {
+            judgement.CheckLongNote(0);
+            keyEffects[0].gameObject.SetActive(false);
+        }
+    }
+    public void OnNoteLine1(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            judgement.Judge(1);
+            keyEffects[1].gameObject.SetActive(true);
+        }
+        else if (context.canceled)
+        {
+            judgement.CheckLongNote(1);
+            keyEffects[1].gameObject.SetActive(false);
+        }
+    }
+    public void OnNoteLine2(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            judgement.Judge(2);
+            keyEffects[2].gameObject.SetActive(true);
+        }
+        else if (context.canceled)
+        {
+            judgement.CheckLongNote(2);
+            keyEffects[2].gameObject.SetActive(false);
+        }
+    }
+    public void OnNoteLine3(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            judgement.Judge(3);
+            keyEffects[3].gameObject.SetActive(true);
+        }
+        else if (context.canceled)
+        {
+            judgement.CheckLongNote(3);
+            keyEffects[3].gameObject.SetActive(false);
         }
     }
 }

@@ -4,7 +4,7 @@ using Utils.GameDefinitions;
 
 public class Score : MonoBehaviour
 {
-    static Score instance;
+    private static Score instance;
     public static Score Instance
     {
         get { return instance; }
@@ -12,11 +12,11 @@ public class Score : MonoBehaviour
 
     public ScoreData data;
 
-    UIText uiJudgement;
-    UIText uiCombo;
-    UIText uiScore;
+    private UIText uiJudgement;
+    private UIText uiCombo;
+    private UIText uiScore;
 
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
             instance = this;

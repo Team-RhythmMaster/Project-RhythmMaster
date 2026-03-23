@@ -1,27 +1,29 @@
 using UnityEngine;
-using Utils.GameDefinitions;
 using System.Collections;
+using Utils.ClassUtility;
+using Utils.GameDefinitions;
 using System.Collections.Generic;
 
+// Note 판정
 public class Judgement : MonoBehaviour
 {
-    readonly int miss = 600;
-    readonly int good = 400;
-    readonly int great = 250;
+    private readonly int miss = 600;
+    private readonly int good = 400;
+    private readonly int great = 250;
 
-    List<Queue<Note>> notes = new List<Queue<Note>>();
-    Queue<Note> note1 = new Queue<Note>();
-    Queue<Note> note2 = new Queue<Note>();
-    Queue<Note> note3 = new Queue<Note>();
-    Queue<Note> note4 = new Queue<Note>();
+    private List<Queue<Note>> notes = new List<Queue<Note>>();
+    private Queue<Note> note1 = new Queue<Note>();
+    private Queue<Note> note2 = new Queue<Note>();
+    private Queue<Note> note3 = new Queue<Note>();
+    private Queue<Note> note4 = new Queue<Note>();
 
-    int[] longNoteCheck = new int[4] { 0, 0, 0, 0 };
+    private int[] longNoteCheck = new int[4] { 0, 0, 0, 0 };
 
-    int curruntTime = 0;
+    private int curruntTime = 0;
     // User에 의해 조정된 판정 타이밍
     public int judgeTimeFromUserSetting = 0;
 
-    Coroutine coCheckMiss;
+    private Coroutine coCheckMiss;
 
     public void Init()
     {
@@ -60,7 +62,7 @@ public class Judgement : MonoBehaviour
             return;
 
         Note note = notes[line].Peek();
-        int judgeTime = curruntTime - note.time + judgeTimeFromUserSetting;
+        float judgeTime = curruntTime - note.time + judgeTimeFromUserSetting;
 
         if (judgeTime < miss && judgeTime > -miss)
         {
@@ -91,7 +93,7 @@ public class Judgement : MonoBehaviour
             {
                 notes[line].Dequeue();
             }
-            else if (note.type == (int)NoteType.Long)
+            else if (note.type == NoteType.Long)
             {
                 longNoteCheck[line] = 1;
             }
@@ -104,10 +106,10 @@ public class Judgement : MonoBehaviour
             return;
 
         Note note = notes[line].Peek();
-        if (note.type != (int)NoteType.Long)
+        if (note.type != NoteType.Long)
             return;
 
-        int judgeTime = curruntTime - note.tail + judgeTimeFromUserSetting;
+        float judgeTime = curruntTime - note.tail + judgeTimeFromUserSetting;
         if (judgeTime < good && judgeTime > -good)
         {
             if (judgeTime < great && judgeTime > -great)
@@ -126,7 +128,7 @@ public class Judgement : MonoBehaviour
         }
     }
 
-    IEnumerator IECheckMiss()
+    private IEnumerator IECheckMiss()
     {
         while (true)
         {
@@ -137,9 +139,9 @@ public class Judgement : MonoBehaviour
                 if (notes[i].Count <= 0)
                     break;
                 Note note = notes[i].Peek();
-                int judgeTime = note.time - curruntTime + judgeTimeFromUserSetting;
+                float judgeTime = note.time - curruntTime + judgeTimeFromUserSetting;
 
-                if (note.type == (int)NoteType.Long)
+                if (note.type == NoteType.Long)
                 {
                     if (longNoteCheck[note.line - 1] == 0) // Head가 판정처리가 안된 경우
                     {

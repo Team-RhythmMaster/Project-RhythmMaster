@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using Utils.ClassUtility;
 using Utils.GameDefinitions;
@@ -34,21 +33,5 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 65;
         Screen.SetResolution(1920, 1080, true);
-    }
-
-    public void ChangeMode(UIObject uiObject)
-    {
-        if (state == GameState.Game)
-        {
-            state = GameState.Edit;
-            TextMeshProUGUI text = uiObject.transform.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = "Edit\nMode";
-        }
-        else
-        {
-            state = GameState.Game;
-            TextMeshProUGUI text = uiObject.transform.GetComponentInChildren<TextMeshProUGUI>();
-            text.text = "Game\nMode";
-        }
     }
 }
