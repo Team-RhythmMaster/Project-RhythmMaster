@@ -1,8 +1,5 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Utils.ClassUtility;
-using Utils.GameDefinitions;
 
 public class InputManager : MonoBehaviour
 {
@@ -10,9 +7,7 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance {  get { return instance; } }
 
     public GameObject[] keyEffects = new GameObject[4];
-    private Conductor conductor;
     private Judgement judgement;
-    private Sync sync;
 
     public LayerMask noteLayer;
     public Vector2 mousePos;
@@ -31,39 +26,33 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        //foreach (var effect in keyEffects)
-        //{
-        //    effect.gameObject.SetActive(false);
-        //}
-
-        conductor = FindFirstObjectByType<Conductor>();
         judgement = FindFirstObjectByType<Judgement>();
-        sync = FindFirstObjectByType<Sync>();
     }
 
     private void Update()
     {
-        //if (GameManager.Instance.state == GameState.Edit)
-        //    mousePos = Mouse.current.position.ReadValue();
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        // 왼쪽 레인 (A키)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            HitNote();
+            HitLane(0);
+        }
+
+        // 오른쪽 레인 (D키)
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            HitLane(1);
         }
     }
 
-    void HitNote()
+    void HitLane(int lane)
     {
-        NoteObject[] notes = FindObjectsByType<NoteObject>(FindObjectsSortMode.None);
+        float currentTime = AudioManager.Instance.songTime;
+        NoteObject note = NoteManager.Instance.GetClosestNote(lane, currentTime);
 
-        if (notes.Length == 0) return;
-
-        // 가장 가까운 노트 찾기
-        NoteObject closest = notes
-            .OrderBy(n => Mathf.Abs(n.noteTime - conductor.songTime))
-            .First();
-
-        closest.TryHit();
+        if (note != null)
+        {
+            note.TryHit();
+        }
     }
 
     public void OnNoteLine0(InputAction.CallbackContext context)

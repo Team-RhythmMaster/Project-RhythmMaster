@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
-using Utils.GameDefinitions;
+using Utils.EnumType;
+using Utils.ClassUtility;
 
 public class Score : MonoBehaviour
 {
@@ -24,10 +25,6 @@ public class Score : MonoBehaviour
 
     public void Init()
     {
-        //uiJudgement = UIController.Instance.FindUI("UI_G_Judgement").uiObject as UIText;
-        //uiCombo = UIController.Instance.FindUI("UI_G_Combo").uiObject as UIText;
-        //uiScore = UIController.Instance.FindUI("UI_G_Score").uiObject as UIText;
-
         AniPreset.Instance.Join(uiJudgement.uiObject.Name);
         AniPreset.Instance.Join(uiCombo.uiObject.Name);
         AniPreset.Instance.Join(uiScore.uiObject.Name);
@@ -52,8 +49,6 @@ public class Score : MonoBehaviour
 
         AniPreset.Instance.PlayPop(uiJudgement.uiObject.Name, uiJudgement.uiObject.rect);
         AniPreset.Instance.PlayPop(uiCombo.uiObject.Name, uiCombo.uiObject.rect);
-        //UIController.Instance.find.Invoke(uiJudgement.Name);
-        //UIController.Instance.find.Invoke(uiCombo.Name);
     }
 
     public void Ani(UIObject uiObject)

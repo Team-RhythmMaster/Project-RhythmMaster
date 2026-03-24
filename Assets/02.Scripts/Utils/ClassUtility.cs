@@ -1,20 +1,33 @@
 using System;
 using UnityEngine;
+using Utils.EnumType;
 using System.Collections.Generic;
-using Utils.GameDefinitions;
 
 namespace Utils.ClassUtility
 {
-    public static class ClassUtility
+    // Score 정보
+    public struct ScoreData
     {
-        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        public int great;
+        public int good;
+        public int miss;
+        public int fastMiss; // 빨리 입력해서 미스
+        public int longMiss; // 롱노트 완성 실패, miss 카운트는 하지 않음
+
+        public string[] judgeText;
+        public Color[] judgeColor;
+        public JudgeType judge;
+        public int combo;
+        public int score
         {
-            T component = gameObject.GetComponent<T>();
-            if (component == null)
+            get
             {
-                component = gameObject.AddComponent<T>();
+                return (great * 500) + (good * 200);
             }
-            return component;
+            set
+            {
+                score = value;
+            }
         }
     }
 

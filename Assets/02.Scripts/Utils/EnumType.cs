@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utils.GameDefinitions
+namespace Utils.EnumType
 {
     // 게임 상태
     public enum GameState
@@ -43,31 +43,5 @@ namespace Utils.GameDefinitions
         Good,
         Bad,
         Miss
-    }
-
-    // Score 정보
-    public struct ScoreData
-    {
-        public int great;
-        public int good;
-        public int miss;
-        public int fastMiss; // 빨리 입력해서 미스
-        public int longMiss; // 롱노트 완성 실패, miss 카운트는 하지 않음
-
-        public string[] judgeText;
-        public Color[] judgeColor;
-        public JudgeType judge;
-        public int combo;
-        public int score
-        {
-            get
-            {
-                return (great * 500) + (good * 200);
-            }
-            set
-            {
-                score = value;
-            }
-        }
     }
 }

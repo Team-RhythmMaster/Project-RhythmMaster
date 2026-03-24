@@ -1,6 +1,6 @@
 using UnityEngine;
+using Utils.EnumType;
 using Utils.ClassUtility;
-using Utils.GameDefinitions;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     public GameState state = GameState.Game;
-
-    public Dictionary<string, Sheet> sheets = new Dictionary<string, Sheet>();
     public string title;
 
     private void Awake()

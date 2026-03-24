@@ -1,58 +1,64 @@
 using UnityEngine;
-using Utils.ClassUtility;
 
-// Note 생성 시스템
+// 음악 분석 및 Note 생성 시스템
 public class NoteGenerator : MonoBehaviour
 {
+    // 기본 설정
     public GameObject notePrefab;
-    private Conductor conductor;
-    public Transform spawnPos;
+    public Vector3 spawnPos = new Vector3(10, 0, 0); // 노트 생성 위치 (화면 오른쪽 밖)
 
-    private float[] spectrum = new float[512];
-    private float energy = 0.0f;
-    private float lastEnergy = 0f;
+    public float bpm = 120f;      // 곡의 BPM
+    public int totalBeats = 100;  // 총 몇 개의 박자를 생성할지
+    public int laneCount = 2;     // 레인 개수 (0 ~ laneCount-1)
+    public float speed = 3f;      // 노트 이동 속도 (판정선까지 도달하는 시간 계산에 사용)
 
-    public float threshold = 0.05f;    // 비트 감지 임계값 (이 정도 이상 변화해야 비트로 인정)
-    private float cooldown = 0f;       // 지금 노트 생성 가능한 상태인지 체크하는 쿨다운 타이머
-    public float spawnInterval = 0.2f; // 노트 생성 후 다음 노트까지 최소 간격 (초)
-
-    public float speed = 3f;
+    // 내부 계산 변수
+    private float beatInterval;   // 한 박자 시간 (초)
+    private float spawnAheadTime; // 노트를 미리 생성할 시간(화면 밖 → 판정선까지 이동 시간)
+    private float rightEdge;      // 카메라 기준 화면 오른쪽 끝 좌표
+    private float songStartTime;  // 노트 기준 시작 시간
+    private int currentIndex = 0; // 현재 몇 번째 노트를 생성했는지
 
     private void Start()
     {
-        conductor = FindFirstObjectByType<Conductor>();
+        rightEdge = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
+        songStartTime = AudioManager.Instance.songTime;
+        spawnAheadTime = rightEdge / speed;
+        beatInterval = 60f / bpm;
     }
 
     private void Update()
     {
-        energy = 0f;
-        cooldown -= Time.deltaTime;
-        AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Blackman);
+        float currentTime = AudioManager.Instance.songTime;
 
-        // 저음 영역 (킥 느낌)
-        for (int i = 0; i < 50; i++)
-            energy += spectrum[i];
-
-        // 갑자기 소리가 커지는 순간 확인
-        float delta = energy - lastEnergy;
-
-        // 비트 감지
-        if (delta > threshold && cooldown <= 0f)
+        // 노트 생성 루프
+        while (currentIndex < totalBeats)
         {
-            SpawnNote();
-            cooldown = spawnInterval;
-        }
+            // 이 노트가 도착해야 할 시간
+            float noteTime = songStartTime + currentIndex * beatInterval;
 
-        lastEnergy = energy;
+            // 생성 타이밍 조건
+            if (noteTime - currentTime <= spawnAheadTime)
+            {
+                SpawnNote(noteTime);
+                currentIndex++;
+            }
+            else
+            {
+                // 아직 생성할 타이밍이 아님
+                break;
+            }
+        }
     }
 
-    private void SpawnNote()
+    private void SpawnNote(float noteTime)
     {
-        GameObject obj = Instantiate(notePrefab, spawnPos.position, Quaternion.identity);
+        GameObject obj = Instantiate(notePrefab, spawnPos, Quaternion.identity);
         NoteObject note = obj.GetComponent<NoteObject>();
 
-        float currentTime = conductor.songTime;
-        float spawnAheadTime = 2f; // 2초 뒤 도착
-        note.noteTime = currentTime + spawnAheadTime;
+        // 노트 데이터 설정 (이 노트가 도착해야 하는 시간)
+        note.noteTime = noteTime;
+        note.lane = Random.Range(0, laneCount);
+        note.speed = speed;
     }
 }

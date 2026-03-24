@@ -1,7 +1,7 @@
 using UnityEngine;
-using System.Collections;
+using Utils.EnumType;
 using Utils.ClassUtility;
-using Utils.GameDefinitions;
+using System.Collections;
 using System.Collections.Generic;
 
 // Note ÆÇÁ¤
@@ -33,17 +33,17 @@ public class Judgement : MonoBehaviour
         }
         notes.Clear();
 
-        foreach (var note in GameManager.Instance.sheets[GameManager.Instance.title].notes)
-        {
-            if (note.line == 1)
-                note1.Enqueue(note);
-            else if (note.line == 2)
-                note2.Enqueue(note);
-            else if (note.line == 3)
-                note3.Enqueue(note);
-            else
-                note4.Enqueue(note);
-        }
+        //foreach (var note in GameManager.Instance.sheets[GameManager.Instance.title].notes)
+        //{
+        //    if (note.line == 1)
+        //        note1.Enqueue(note);
+        //    else if (note.line == 2)
+        //        note2.Enqueue(note);
+        //    else if (note.line == 3)
+        //        note3.Enqueue(note);
+        //    else
+        //        note4.Enqueue(note);
+        //}
         notes.Add(note1);
         notes.Add(note2);
         notes.Add(note3);

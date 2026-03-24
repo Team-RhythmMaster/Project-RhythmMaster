@@ -1,5 +1,5 @@
 using UnityEngine;
-using Utils.GameDefinitions;
+using Utils.EnumType;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
 
     public MusicState state = MusicState.Stop;
     public AudioSource audioSource;
+
+    // 현재 음악의 시간
+    public float songTime;
 
     private void Awake()
     {
@@ -27,6 +30,16 @@ public class AudioManager : MonoBehaviour
     private void Init()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        Play();
+    }
+
+    private void Update()
+    {
+        songTime = audioSource.time;
     }
 
     public float Length
