@@ -5,23 +5,11 @@ using Utils.ClassUtility;
 
 public class Score : MonoBehaviour
 {
-    private static Score instance;
-    public static Score Instance
-    {
-        get { return instance; }
-    }
-
     public ScoreData data;
 
     private UIText uiJudgement;
     private UIText uiCombo;
     private UIText uiScore;
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-    }
 
     public void Init()
     {

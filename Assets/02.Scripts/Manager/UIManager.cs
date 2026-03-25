@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
@@ -9,6 +11,8 @@ public class UIManager : MonoBehaviour
 
     public Func<string, UIActor> find;
     private Dictionary<string, UIActor> uiObjectDic = new Dictionary<string, UIActor>();
+
+    public Text judgeText;
 
     private void Awake()
     {
@@ -32,9 +36,40 @@ public class UIManager : MonoBehaviour
         {
             uiObjectDic.Add(obj.Name, new UIActor(obj, null));
         }
+    }
 
-        uiObjectDic["UI_G_Judgement"].action = Score.Instance.Ani;
-        uiObjectDic["UI_G_Combo"].action = Score.Instance.Ani;
+    public void ShowJudge(string result)
+    {
+        StopAllCoroutines();
+        StartCoroutine(ShowRoutine(result));
+    }
+
+    private IEnumerator ShowRoutine(string result)
+    {
+        judgeText.text = result;
+
+        // 색상 변경
+        switch (result)
+        {
+            case "Perfect": 
+                judgeText.color = Color.yellow; 
+                break;
+            case "Great": 
+                judgeText.color = Color.green; 
+                break;
+            case "Good": 
+                judgeText.color = Color.blue; 
+                break;
+            case "Bad": 
+                judgeText.color = Color.gray; 
+                break;
+            case "Miss": 
+                judgeText.color = Color.red;
+                break;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        judgeText.text = "";
     }
 
     public UIActor FindUI(string uiName)

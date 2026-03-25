@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     public GameState state = GameState.Game;
-    public string title;
 
     private void Awake()
     {

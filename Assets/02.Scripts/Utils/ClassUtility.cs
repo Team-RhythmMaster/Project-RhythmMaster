@@ -5,39 +5,14 @@ using System.Collections.Generic;
 
 namespace Utils.ClassUtility
 {
-    // Score 정보
-    public struct ScoreData
-    {
-        public int great;
-        public int good;
-        public int miss;
-        public int fastMiss; // 빨리 입력해서 미스
-        public int longMiss; // 롱노트 완성 실패, miss 카운트는 하지 않음
-
-        public string[] judgeText;
-        public Color[] judgeColor;
-        public JudgeType judge;
-        public int combo;
-        public int score
-        {
-            get
-            {
-                return (great * 500) + (good * 200);
-            }
-            set
-            {
-                score = value;
-            }
-        }
-    }
-
     [Serializable]
     public class Note
     {
         public NoteType type; // 노트 타입 (0: Short, 1: Long)
+        public bool isHold;   // 롱노트 잡고 있는지 여부
         public float time;    // 노트 도착 시간
-        public float tail;    // 롱노트 끝 시간
-        public int line;      // 레인 index
+        public float endTime; // 롱노트 끝 시간
+        public int lane;      // 레인 index
     }
 
     [Serializable]
@@ -72,6 +47,32 @@ namespace Utils.ClassUtility
 
             BarPerSec = BarPerMilliSec * 0.001f;
             BeatPerSec = BarPerMilliSec / 64f;
+        }
+    }
+
+        // Score 정보
+    public struct ScoreData
+    {
+        public int great;
+        public int good;
+        public int miss;
+        public int fastMiss; // 빨리 입력해서 미스
+        public int longMiss; // 롱노트 완성 실패, miss 카운트는 하지 않음
+
+        public string[] judgeText;
+        public Color[] judgeColor;
+        public JudgeType judge;
+        public int combo;
+        public int score
+        {
+            get
+            {
+                return (great * 500) + (good * 200);
+            }
+            set
+            {
+                score = value;
+            }
         }
     }
 }

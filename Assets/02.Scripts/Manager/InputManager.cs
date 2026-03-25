@@ -7,10 +7,6 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance {  get { return instance; } }
 
     public GameObject[] keyEffects = new GameObject[4];
-    private Judgement judgement;
-
-    public LayerMask noteLayer;
-    public Vector2 mousePos;
 
     private void Awake()
     {
@@ -24,87 +20,21 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        judgement = FindFirstObjectByType<Judgement>();
-    }
-
     private void Update()
     {
-        // 왼쪽 레인 (A키)
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            HitLane(0);
-        }
-
-        // 오른쪽 레인 (D키)
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            HitLane(1);
-        }
+        HandleLane(1, KeyCode.A);
+        HandleLane(0, KeyCode.D);
     }
 
-    void HitLane(int lane)
+    void HandleLane(int lane, KeyCode key)
     {
-        float currentTime = AudioManager.Instance.songTime;
-        NoteObject note = NoteManager.Instance.GetClosestNote(lane, currentTime);
+        if (Input.GetKeyDown(key))
+        {
+            NoteManager.Instance.TryHitLane(lane);
+        }
 
-        if (note != null)
-        {
-            note.TryHit();
-        }
-    }
-
-    public void OnNoteLine0(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            judgement.Judge(0);
-            keyEffects[0].gameObject.SetActive(true);
-        }
-        else if (context.canceled)
-        {
-            judgement.CheckLongNote(0);
-            keyEffects[0].gameObject.SetActive(false);
-        }
-    }
-    public void OnNoteLine1(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            judgement.Judge(1);
-            keyEffects[1].gameObject.SetActive(true);
-        }
-        else if (context.canceled)
-        {
-            judgement.CheckLongNote(1);
-            keyEffects[1].gameObject.SetActive(false);
-        }
-    }
-    public void OnNoteLine2(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            judgement.Judge(2);
-            keyEffects[2].gameObject.SetActive(true);
-        }
-        else if (context.canceled)
-        {
-            judgement.CheckLongNote(2);
-            keyEffects[2].gameObject.SetActive(false);
-        }
-    }
-    public void OnNoteLine3(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            judgement.Judge(3);
-            keyEffects[3].gameObject.SetActive(true);
-        }
-        else if (context.canceled)
-        {
-            judgement.CheckLongNote(3);
-            keyEffects[3].gameObject.SetActive(false);
-        }
+        // 롱노트 유지
+        bool holding = Input.GetKey(key);
+        NoteManager.Instance.HoldLane(lane, holding);
     }
 }

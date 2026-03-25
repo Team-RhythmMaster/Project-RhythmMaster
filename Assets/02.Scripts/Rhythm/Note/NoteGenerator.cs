@@ -1,64 +1,74 @@
 using UnityEngine;
+using Utils.ClassUtility;
+using System.Collections.Generic;
 
-// 음악 분석 및 Note 생성 시스템
+// Note 재생
 public class NoteGenerator : MonoBehaviour
 {
-    // 기본 설정
-    public GameObject notePrefab;
-    public Vector3 spawnPos = new Vector3(10, 0, 0); // 노트 생성 위치 (화면 오른쪽 밖)
+    public List<Note> notes = new List<Note>();
 
-    public float bpm = 120f;      // 곡의 BPM
-    public int totalBeats = 100;  // 총 몇 개의 박자를 생성할지
-    public int laneCount = 2;     // 레인 개수 (0 ~ laneCount-1)
-    public float speed = 3f;      // 노트 이동 속도 (판정선까지 도달하는 시간 계산에 사용)
+    [Header("설정값")]
+    public float speed = 3f; // 노트 이동 속도
+    public Vector3 hitLine = new Vector3(-6.5f, 0, 0);
 
-    // 내부 계산 변수
-    private float beatInterval;   // 한 박자 시간 (초)
-    private float spawnAheadTime; // 노트를 미리 생성할 시간(화면 밖 → 판정선까지 이동 시간)
-    private float rightEdge;      // 카메라 기준 화면 오른쪽 끝 좌표
-    private float songStartTime;  // 노트 기준 시작 시간
-    private int currentIndex = 0; // 현재 몇 번째 노트를 생성했는지
+    [Header("내부 변수")]
+    private int spawnIndex = 0;     // 현재 생성할 노트 인덱스
+    private float spawnAheadTime;   // 미리 생성 시간
+    private float rightEdge;        // 화면 오른쪽 끝 위치
 
     private void Start()
     {
         rightEdge = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
-        songStartTime = AudioManager.Instance.songTime;
-        spawnAheadTime = rightEdge / speed;
-        beatInterval = 60f / bpm;
+        spawnAheadTime = (rightEdge - hitLine.x) / speed; // 핵심: 노트가 판정선까지 이동하는 데 걸리는 시간
+        notes.Sort((a, b) => a.time.CompareTo(b.time));
     }
 
     private void Update()
     {
+        Debug.Log(spawnAheadTime);
         float currentTime = AudioManager.Instance.songTime;
 
-        // 노트 생성 루프
-        while (currentIndex < totalBeats)
+        while (spawnIndex < notes.Count)
         {
-            // 이 노트가 도착해야 할 시간
-            float noteTime = songStartTime + currentIndex * beatInterval;
+            Note data = notes[spawnIndex];
 
-            // 생성 타이밍 조건
-            if (noteTime - currentTime <= spawnAheadTime)
+            if (data.time - currentTime <= spawnAheadTime)
             {
-                SpawnNote(noteTime);
-                currentIndex++;
+                Spawn(data);
+                spawnIndex++;
             }
-            else
-            {
-                // 아직 생성할 타이밍이 아님
+            else 
                 break;
-            }
+        }
+
+        Debug.Log($"spawnAheadTime: {spawnAheadTime}");
+        Debug.Log($"hitLine: {hitLine.x}, rightEdge: {rightEdge}");
+    }
+
+    // 노트 생성
+    void Spawn(Note data)
+    {
+        float spawnX = rightEdge;
+        Vector3 pos = new Vector3(spawnX, data.lane * 1.5f, 0);
+
+        if (data.isHold)
+        {
+            LongNote note = NoteManager.Instance.GetLong();
+            note.transform.position = pos;
+
+            note.Init(data.time, data.lane, speed, data.endTime);
+        }
+        else
+        {
+            ShortNote note = NoteManager.Instance.GetShort();
+            note.transform.position = pos;
+
+            note.Init(data.time, data.lane, speed);
         }
     }
 
-    private void SpawnNote(float noteTime)
+    public float GetSpawnAheadTime()
     {
-        GameObject obj = Instantiate(notePrefab, spawnPos, Quaternion.identity);
-        NoteObject note = obj.GetComponent<NoteObject>();
-
-        // 노트 데이터 설정 (이 노트가 도착해야 하는 시간)
-        note.noteTime = noteTime;
-        note.lane = Random.Range(0, laneCount);
-        note.speed = speed;
+        return spawnAheadTime;
     }
 }

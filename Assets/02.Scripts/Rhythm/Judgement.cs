@@ -20,10 +20,10 @@ public class Judgement : MonoBehaviour
     private int[] longNoteCheck = new int[4] { 0, 0, 0, 0 };
 
     private int curruntTime = 0;
-    // User에 의해 조정된 판정 타이밍
     public int judgeTimeFromUserSetting = 0;
 
     private Coroutine coCheckMiss;
+    private Score score;
 
     public void Init()
     {
@@ -70,23 +70,23 @@ public class Judgement : MonoBehaviour
             {
                 if (judgeTime < great && judgeTime > -great)
                 {
-                    Score.Instance.data.great++;
-                    Score.Instance.data.judge = JudgeType.Great;
+                    score.data.great++;
+                    score.data.judge = JudgeType.Great;
                 }
                 else
                 {
-                    Score.Instance.data.good++;
-                    Score.Instance.data.judge = JudgeType.Good;
+                    score.data.good++;
+                    score.data.judge = JudgeType.Good;
                 }
-                Score.Instance.data.combo++;
+                score.data.combo++;
             }
             else
             {
-                Score.Instance.data.fastMiss++;
-                Score.Instance.data.judge = JudgeType.Miss;
-                Score.Instance.data.combo = 0;
+                score.data.fastMiss++;
+                score.data.judge = JudgeType.Miss;
+                score.data.combo = 0;
             }
-            Score.Instance.SetScore();
+            score.SetScore();
             //JudgeEffect.Instance.OnEffect(line);
 
             if (note.type == (int)NoteType.Short)
@@ -109,20 +109,20 @@ public class Judgement : MonoBehaviour
         if (note.type != NoteType.Long)
             return;
 
-        float judgeTime = curruntTime - note.tail + judgeTimeFromUserSetting;
+        float judgeTime = curruntTime - note.endTime + judgeTimeFromUserSetting;
         if (judgeTime < good && judgeTime > -good)
         {
             if (judgeTime < great && judgeTime > -great)
             {
-                Score.Instance.data.great++;
-                Score.Instance.data.judge = JudgeType.Great;
-                Score.Instance.data.combo++;
+                score.data.great++;
+                score.data.judge = JudgeType.Great;
+                score.data.combo++;
             }
             else
             {
-                Score.Instance.data.longMiss++;
+                score.data.longMiss++;
             }
-            Score.Instance.SetScore();
+            score.SetScore();
             longNoteCheck[line] = 0;
             notes[line].Dequeue();
         }
@@ -143,14 +143,14 @@ public class Judgement : MonoBehaviour
 
                 if (note.type == NoteType.Long)
                 {
-                    if (longNoteCheck[note.line - 1] == 0) // Head가 판정처리가 안된 경우
+                    if (longNoteCheck[note.lane - 1] == 0) // Head가 판정처리가 안된 경우
                     {
                         if (judgeTime < -miss)
                         {
-                            Score.Instance.data.miss++;
-                            Score.Instance.data.judge = JudgeType.Miss;
-                            Score.Instance.data.combo = 0;
-                            Score.Instance.SetScore();
+                            score.data.miss++;
+                            score.data.judge = JudgeType.Miss;
+                            score.data.combo = 0;
+                            score.SetScore();
                             notes[i].Dequeue();
                         }
                     }
@@ -159,10 +159,10 @@ public class Judgement : MonoBehaviour
                 {
                     if (judgeTime < -miss)
                     {
-                        Score.Instance.data.miss++;
-                        Score.Instance.data.judge = JudgeType.Miss;
-                        Score.Instance.data.combo = 0;
-                        Score.Instance.SetScore();
+                        score.data.miss++;
+                        score.data.judge = JudgeType.Miss;
+                        score.data.combo = 0;
+                        score.SetScore();
                         notes[i].Dequeue();
                     }
                 }

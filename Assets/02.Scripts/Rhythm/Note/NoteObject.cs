@@ -1,93 +1,76 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using Utils.ClassUtility;
 
-// 모든 노트의 기본 동작을 담당
+// Note 기본 동작
 public abstract class NoteObject : MonoBehaviour
 {
-    public int lane;              // 어떤 레인에 속하는지 (0=왼쪽, 1=오른쪽)
-    public float noteTime;        // 이 노트를 눌러야 하는 시간 (초)
-    public float speed = 3f;      // 이동 속도 (시각적인 요소)
-    public float offset = -1.0f;  // 음악과 노트 위치 싱크 조정 (초)
-    public float hitLineX = -2.0f;// 판정선 위치
+    protected NoteGenerator noteGenerator;
 
-    // 판정 기준 시간
-    public float perfect = 0.05f;
-    public float great = 0.1f;
-    public float good = 0.15f;
-    public float bad = 0.2f;
-    public float miss = 0.25f;
+    // 기본 데이터
+    public Note note;               // 원본 데이터
+    public float noteTime;          // 판정 시간
+    public float speed = 3f;        // 이동 속도
+    protected float offset = 0.05f; // 싱크 보정
 
-    private bool isHit = false;
+    // 판정 범위
+    protected float perfect = 0.1f;
+    protected float great = 0.2f;
+    protected float good = 0.3f;
+    protected float bad = 0.4f;
+    protected float miss = 0.5f;
 
-    void Start()
+    // 상태
+    protected bool isHit = false;
+
+    protected virtual void Awake()
     {
-        // 노트 생성 시 자동 등록
-        NoteManager.Instance.Register(this);
+        noteGenerator = FindFirstObjectByType<NoteGenerator>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         float currentTime = AudioManager.Instance.songTime + offset;
-
-        // 시간 기반 위치 계산
-        float x = hitLineX + (noteTime - currentTime) * speed;
-        // lane별로 y 위치 다르게 (위/아래)
-        transform.position = new Vector3(x, lane * 1.5f, 0);
+        float x = noteGenerator.hitLine.x + (noteTime - currentTime) * speed; // 핵심 공식
+        transform.position = new Vector3(x, note.lane * 1.5f, 0);
 
         CheckMiss(currentTime);
     }
 
-    // Miss 자동 처리
-    void CheckMiss(float currentTime)
+    public virtual void Init(float _noteTime, int _lane, float _speed)
+    {
+        noteTime = _noteTime;
+        speed = _speed;
+
+        note.lane = _lane;
+        isHit = false;
+
+        NoteManager.Instance.Register(this);
+    }
+
+    // 입력 (자식이 구현)
+    public abstract void TryHit();
+
+    // Miss 처리
+    protected virtual void CheckMiss(float currentTime)
     {
         if (!isHit && currentTime - noteTime > miss)
         {
-            Debug.Log("Miss");
+            JudgeManager.Instance.Judge("Miss");
             Remove();
         }
     }
 
-    // 입력 판정
-    public void TryHit()
-    {
-        float currentTime = AudioManager.Instance.songTime;
-        float diff = Mathf.Abs(noteTime - currentTime);
-
-        if (diff <= perfect)
-        {
-            Debug.Log("Perfect");
-            Hit();
-        }
-        else if (diff <= great)
-        {
-            Debug.Log("Great");
-            Hit();
-        }
-        else if (diff <= good)
-        {
-            Debug.Log("Good");
-            Hit();
-        }
-        else if(diff <= bad)
-        {
-            Debug.Log("Bad");
-            Hit();
-        }
-        else
-        {
-            Debug.Log("Miss");
-        }
-    }
-
-    void Hit()
+    // 제거
+    protected void Hit()
     {
         isHit = true;
         Remove();
     }
 
-    void Remove()
+    protected void Remove()
     {
-        // 리스트에서 제거
         NoteManager.Instance.Unregister(this);
-        Destroy(gameObject);
+        NoteManager.Instance.Return(this);
     }
 }

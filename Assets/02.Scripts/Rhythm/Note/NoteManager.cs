@@ -4,92 +4,124 @@ using System.Collections.Generic;
 public class NoteManager : MonoBehaviour
 {
     private static NoteManager instance;
-    public static NoteManager Instance {  get { return instance; } }
+    public static NoteManager Instance { get { return instance; } }
 
-    // 현재 활성화된 노트 리스트
-    public List<NoteObject> notes = new List<NoteObject>();
+    // Lane별 큐 (판정용)
+    private Dictionary<int, Queue<NoteObject>> notesByLane = new Dictionary<int, Queue<NoteObject>>();
 
-    // Object Pooling
-    private Queue<GameObject> pool = new Queue<GameObject>();
-    public Transform notePool;
-    public GameObject notePrefab;
+    // 풀링 (타입별 분리)
+    private Queue<ShortNote> shortPool = new Queue<ShortNote>();
+    private Queue<LongNote> longPool = new Queue<LongNote>();
+
+    public ShortNote shortPrefab;
+    public LongNote longPrefab;
+
+    public Transform poolParent;
     public int poolSize = 100;
 
-    void Awake()
+    private Vector3 spawnPos = new Vector3(10.0f, 0.0f, 0.0f);
+
+    private void Awake()
     {
-        if(instance != null && instance != this)
+        if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
             instance = this;
         }
 
+        // lane 초기화
+        for (int i = 0; i < 4; i++)
+        {
+            notesByLane[i] = new Queue<NoteObject>();
+        }
+
         Init();
     }
 
-    private void Init()
+    void Init()
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(notePrefab, notePool);
-            obj.SetActive(false);
-            pool.Enqueue(obj);
+            ShortNote s = Instantiate(shortPrefab, poolParent);
+            s.gameObject.SetActive(false);
+            shortPool.Enqueue(s);
+
+            LongNote l = Instantiate(longPrefab, poolParent);
+            l.gameObject.SetActive(false);
+            longPool.Enqueue(l);
         }
     }
 
-    // 노트 등록
+    public ShortNote GetShort()
+    {
+        if (shortPool.Count > 0)
+        {
+            var n = shortPool.Dequeue();
+            n.gameObject.SetActive(true);
+            n.transform.position = spawnPos;
+            return n;
+        }
+        return Instantiate(shortPrefab);
+    }
+
+    public LongNote GetLong()
+    {
+        if (longPool.Count > 0)
+        {
+            var n = longPool.Dequeue();
+            n.gameObject.SetActive(true);
+            n.transform.position = spawnPos;
+            return n;
+        }
+        return Instantiate(longPrefab);
+    }
+
+    // 반환
+    public void Return(NoteObject note)
+    {
+        note.gameObject.SetActive(false);
+
+        if (note is ShortNote s)
+            shortPool.Enqueue(s);
+        else if (note is LongNote l)
+            longPool.Enqueue(l);
+    }
+
+    // 등록 / 제거
     public void Register(NoteObject note)
     {
-        notes.Add(note);
+        notesByLane[note.note.lane].Enqueue(note);
     }
 
-    // 노트 제거
     public void Unregister(NoteObject note)
     {
-        notes.Remove(note);
-    }
+        int lane = note.note.lane;
 
-    // 특정 레인에서 가장 가까운 노트 찾기
-    public NoteObject GetClosestNote(int lane, float currentTime)
-    {
-        NoteObject closest = null;
-        float minDiff = float.MaxValue;
-
-        foreach (var note in notes)
+        if (notesByLane[lane].Count > 0 && notesByLane[lane].Peek() == note)
         {
-            if (note.lane != lane) 
-                continue;
-
-            float diff = Mathf.Abs(note.noteTime - currentTime);
-
-            if (diff < minDiff)
-            {
-                minDiff = diff;
-                closest = note;
-            }
+            notesByLane[lane].Dequeue();
         }
-
-        return closest;
     }
 
-    //public GameObject Get()
-    //{
-    //    if (pool.Count > 0)
-    //    {
-    //        GameObject obj = pool.Dequeue();
-    //        obj.SetActive(true);
-    //        return obj;
-    //    }
+    public void TryHitLane(int lane)
+    {
+        if (notesByLane[lane].Count == 0) 
+            return;
 
-    //    // 부족하면 추가 생성
-    //    return Instantiate(notePrefab);
-    //}
+        notesByLane[lane].Peek().TryHit();
+    }
 
-    //public void Return(GameObject obj)
-    //{
-    //    obj.SetActive(false);
-    //    pool.Enqueue(obj);
-    //}
+    public void HoldLane(int lane, bool holding)
+    {
+        if (notesByLane[lane].Count == 0) 
+            return;
+
+        if (notesByLane[lane].Peek() is LongNote ln)
+        {
+            ln.SetHoldInput(holding);
+        }
+    }
 }
