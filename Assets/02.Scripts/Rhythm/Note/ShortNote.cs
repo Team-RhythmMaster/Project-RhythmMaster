@@ -6,8 +6,7 @@ public class ShortNote : NoteObject
     public override void TryHit()
     {
         float currentTime = AudioManager.Instance.songTime + offset;
-
-        float diff = Mathf.Abs(noteTime - currentTime);
+        diff = Mathf.Abs(note.time - currentTime);
 
         if (diff <= perfect)
         {

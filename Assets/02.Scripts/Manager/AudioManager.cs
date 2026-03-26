@@ -9,7 +9,17 @@ public class AudioManager : MonoBehaviour
     public MusicState state = MusicState.Stop;
     public AudioSource audioSource;
 
-    private double dspStartTime;  // 오디오가 실제로 재생되기 시작한 절대 시간
+    private double dspStartTime;      // 오디오가 실제로 재생되기 시작한 절대 시간
+    public float audioOffset = 0.03f; // 오디오 싱크 보정값
+
+    public float songTime
+    {
+        get
+        {
+            // 현재 DSP 시간 - 시작 DSP 시간
+            return (float)(AudioSettings.dspTime - dspStartTime) + audioOffset;
+        }
+    }
 
     private void Awake()
     {
@@ -34,15 +44,6 @@ public class AudioManager : MonoBehaviour
     private void Init()
     {
         audioSource = GetComponent<AudioSource>();
-    }
-
-    public float songTime
-    {
-        get
-        {
-            // 현재 DSP 시간 - 시작 DSP 시간
-            return (float)(AudioSettings.dspTime - dspStartTime);
-        }
     }
 
     public float Length

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using Utils.ClassUtility;
 
 // Note 기본 동작
@@ -8,10 +7,9 @@ public abstract class NoteObject : MonoBehaviour
     protected NoteGenerator noteGenerator;
 
     // 기본 데이터
-    public Note note;               // 원본 데이터
-    public float noteTime;          // 판정 시간
-    public float speed = 3f;        // 이동 속도
-    protected float offset = 0.05f; // 싱크 보정
+    public Note note;                // 원본 데이터
+    public float speed;              // 이동 속도
+    protected float offset = -0.03f; // 싱크 보정값
 
     // 판정 범위
     protected float perfect = 0.1f;
@@ -20,26 +18,29 @@ public abstract class NoteObject : MonoBehaviour
     protected float bad = 0.4f;
     protected float miss = 0.5f;
 
+    protected float diff = 0.0f;
+
     // 상태
     protected bool isHit = false;
 
     protected virtual void Awake()
     {
         noteGenerator = FindFirstObjectByType<NoteGenerator>();
+        speed = noteGenerator.speed;
     }
 
     protected virtual void Update()
     {
         float currentTime = AudioManager.Instance.songTime + offset;
-        float x = noteGenerator.hitLine.x + (noteTime - currentTime) * speed; // 핵심 공식
-        transform.position = new Vector3(x, note.lane * 1.5f, 0);
+        float x = noteGenerator.hitLine.x + (note.time - currentTime) * speed; // 핵심 공식
+        transform.position = new Vector3(x, NoteManager.Instance.laneY[note.lane], 0);
 
         CheckMiss(currentTime);
     }
 
     public virtual void Init(float _noteTime, int _lane, float _speed)
     {
-        noteTime = _noteTime;
+        note.time = _noteTime;
         speed = _speed;
 
         note.lane = _lane;
@@ -48,20 +49,27 @@ public abstract class NoteObject : MonoBehaviour
         NoteManager.Instance.Register(this);
     }
 
-    // 입력 (자식이 구현)
+    public virtual void Init(Note data, float speed)
+    {
+        note = data;
+        this.speed = speed;
+
+        isHit = false;
+
+        NoteManager.Instance.Register(this);
+    }
+
     public abstract void TryHit();
 
-    // Miss 처리
     protected virtual void CheckMiss(float currentTime)
     {
-        if (!isHit && currentTime - noteTime > miss)
+        if (!isHit && currentTime - note.time > miss)
         {
             JudgeManager.Instance.Judge("Miss");
             Remove();
         }
     }
 
-    // 제거
     protected void Hit()
     {
         isHit = true;

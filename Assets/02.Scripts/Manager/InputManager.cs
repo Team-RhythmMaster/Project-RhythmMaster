@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -22,8 +21,8 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        HandleLane(1, KeyCode.A);
-        HandleLane(0, KeyCode.D);
+        HandleLane(0, KeyCode.A);
+        HandleLane(1, KeyCode.D);
     }
 
     void HandleLane(int lane, KeyCode key)
@@ -34,7 +33,7 @@ public class InputManager : MonoBehaviour
         }
 
         // ·Õ³ëÆ® À¯Áö
-        bool holding = Input.GetKey(key);
-        NoteManager.Instance.HoldLane(lane, holding);
+        bool isHolding = Input.GetKey(key);
+        NoteManager.Instance.HoldLane(lane, isHolding);
     }
 }

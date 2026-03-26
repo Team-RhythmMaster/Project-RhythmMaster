@@ -1,88 +1,97 @@
 using UnityEngine;
+using Utils.EnumType;
 
 // 롱 노트
 public class LongNote : NoteObject
 {
-    public float endTime;
+    private HoldState state = HoldState.Idle;
+    private LineRenderer lineRenderer;
+    private GameObject head;
 
-    private bool isHolding = false;
-    private bool holdInput = false;
+    private bool isKeyHeld = false;
 
-    public Transform body; // 길이 늘어나는 부분
-
-    public void Init(float time, int lane, float speed, float endTime)
+    protected override void Awake()
     {
-        base.Init(time, lane, speed);
+        base.Awake();
+        lineRenderer = GetComponent<LineRenderer>();
+        head = transform.GetChild(0).gameObject;
 
-        this.endTime = endTime;
-
-        isHolding = false;
-        holdInput = false;
-
-        UpdateVisual();
-    }
-
-    // 길이 계산
-    private void UpdateVisual()
-    {
-        float duration = endTime - noteTime;
-        float length = duration * speed;
-
-        // Y축 기준으로 늘림
-        body.localScale = new Vector3(length, 0.5f, 1);
-        // 위치 보정 (중앙 기준)
-        body.localPosition = new Vector3(length / 2f, 0, 0);
-    }
-
-    public override void TryHit()
-    {
-        float currentTime = AudioManager.Instance.songTime;
-
-        float diff = Mathf.Abs(noteTime - currentTime);
-
-        if (diff <= 0.1f)
-        {
-            isHolding = true;
-            JudgeManager.Instance.Judge("Perfect");
-        }
-    }
-
-    public void SetHoldInput(bool holding)
-    {
-        holdInput = holding;
+        lineRenderer.positionCount = 2;
+        lineRenderer.useWorldSpace = true;
     }
 
     protected override void Update()
     {
         base.Update();
+        UpdateLine();
+        float currentTime = AudioManager.Instance.songTime + offset;
 
-        float currentTime = AudioManager.Instance.songTime;
+        if (state != HoldState.Holding)
+            return;
 
-        if (isHolding)
+        // 누르다 떼면 실패
+        if (!isKeyHeld && currentTime < note.endTime)
         {
-            if (holdInput)
-            {
-                if (currentTime >= endTime)
-                {
-                    Complete();
-                }
-            }
-            else
-            {
-                Fail();
-            }
+            Fail();
+            return;
+        }
+
+        // 끝까지 유지 성공
+        if (currentTime >= note.endTime)
+        {
+            Complete();
+        }
+    }
+
+    private void UpdateLine()
+    {
+        float currentTime = AudioManager.Instance.songTime + offset;
+        float startTime = note.time;
+
+        // 잡고 있으면 시작점이 현재 시간으로 따라옴
+        if (state == HoldState.Holding)
+            startTime = currentTime;
+
+        float startX = noteGenerator.hitLine.x + (startTime - currentTime) * speed;
+        float endX = noteGenerator.hitLine.x + (note.endTime - currentTime) * speed;
+        float y = NoteManager.Instance.laneY[note.lane];
+
+        lineRenderer.SetPosition(0, new Vector3(startX, y, 0));
+        lineRenderer.SetPosition(1, new Vector3(endX, y, 0));
+    }
+
+    public void SetHoldInput(bool holding)
+    {
+        isKeyHeld = holding;
+    }
+
+    public override void TryHit()
+    {
+        float currentTime = AudioManager.Instance.songTime + offset;
+        diff = Mathf.Abs(note.time - currentTime);
+        head.gameObject.SetActive(false);
+
+        if (diff <= bad)
+        {
+            isHit = true;
+            state = HoldState.Holding;
+            NoteManager.Instance.SetActiveLongNote(note.lane, this);
         }
     }
 
     void Complete()
     {
-        JudgeManager.Instance.Judge("Perfect");
+        JudgeManager.Instance.Judge("Perfect"); // 간단 처리
+        NoteManager.Instance.ClearActiveLongNote(note.lane);
+        state = HoldState.Completed;
         Remove();
     }
 
     void Fail()
     {
         JudgeManager.Instance.Judge("Miss");
+        NoteManager.Instance.ClearActiveLongNote(note.lane);
+        state = HoldState.Failed;
         Remove();
     }
 }

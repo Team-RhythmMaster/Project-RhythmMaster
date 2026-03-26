@@ -35,6 +35,14 @@ namespace Utils.EnumType
         Long
     }
 
+    public enum HoldState
+    {
+        Idle,
+        Holding,
+        Completed,
+        Failed
+    }
+
     // Note 판정 종류
     public enum JudgeType
     {

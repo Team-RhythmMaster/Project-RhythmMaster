@@ -8,6 +8,7 @@ public class NoteManager : MonoBehaviour
 
     // Lane별 큐 (판정용)
     private Dictionary<int, Queue<NoteObject>> notesByLane = new Dictionary<int, Queue<NoteObject>>();
+    private Dictionary<int, LongNote> activeLongNotes = new Dictionary<int, LongNote>();
 
     // 풀링 (타입별 분리)
     private Queue<ShortNote> shortPool = new Queue<ShortNote>();
@@ -20,6 +21,7 @@ public class NoteManager : MonoBehaviour
     public int poolSize = 100;
 
     private Vector3 spawnPos = new Vector3(10.0f, 0.0f, 0.0f);
+    public float[] laneY = { 1f, -1f };
 
     private void Awake()
     {
@@ -33,7 +35,7 @@ public class NoteManager : MonoBehaviour
         }
 
         // lane 초기화
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < laneY.Length; i++)
         {
             notesByLane[i] = new Queue<NoteObject>();
         }
@@ -80,48 +82,58 @@ public class NoteManager : MonoBehaviour
     }
 
     // 반환
-    public void Return(NoteObject note)
+    public void Return(NoteObject _note)
     {
-        note.gameObject.SetActive(false);
+        _note.gameObject.SetActive(false);
 
-        if (note is ShortNote s)
+        if (_note is ShortNote s)
             shortPool.Enqueue(s);
-        else if (note is LongNote l)
+        else if (_note is LongNote l)
             longPool.Enqueue(l);
     }
 
     // 등록 / 제거
-    public void Register(NoteObject note)
+    public void Register(NoteObject _note)
     {
-        notesByLane[note.note.lane].Enqueue(note);
+        notesByLane[_note.note.lane].Enqueue(_note);
     }
 
-    public void Unregister(NoteObject note)
+    public void Unregister(NoteObject _note)
     {
-        int lane = note.note.lane;
+        int lane = _note.note.lane;
 
-        if (notesByLane[lane].Count > 0 && notesByLane[lane].Peek() == note)
+        if (notesByLane[lane].Count > 0 && notesByLane[lane].Peek() == _note)
         {
             notesByLane[lane].Dequeue();
         }
     }
 
-    public void TryHitLane(int lane)
+    public void TryHitLane(int _lane)
     {
-        if (notesByLane[lane].Count == 0) 
+        if (notesByLane[_lane].Count == 0) 
             return;
 
-        notesByLane[lane].Peek().TryHit();
+        notesByLane[_lane].Peek().TryHit();
     }
 
-    public void HoldLane(int lane, bool holding)
+    public void HoldLane(int lane, bool isHolding)
     {
-        if (notesByLane[lane].Count == 0) 
-            return;
-
-        if (notesByLane[lane].Peek() is LongNote ln)
+        if (activeLongNotes.TryGetValue(lane, out LongNote ln))
         {
-            ln.SetHoldInput(holding);
+            ln.SetHoldInput(isHolding);
         }
+    }
+
+    // 등록
+    public void SetActiveLongNote(int lane, LongNote note)
+    {
+        activeLongNotes[lane] = note;
+    }
+
+    // 해제
+    public void ClearActiveLongNote(int lane)
+    {
+        if (activeLongNotes.ContainsKey(lane))
+            activeLongNotes.Remove(lane);
     }
 }

@@ -6,72 +6,69 @@ using System.Collections.Generic;
 public class BeatDetection : MonoBehaviour
 {
     private NoteGenerator noteGenerator;
+    private Queue<float> fluxHistory = new Queue<float>();
+    private Dictionary<int, float> lastLaneTime = new Dictionary<int, float>(); // lane별 마지막 노트 시간 (겹침 방지)
 
-    // FFT 관련
-    private float[] spectrum = new float[1024];     // 현재 프레임 주파수 데이터
-    private float[] prevSpectrum = new float[1024]; // 이전 프레임 주파수 데이터
+    private float[] spectrum = new float[1024];
+    private float[] prevSpectrum = new float[1024];
 
-    // Flux 기록
-    private Queue<float> fluxHistory = new Queue<float>(); // 과거 flux 저장
-    private int historySize = 100;                         // 노이즈 안정화 평균 계산용 (80~120 추천)
-    private float sensitivity = 3.0f; // 감도 (2.0~3.0 추천)
+    private int historySize = 100;
+    private float sensitivity = 3.5f;
 
-    private float lastBeatTime = 0f;  // Beat 중복 방지
-    private float minInterval = 0.3f;// 노트의 최소 간격 (0.2~0.3 추천)
+    private float minInterval = 0.4f;  // 노트간 최소 간격
+    private float lastBeatTime = 0f;
+
+    private float bpm = 100f;
+    private float beatInterval;
 
     private void Awake()
     {
         noteGenerator = FindFirstObjectByType<NoteGenerator>();
+        beatInterval = 60f / bpm;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < NoteManager.Instance.laneY.Length; i++)
+            lastLaneTime[i] = -999f;
     }
 
     private void Update()
     {
-        // 현재 스펙트럼 데이터 가져오기
         AudioManager.Instance.audioSource.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
-        // Flux 계산
         float flux = CalculateFlux();
 
-        // Beat 판정
         if (IsBeat(flux))
         {
             float time = AudioManager.Instance.songTime;
 
-            // 중복 방지
             if (time - lastBeatTime > minInterval)
             {
-                OnBeatDetected(time);
+                CreateQuantizedNote(time);
                 lastBeatTime = time;
             }
         }
     }
 
-    // Spectral Flux 계산
-    private float CalculateFlux()
+    float CalculateFlux()
     {
         float flux = 0f;
 
         for (int i = 0; i < spectrum.Length; i++)
         {
-            // 현재 - 이전
             float diff = spectrum[i] - prevSpectrum[i];
 
-            // 증가한 부분만 사용
             if (diff > 0)
-            {
                 flux += diff;
-            }
 
-            // 현재 값을 이전 배열에 저장
             prevSpectrum[i] = spectrum[i];
         }
 
         return flux;
     }
 
-    // Beat 판정
-    private bool IsBeat(float flux)
+    bool IsBeat(float flux)
     {
-        // 평균 계산
         float avg = 0f;
 
         foreach (var f in fluxHistory)
@@ -80,34 +77,58 @@ public class BeatDetection : MonoBehaviour
         if (fluxHistory.Count > 0)
             avg /= fluxHistory.Count;
 
-        // 현재 flux 저장
         fluxHistory.Enqueue(flux);
 
         if (fluxHistory.Count > historySize)
             fluxHistory.Dequeue();
 
-        // 평균 대비 증가 여부 확인
         return flux > avg * sensitivity;
     }
 
-    // Beat 발생 시
-    private void OnBeatDetected(float time)
+    // BPM 정렬 + 패턴 생성
+    void CreateQuantizedNote(float time)
     {
-        Note n = new Note();
         float spawnAheadTime = noteGenerator.GetSpawnAheadTime();
+        float quantized = Mathf.Round(time / beatInterval) * beatInterval;  // BPM 정렬
 
-        // 지금 시간을 미래 시간으로 변환
-        n.time = time + spawnAheadTime;
-        n.lane = Random.Range(0, 2);
+        // 판정선 기준 최종 도착 시간
+        float finalTime = quantized + spawnAheadTime;
+        float songLength = AudioManager.Instance.Length;
 
-        // 롱노트 랜덤 생성
+        if (finalTime > songLength)
+            return;
+
+        int lane = Random.Range(0, NoteManager.Instance.laneY.Length);
+
+        // 겹침 방지
+        if (finalTime - lastLaneTime[lane] < beatInterval * 0.5f)
+            return;
+
+        Note n = new Note();
+        n.time = finalTime;
+        n.lane = lane;
+
+        // 롱노트 생성 (박자 기반)
         if (Random.value < 0.2f)
         {
             n.isHold = true;
-            n.endTime = n.time + Random.Range(0.5f, 1.5f);
+
+            // 박자 기반 길이
+            float[] lengths = { 1.0f, 1.5f, 2f };
+            float beatCount = lengths[Random.Range(0, lengths.Length)];
+            n.endTime = n.time + beatInterval * beatCount;
+
+            // 롱노트 끝도 겹침 방지
+            lastLaneTime[lane] = n.endTime;
+
+            if (n.endTime > songLength)
+                return;
+        }
+        else
+        {
+            lastLaneTime[lane] = n.time;
         }
 
-        // 추가 + 정렬 (실시간 생성이라 필수)
         noteGenerator.notes.Add(n);
         noteGenerator.notes.Sort((a, b) => a.time.CompareTo(b.time));
     }
