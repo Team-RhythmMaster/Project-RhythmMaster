@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils.EnumType;
 using Utils.ClassUtility;
 
 // Note 기본 동작
@@ -63,7 +64,7 @@ public abstract class NoteObject : MonoBehaviour
     {
         if (!isHit && _currentTime - data.time > miss)
         {
-            JudgeManager.Instance.Judge("Miss");
+            JudgeManager.Instance.Judge(JudgeType.Miss);
             Remove();
         }
     }

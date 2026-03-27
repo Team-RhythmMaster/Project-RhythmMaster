@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils.EnumType;
 
 // 일반 노트
 public class ShortNote : NoteObject
@@ -13,13 +14,13 @@ public class ShortNote : NoteObject
             isHit = true;
 
             if (diff <= perfect) 
-                JudgeManager.Instance.Judge("Perfect");
+                JudgeManager.Instance.Judge(JudgeType.Perfect);
             else if (diff <= great) 
-                JudgeManager.Instance.Judge("Great");
+                JudgeManager.Instance.Judge(JudgeType.Great);
             else if (diff <= good) 
-                JudgeManager.Instance.Judge("Good");
+                JudgeManager.Instance.Judge(JudgeType.Good);
             else 
-                JudgeManager.Instance.Judge("Bad");
+                JudgeManager.Instance.Judge(JudgeType.Bad);
 
             Remove();
         }

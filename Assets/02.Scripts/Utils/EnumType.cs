@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace Utils.EnumType
 {
-    // 게임 상태
+    // 게임 현재 상태
     public enum GameState
     {
         Game,
@@ -26,21 +24,6 @@ namespace Utils.EnumType
         Paused,    // 일시 정지 상태
         Unpaused,  // 일시 정지 상태 해제
         Stop       // 정지 상태
-    }
-
-    // Note 종류
-    public enum NoteType
-    {
-        Short,
-        Long
-    }
-
-    public enum HoldState
-    {
-        Idle,
-        Holding,
-        Completed,
-        Failed
     }
 
     // Note 판정 종류

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Utils.EnumType;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,32 +39,32 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowJudge(string result)
+    public void ShowJudge(JudgeType _result)
     {
         StopAllCoroutines();
-        StartCoroutine(ShowRoutine(result));
+        StartCoroutine(ShowRoutine(_result));
     }
 
-    private IEnumerator ShowRoutine(string result)
+    private IEnumerator ShowRoutine(JudgeType _result)
     {
-        judgeText.text = result;
+        judgeText.text = _result.ToString();
 
         // 색상 변경
-        switch (result)
+        switch (_result)
         {
-            case "Perfect": 
+            case JudgeType.Perfect:
                 judgeText.color = Color.yellow; 
                 break;
-            case "Great": 
+            case JudgeType.Great:
                 judgeText.color = Color.green; 
                 break;
-            case "Good": 
+            case JudgeType.Good:
                 judgeText.color = Color.blue; 
                 break;
-            case "Bad": 
+            case JudgeType.Bad:
                 judgeText.color = Color.gray; 
                 break;
-            case "Miss": 
+            case JudgeType.Miss:
                 judgeText.color = Color.red;
                 break;
         }

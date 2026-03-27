@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils.EnumType;
 
 public class JudgeManager : MonoBehaviour
 {
@@ -22,35 +23,35 @@ public class JudgeManager : MonoBehaviour
     }
 
     // 판정 결과 처리
-    public void Judge(string result)
+    public void Judge(JudgeType _result)
     {
-        switch (result)
+        switch (_result)
         {
-            case "Perfect":
+            case JudgeType.Perfect:
                 combo++;
                 score += 1000;
                 break;
 
-            case "Great":
+            case JudgeType.Great:
                 combo++;
                 score += 500;
                 break;
 
-            case "Good":
+            case JudgeType.Good:
                 combo++;
                 score += 200;
                 break;
 
-            case "Bad":
+            case JudgeType.Bad:
                 combo = 0;
                 score += 100;
                 break;
 
-            case "Miss":
+            case JudgeType.Miss:
                 combo = 0;
                 break;
         }
 
-        UIManager.Instance.ShowJudge(result);
+        UIManager.Instance.ShowJudge(_result);
     }
 }

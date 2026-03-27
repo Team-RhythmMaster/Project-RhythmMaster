@@ -38,9 +38,4 @@ public class Score : MonoBehaviour
         AniPreset.Instance.PlayPop(uiJudgement.uiObject.Name, uiJudgement.uiObject.rect);
         AniPreset.Instance.PlayPop(uiCombo.uiObject.Name, uiCombo.uiObject.rect);
     }
-
-    public void Ani(UIObject uiObject)
-    {
-        //AniPreset.Instance.PlayPop(uiObject.Name, uiObject.rect);
-    }
 }

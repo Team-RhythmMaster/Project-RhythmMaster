@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils.EnumType;
 
 // ที ณ๋ฦฎ
 public class LongNote : NoteObject
@@ -77,14 +78,14 @@ public class LongNote : NoteObject
 
     void Complete()
     {
-        JudgeManager.Instance.Judge("Perfect");
+        JudgeManager.Instance.Judge(JudgeType.Perfect);
         NoteManager.Instance.ClearActiveLongNote(GetLane());
         Remove();
     }
 
     void Fail()
     {
-        JudgeManager.Instance.Judge("Miss");
+        JudgeManager.Instance.Judge(JudgeType.Miss);
         NoteManager.Instance.ClearActiveLongNote(GetLane());
         Remove();
     }
