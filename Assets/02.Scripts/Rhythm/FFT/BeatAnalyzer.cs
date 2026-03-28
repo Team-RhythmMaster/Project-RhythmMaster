@@ -4,20 +4,15 @@ using System.Collections.Generic;
 // FFT 기반으로 음악에서 비트(Onset)를 검출
 public class BeatAnalyzer : MonoBehaviour
 {
-    // Flux 기록 (에너지 변화량)
-    private Queue<float> fluxHistory = new Queue<float>();
+    private Queue<float> fluxHistory = new Queue<float>(); // Flux 기록 (에너지 변화량)
+    private float[] prevSpectrum = new float[1024];        // 이전 스펙트럼
+    private float[] spectrum = new float[1024];            // 현재 스펙트럼
 
-    // FFT 결과 저장 배열
-    private float[] spectrum = new float[1024];
-    private float[] prevSpectrum = new float[1024];
+    private int historySize = 60;     // 평균 계산용 히스토리 버퍼의 최대 길이 (50~100 사이 안정적)
+    private float sensitivity = 4.5f; // 민감도 (낮을수록 많이 감지)
 
-    [Header("분석 설정")]
-    private int historySize = 50;      // 평균 계산용 히스토리 길이
-    private float sensitivity = 4.0f;  // 민감도 (낮을수록 많이 감지)
-
-    [Header("비트 설정")]
     private float bpm = 120f;
-    private float beatInterval;
+    private float beatInterval; // 비트 간격
 
     private void Awake()
     {
@@ -36,10 +31,10 @@ public class BeatAnalyzer : MonoBehaviour
         float avg = GetAverageFlux(flux);
 
         // 비트 판정 (노이즈 제거 포함)
-        return flux > avg * sensitivity && flux > 0.01f;
+        return (flux > avg * sensitivity) && (flux > 0.01f);
     }
 
-    // 스펙트럼 변화량 계산 (Spectral Flux)
+    // 스펙트럼 변화량 계산
     private float CalculateFlux()
     {
         float flux = 0f;
@@ -65,7 +60,6 @@ public class BeatAnalyzer : MonoBehaviour
         // 현재 flux를 히스토리에 추가
         fluxHistory.Enqueue(_currentFlux);
 
-        // 히스토리 길이 유지
         if (fluxHistory.Count > historySize)
             fluxHistory.Dequeue();
 
@@ -73,14 +67,13 @@ public class BeatAnalyzer : MonoBehaviour
         float sum = 0f;
         foreach (var f in fluxHistory)
             sum += f;
-
-        float avg = fluxHistory.Count > 0 ? sum / fluxHistory.Count : 0f;
+        float avg = (fluxHistory.Count > 0) ? (sum / fluxHistory.Count) : 0f;
 
         // 너무 작은 값 방지 (노이즈 안정화)
         return Mathf.Max(avg, 0.0001f);
     }
 
-    // 입력된 시간을 가장 가까운 박자에 맞게 보정 (Quantize)
+    // 입력된 시간을 가장 가까운 박자에 맞게 보정
     public float Quantize(float _time)
     {
         return Mathf.Round(_time / beatInterval) * beatInterval;

@@ -8,11 +8,10 @@ public class LongNote : NoteObject
     private GameObject head;
 
     private bool isHolding = false;
-    private bool isKeyHeld = false;
+    private bool isKeyHold = false;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         lineRenderer = GetComponent<LineRenderer>();
         head = transform.GetChild(0).gameObject;
 
@@ -31,7 +30,7 @@ public class LongNote : NoteObject
             return;
 
         // 누르다 떼면 실패
-        if (!isKeyHeld && currentTime < GetEndTime())
+        if (!isKeyHold && currentTime < GetEndTime())
         {
             Fail();
             return;
@@ -58,7 +57,7 @@ public class LongNote : NoteObject
 
     public void SetHold(bool _holding)
     {
-        isKeyHeld = _holding;
+        isKeyHold = _holding;
     }
 
     public override void TryHit()
@@ -67,7 +66,7 @@ public class LongNote : NoteObject
         diff = Mathf.Abs(GetTime() - currentTime);
         head.gameObject.SetActive(false);
 
-        if (diff <= bad)
+        if (diff <= JudgeManager.bad)
         {
             isHolding = true;
             isHit = true;

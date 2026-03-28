@@ -2,13 +2,14 @@ using UnityEngine;
 using Utils.ClassUtility;
 using System.Collections.Generic;
 
+// 오브젝트 풀링으로 Note 관리
 public class NoteManager : MonoBehaviour
 {
     private static NoteManager instance;
     public static NoteManager Instance { get { return instance; } }
 
-    private Dictionary<int, Queue<NoteObject>> lanes = new();
-    private Dictionary<int, LongNote> activeLong = new();
+    private Dictionary<int, Queue<NoteObject>> lanes = new();  // 각 lane별 판정 대기열
+    private Dictionary<int, LongNote> activeLong = new();      // 현재 누르고 있는 longNote
 
     private Queue<ShortNote> shortPool = new Queue<ShortNote>();
     private Queue<LongNote> longPool = new Queue<LongNote>();
@@ -32,10 +33,6 @@ public class NoteManager : MonoBehaviour
         {
             instance = this;
         }
-
-        // lane 초기화
-        for (int i = 0; i < laneY.Length; i++)
-            lanes[i] = new Queue<NoteObject>();
     }
 
     private void Start()
@@ -45,51 +42,39 @@ public class NoteManager : MonoBehaviour
 
     private void Init()
     {
-        if (shortPrefab == null || longPrefab == null)
-        {
-            Debug.Log("NoteManager: Prefab이 할당되지 않았습니다.");
-            return;
-        }
+        // lane 초기화 : lane 개수만큼 큐 생성
+        for (int i = 0; i < laneY.Length; i++)
+            lanes[i] = new Queue<NoteObject>();
 
-        if (poolParent == null)
-        {
-            Debug.LogWarning("NoteManager: poolParent가 없어 자동 생성합니다.");
-            GameObject parent = new GameObject("NotePool");
-            poolParent = parent.transform;
-        }
-
+        // 오브젝트풀 초기화
         for (int i = 0; i < poolSize; i++)
         {
-            var s = Instantiate(shortPrefab, poolParent);
-            s.gameObject.SetActive(false);
-            shortPool.Enqueue(s);
+            var shortNote = Instantiate(shortPrefab, poolParent);
+            shortNote.gameObject.SetActive(false);
+            shortPool.Enqueue(shortNote);
 
-            var l = Instantiate(longPrefab, poolParent);
-            l.gameObject.SetActive(false);
-            longPool.Enqueue(l);
+            var longNote = Instantiate(longPrefab, poolParent);
+            longNote.gameObject.SetActive(false);
+            longPool.Enqueue(longNote);
         }
     }
 
-    // 풀에서 가져오기
-    public NoteObject Get(NoteData _data)
+    // 오브젝트풀에서 Note 가져오기
+    public NoteObject GetNote(NoteData _data)
     {
         NoteObject note;
 
         if (_data.IsLong)
-        {
-            note = longPool.Count > 0 ? longPool.Dequeue() : Instantiate(longPrefab);
-        }
+            note = (longPool.Count > 0) ? longPool.Dequeue() : Instantiate(longPrefab);
         else
-        {
-            note = shortPool.Count > 0 ? shortPool.Dequeue() : Instantiate(shortPrefab);
-        }
+            note = (shortPool.Count > 0) ? shortPool.Dequeue() : Instantiate(shortPrefab);
 
         note.gameObject.SetActive(true);
         return note;
     }
 
-    // 반환
-    public void Return(NoteObject _note)
+    // Note를 오브젝트풀에 반환
+    public void ReturnNote(NoteObject _note)
     {
         _note.gameObject.SetActive(false);
 
@@ -99,7 +84,7 @@ public class NoteManager : MonoBehaviour
             shortPool.Enqueue(s);
     }
 
-    // Lane 관리
+    // Note를 해당 lane의 판정 대기열에 등록
     public void Register(NoteObject _note)
     {
         lanes[_note.GetLane()].Enqueue(_note);
@@ -112,13 +97,16 @@ public class NoteManager : MonoBehaviour
             lanes[lane].Dequeue();
     }
 
-    // 입력 처리
+    // 판정 시도
     public void TryHit(int _lane)
     {
-        if (lanes[_lane].Count == 0) return;
+        if (lanes[_lane].Count == 0) 
+            return;
+
         lanes[_lane].Peek().TryHit();
     }
 
+    // longNote 누르고 있는 상태 전달
     public void Hold(int _lane, bool _holding)
     {
         if (activeLong.TryGetValue(_lane, out var ln))
@@ -135,5 +123,6 @@ public class NoteManager : MonoBehaviour
         activeLong.Remove(_lane);
     }
 
+    // lane 위치 반환
     public float GetLaneY(int _lane) => laneY[_lane];
 }

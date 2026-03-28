@@ -9,14 +9,6 @@ namespace Utils.EnumType
         GameOver
     }
 
-    // 노래 난이도
-    public enum Difficulty 
-    { 
-        Easy, 
-        Normal, 
-        Hard 
-    }
-
     // 노래 재생 상태
     public enum MusicState
     {
@@ -24,6 +16,14 @@ namespace Utils.EnumType
         Paused,    // 일시 정지 상태
         Unpaused,  // 일시 정지 상태 해제
         Stop       // 정지 상태
+    }
+
+    // 노래 난이도
+    public enum Difficulty 
+    { 
+        Easy, 
+        Normal, 
+        Hard 
     }
 
     // Note 판정 종류

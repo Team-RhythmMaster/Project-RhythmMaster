@@ -9,15 +9,15 @@ public class ShortNote : NoteObject
         float currentTime = AudioManager.Instance.songTime + offset;
         float diff = Mathf.Abs(GetTime() - currentTime);
 
-        if (diff <= bad)
+        if (diff <= JudgeManager.bad)
         {
             isHit = true;
 
-            if (diff <= perfect) 
+            if (diff <= JudgeManager.perfect) 
                 JudgeManager.Instance.Judge(JudgeType.Perfect);
-            else if (diff <= great) 
+            else if (diff <= JudgeManager.great) 
                 JudgeManager.Instance.Judge(JudgeType.Great);
-            else if (diff <= good) 
+            else if (diff <= JudgeManager.good) 
                 JudgeManager.Instance.Judge(JudgeType.Good);
             else 
                 JudgeManager.Instance.Judge(JudgeType.Bad);

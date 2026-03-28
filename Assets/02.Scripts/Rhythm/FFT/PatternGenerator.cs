@@ -9,7 +9,11 @@ public class PatternGenerator : MonoBehaviour
     private BeatAnalyzer beatAnalyzer;
 
     private Dictionary<int, float> lastLaneTime = new Dictionary<int, float>();
-    private float noteSpawnDelay = 6f;
+    private const float longNoteLengthMin = 1.0f;
+    private const float longNoteLenghtMax = 5.0f;
+
+    private float noteSpawnDelay = 6f;  // Note 셍성 딜레이 시간
+    private float longNoteRate = 0.2f;  // longNote 생성 비율
 
     private void Awake()
     {
@@ -33,14 +37,13 @@ public class PatternGenerator : MonoBehaviour
         }
     }
 
-    // 비트 발생 시 호출 → 노트 생성
+    // 비트 발생 시 노트 생성
     public void Generate(float _rawTime)
     {
-        float time = beatAnalyzer.Quantize(_rawTime);
-        time += noteSpawnDelay;
+        int lane = Random.Range(0, NoteManager.Instance.laneY.Length);
+        float time = beatAnalyzer.Quantize(_rawTime) + noteSpawnDelay;
 
-        int lane = SelectLane();
-
+        // 같은 레인에서 이전 노트 이후 최소 0.5비트 이상 간격이 있어야만 새 노트를 생성 (8분음표)
         if (time - lastLaneTime[lane] < beatAnalyzer.GetBeatInterval() * 0.5f)
             return;
 
@@ -48,11 +51,10 @@ public class PatternGenerator : MonoBehaviour
         note.time = time;
         note.lane = lane;
 
-        if (Random.value < 0.2f)
+        if (Random.value < longNoteRate)
         {
-            float length = beatAnalyzer.GetBeatInterval() * Random.Range(1f, 2f);
+            float length = beatAnalyzer.GetBeatInterval() * Random.Range(longNoteLengthMin, longNoteLenghtMax);
             note.endTime = time + length;
-
             lastLaneTime[lane] = note.endTime;
         }
         else
@@ -62,11 +64,5 @@ public class PatternGenerator : MonoBehaviour
         }
 
         noteGenerator.AddNote(note);
-    }
-
-    // 자연스러운 레인 선택
-    int SelectLane()
-    {
-        return Random.Range(0, NoteManager.Instance.laneY.Length);
     }
 }

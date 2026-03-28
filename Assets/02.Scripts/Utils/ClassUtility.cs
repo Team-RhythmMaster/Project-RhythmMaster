@@ -50,7 +50,7 @@ namespace Utils.ClassUtility
         }
     }
 
-        // Score 정보
+    // Score 정보
     public struct ScoreData
     {
         public int great;

@@ -6,6 +6,13 @@ public class JudgeManager : MonoBehaviour
     private static JudgeManager instance;
     public static JudgeManager Instance { get { return instance; } }
 
+    // 판정 범위
+    public const float perfect = 0.05f;
+    public const float great = 0.15f;
+    public const float good = 0.2f;
+    public const float bad = 0.25f;
+    public const float miss = 0.5f;
+
     public int combo = 0;
     public int score = 0;
 
@@ -18,7 +25,6 @@ public class JudgeManager : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

@@ -2,22 +2,12 @@
 using Utils.EnumType;
 using Utils.ClassUtility;
 
-// Note 기본 동작
 public abstract class NoteObject : MonoBehaviour
 {
-    protected NoteGenerator noteGenerator;
-
     // 기본 데이터
     private NoteData data;
     protected float offset = -0.2f; // 싱크 보정값
     protected float diff = 0.0f;     // longNote 시작점과 끝점 시간 차이
-
-    // 판정 범위
-    protected const float perfect = 0.05f;
-    protected const float great = 0.15f;
-    protected const float good = 0.2f;
-    protected const float bad = 0.25f;
-    protected const float miss = 0.5f;
 
     protected bool isHit = false;
     private bool firstFrame = true;
@@ -26,11 +16,6 @@ public abstract class NoteObject : MonoBehaviour
     public float GetSpeed() => data.speed;
     public float GetTime() => data.time;
     public float GetEndTime() => data.endTime;
-
-    protected virtual void Awake()
-    {
-
-    }
 
     protected virtual void Update()
     {
@@ -48,9 +33,8 @@ public abstract class NoteObject : MonoBehaviour
         CheckMiss(currentTime);
     }
 
-    public void Init(NoteData _data, float _speed, NoteGenerator _generator)
+    public void Init(NoteData _data, float _speed)
     {
-        noteGenerator = _generator;
         data = _data;
         data.speed = _speed;
         isHit = false;
@@ -62,7 +46,7 @@ public abstract class NoteObject : MonoBehaviour
 
     protected virtual void CheckMiss(float _currentTime)
     {
-        if (!isHit && _currentTime - data.time > miss)
+        if (!isHit && _currentTime - data.time > JudgeManager.miss)
         {
             JudgeManager.Instance.Judge(JudgeType.Miss);
             Remove();
@@ -73,6 +57,6 @@ public abstract class NoteObject : MonoBehaviour
     protected void Remove()
     {
         NoteManager.Instance.Unregister(this);
-        NoteManager.Instance.Return(this);
+        NoteManager.Instance.ReturnNote(this);
     }
 }

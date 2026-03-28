@@ -9,7 +9,6 @@ public class AudioManager : MonoBehaviour
     public MusicState state = MusicState.Stop;
     public AudioSource audioSource;
 
-    public double startDelay = 0.5f;
     private double dspStartTime;      // 오디오가 실제로 재생되기 시작한 절대 시간
     public float audioOffset = 0.03f; // 오디오 싱크 보정값
 
@@ -19,32 +18,11 @@ public class AudioManager : MonoBehaviour
         {
             double time = AudioSettings.dspTime - dspStartTime;
 
-            // 음악 시작 전이면 0
             if (time < 0)
                 return 0f;
 
             return (float)time + audioOffset;
         }
-    }
-
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
-        Init();
-    }
-
-    private void Init()
-    {
-        audioSource = GetComponent<AudioSource>();
     }
 
     public float Length
@@ -74,11 +52,31 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // 플레이 시작
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        Init();
+    }
+
+    private void Init()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    // 플레이
     public void Play()
     {
         state = MusicState.Playing;
-        dspStartTime = AudioSettings.dspTime + startDelay;
+        dspStartTime = AudioSettings.dspTime;
         audioSource.PlayScheduled(dspStartTime);
     }
 

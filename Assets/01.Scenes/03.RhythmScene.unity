@@ -832,8 +832,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 3
   audioSource: {fileID: 0}
-  startDelay: 0.5
   audioOffset: 0.03
+  startDelay: 0.5
 --- !u!4 &796250193
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,11 +1610,11 @@ SceneRoots:
   - {fileID: 749278891}
   - {fileID: 1206334406}
   - {fileID: 1842433175}
+  - {fileID: 193558285}
+  - {fileID: 2059812600}
   - {fileID: 629382516}
   - {fileID: 288740479}
   - {fileID: 1081654279}
-  - {fileID: 193558285}
-  - {fileID: 2059812600}
   - {fileID: 1051495390}
   - {fileID: 1835414737}
   - {fileID: 1100667427}
