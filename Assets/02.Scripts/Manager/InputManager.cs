@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using Utils.EnumType;
+using DG.Tweening;
 
 public class InputManager : MonoBehaviour
 {
@@ -42,10 +43,15 @@ public class InputManager : MonoBehaviour
     {
         // 키 눌렀을 때 판정 시도
         if (Input.GetKeyDown(_key))
+        {
             NoteManager.Instance.TryHit(_lane);
+
+            hitLines[_lane].DOKill(); // 기존 트윈 제거
+            hitLines[_lane].localScale = new Vector3(0.8f, 0.8f, 0.8f); // 스케일 초기화
+            hitLines[_lane].transform.DOPunchScale(new Vector3(0.8f, 0.8f, 0.8f) * 0.3f, 0.3f, 5, 0.5f);
+        }
 
         // 롱노트 유지 여부 전달
         NoteManager.Instance.Hold(_lane, Input.GetKey(_key));
-        hitLines[_lane].gameObject.SetActive(false);
     }
 }
