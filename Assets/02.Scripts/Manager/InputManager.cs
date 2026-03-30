@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Linq;
-using Utils.EnumType;
 using DG.Tweening;
+using Utils.EnumType;
 
 public class InputManager : MonoBehaviour
 {

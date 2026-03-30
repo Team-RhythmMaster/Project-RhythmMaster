@@ -73,14 +73,14 @@ public class LongNote : NoteObject
 
     void Complete()
     {
-        JudgeManager.Instance.Judge(judge);
+        JudgeManager.Instance.Judgment(judge, this);
         NoteManager.Instance.ClearActiveLongNote(data.lane);
         Remove();
     }
 
     void Fail()
     {
-        JudgeManager.Instance.Judge(JudgeType.Miss);
+        JudgeManager.Instance.Judgment(JudgeType.Miss, this);
         NoteManager.Instance.ClearActiveLongNote(data.lane);
         Remove();
     }

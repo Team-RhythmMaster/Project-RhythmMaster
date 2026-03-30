@@ -1,16 +1,17 @@
-using System;
 using UnityEngine;
-using Utils.ClassUtility;
 using Utils.EnumType;
+using Utils.ClassUtility;
+using System.Collections.Generic;
 
 public class JudgeManager : MonoBehaviour
 {
     private static JudgeManager instance;
     public static JudgeManager Instance { get { return instance; } }
 
-    private UIText uiJudgement;
-    private UIText uiCombo;
-    private UIText uiScore;
+    // UI 오브젝트풀
+    public JudgmentUI judgePrefab;
+    private Transform parentTransform;
+    private Queue<JudgmentUI> judgePool = new Queue<JudgmentUI>();
 
     // 점수 데이터
     public ScoreData data;
@@ -18,18 +19,18 @@ public class JudgeManager : MonoBehaviour
     private int score = 0;
 
     // 판정 범위
-    public const float perfect = 0.05f;
-    public const float great = 0.1f;
-    public const float good = 0.15f;
-    public const float bad = 0.2f;
-    public const float miss = 0.25f;
+    public const float perfect = 0.1f;
+    public const float great = 0.15f;
+    public const float good = 0.2f;
+    public const float bad = 0.25f;
+    public const float miss = 0.3f;
 
     // 판정별 점수
-    public const int perfectScore = 1000;
-    public const int greatScore = 500;
-    public const int goodScore = 250;
-    public const int badScore = 100;
-    public const int missScore = 0;
+    private const int perfectScore = 1000;
+    private const int greatScore = 500;
+    private const int goodScore = 250;
+    private const int badScore = 100;
+    private const int missScore = 0;
 
     private void Awake()
     {
@@ -41,18 +42,35 @@ public class JudgeManager : MonoBehaviour
         {
             instance = this;
         }
+
+        Init();
     }
 
-    // 초기화
-    public void Init()
+    private void Init()
     {
-        AniPreset.Instance.Join(uiJudgement.uiObject.Name);
-        AniPreset.Instance.Join(uiCombo.uiObject.Name);
-        AniPreset.Instance.Join(uiScore.uiObject.Name);
+        parentTransform = GameObject.Find("Canvas/JudgePool").transform;
+    }
+
+    public JudgmentUI JudgmentUIGet()
+    {
+        if (judgePool.Count > 0)
+        {
+            var obj = judgePool.Dequeue();
+            obj.gameObject.SetActive(true);
+            return obj;
+        }
+
+        return Instantiate(judgePrefab, parentTransform);
+    }
+
+    public void Return(JudgmentUI _obj)
+    {
+        _obj.gameObject.SetActive(false);
+        judgePool.Enqueue(_obj);
     }
 
     // 판정 결과 처리
-    public void Judge(JudgeType _result)
+    public void Judgment(JudgeType _result, NoteObject _note)
     {
         switch (_result)
         {
@@ -77,27 +95,6 @@ public class JudgeManager : MonoBehaviour
                 break;
         }
 
-        UIManager.Instance.ShowJudge(_result);
-    }
-
-    public void Clear()
-    {
-        data = new ScoreData();
-        data.judgeText = Enum.GetNames(typeof(JudgeType));
-        data.judgeColor = new Color[3] { Color.blue, Color.yellow, Color.red };
-        uiJudgement.SetText("");
-        uiCombo.SetText("");
-        uiScore.SetText("0");
-    }
-
-    public void SetScore()
-    {
-        uiJudgement.SetText(data.judgeText[(int)data.judge]);
-        uiJudgement.SetColor(data.judgeColor[(int)data.judge]);
-        uiCombo.SetText($"{data.combo}");
-        uiScore.SetText($"{data.score}");
-
-        AniPreset.Instance.PlayPop(uiJudgement.uiObject.Name, uiJudgement.uiObject.rect);
-        AniPreset.Instance.PlayPop(uiCombo.uiObject.Name, uiCombo.uiObject.rect);
+        UIManager.Instance.ShowJudge(_result, _note.GetLane());
     }
 }

@@ -62,7 +62,7 @@ public abstract class NoteObject : MonoBehaviour
         // 현재 시간 - 노트 시간 > Miss 판정 허용 오차
         if (!isHit && _currentTime - data.time > JudgeManager.miss)
         {
-            JudgeManager.Instance.Judge(JudgeType.Miss);
+            JudgeManager.Instance.Judgment(JudgeType.Miss, this);
             Remove();
         }
     }

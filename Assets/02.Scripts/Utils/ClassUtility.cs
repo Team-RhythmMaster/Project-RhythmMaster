@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Utils.EnumType;
-using System.Collections.Generic;
 
 namespace Utils.ClassUtility
 {
@@ -18,27 +17,17 @@ namespace Utils.ClassUtility
     // Score 정보
     public struct ScoreData
     {
-        public int great;
-        public int good;
-        public int miss;
-        public int fastMiss; // 빨리 입력해서 미스
-        public int longMiss; // 롱노트 완성 실패, miss 카운트는 하지 않음
-
         public string[] judgeText;
         public Color[] judgeColor;
         public JudgeType judge;
-        public int combo;
 
-        public int score
-        {
-            get
-            {
-                return (great * 500) + (good * 200);
-            }
-            set
-            {
-                score = value;
-            }
-        }
+        public int combo;
+        public int score;
+
+        public int perfect;
+        public int great;
+        public int good;
+        public int bad;
+        public int miss;
     }
 }

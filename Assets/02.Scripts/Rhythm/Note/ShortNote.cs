@@ -17,14 +17,14 @@ public class ShortNote : NoteObject
         {
             isHit = true;
 
-            if (diff <= JudgeManager.perfect) 
-                JudgeManager.Instance.Judge(JudgeType.Perfect);
-            else if (diff <= JudgeManager.great) 
-                JudgeManager.Instance.Judge(JudgeType.Great);
-            else if (diff <= JudgeManager.good) 
-                JudgeManager.Instance.Judge(JudgeType.Good);
-            else 
-                JudgeManager.Instance.Judge(JudgeType.Bad);
+            if (diff <= JudgeManager.perfect)
+                JudgeManager.Instance.Judgment(JudgeType.Perfect, this);
+            else if (diff <= JudgeManager.great)
+                JudgeManager.Instance.Judgment(JudgeType.Great, this);
+            else if (diff <= JudgeManager.good)
+                JudgeManager.Instance.Judgment(JudgeType.Good, this);
+            else
+                JudgeManager.Instance.Judgment(JudgeType.Bad, this);
 
             StartCoroutine(OnHit());
         }
