@@ -9,7 +9,7 @@ public class BeatAnalyzer : MonoBehaviour
     private float[] spectrum = new float[1024];            // 현재 스펙트럼
 
     private const int historySize = 80;     // 평균 계산용 히스토리 버퍼의 최대 길이 (50~80 사이 안정적)
-    private const float sensitivity = 4.0f; // 민감도 (1.3~2.0 사이 보통)
+    private const float sensitivity = 2.5f; // 민감도 (1.3~2.0 사이 보통)
 
     private float bpm = 120f;
     private float beatInterval; // 비트 간격

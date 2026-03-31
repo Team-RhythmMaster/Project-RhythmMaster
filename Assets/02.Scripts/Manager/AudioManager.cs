@@ -6,6 +6,8 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     public static AudioManager Instance { get { return instance; } }
 
+    private NoteGenerator noteGenerator;
+
     public AudioSource audioSource;
     public MusicState state = MusicState.Stop;
 
@@ -42,6 +44,7 @@ public class AudioManager : MonoBehaviour
 
     private void Init()
     {
+        noteGenerator = FindAnyObjectByType<NoteGenerator>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -49,6 +52,7 @@ public class AudioManager : MonoBehaviour
     public void Play()
     {
         state = MusicState.Playing;
+
         songStartDspTime = AudioSettings.dspTime + noteTravelTime;
         audioSource.PlayScheduled(songStartDspTime);
     }

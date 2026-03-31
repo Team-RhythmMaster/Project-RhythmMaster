@@ -36,7 +36,7 @@ public class NoteGenerator : MonoBehaviour
     public void Init()
     {
         rightEdge = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
-        spawnX = rightEdge + 15.0f;
+        spawnX = rightEdge + 2.0f;
 
         // 거리 / 속도 = 시간 (+1.0f → 여유 시간/렉 방지/프레임 드랍 방지)
         spawnAheadTime = ((spawnX - NoteManager.hitLineX) / speed) + 1.0f;
