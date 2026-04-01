@@ -1,9 +1,10 @@
 using UnityEngine;
+using System.Linq;
 using Utils.EnumType;
 
 public class LongNote : NoteObject
 {
-    private LineRenderer lineRenderer;
+    private SpriteRenderer tailRenderer;
     private JudgeType judge;
 
     private bool isHolding = false;  // 판정을 시작했는지 여부
@@ -12,9 +13,7 @@ public class LongNote : NoteObject
     protected override void Awake()
     {
         base.Awake();
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = 2;
-        lineRenderer.useWorldSpace = true;
+        tailRenderer = GetComponentsInChildren<SpriteRenderer>().Skip(1).FirstOrDefault();
     }
 
     protected override void Update()
@@ -40,12 +39,32 @@ public class LongNote : NoteObject
     // 판정 시작 시점과 끝 시점에 따라 선의 위치를 업데이트 → 롱노트 시각화 표현
     private void UpdateLine(float _currentTime)
     {
-        float startTime = isHolding ? _currentTime : data.time;
-        float startX = NoteManager.hitLineX + ((startTime - _currentTime) * data.speed);
         float endX = NoteManager.hitLineX + ((data.endTime - _currentTime) * data.speed);
 
-        lineRenderer.SetPosition(0, new Vector3(startX, yPos, 0));
-        lineRenderer.SetPosition(1, new Vector3(endX, yPos, 0));
+        if (!isHolding)
+        {
+            // 일반 상태 (이동 중)
+            float startX = NoteManager.hitLineX + ((data.time - _currentTime) * data.speed);
+            float length = endX - startX;
+            transform.position = new Vector3(startX, transform.position.y, 0);
+            SetTail(length);
+        }
+        else
+        {
+            // 판정 시작 후 (머리 고정)
+            float length = endX - NoteManager.hitLineX;
+            transform.position = new Vector3(NoteManager.hitLineX, transform.position.y, 0);
+            SetTail(length);
+        }
+    }
+
+    private void SetTail(float length)
+    {
+        if (length < 0) length = 0;
+
+        Vector2 size = tailRenderer.size;
+        size.x = length;
+        tailRenderer.size = size;
     }
 
     public override void TryHit()
@@ -56,8 +75,9 @@ public class LongNote : NoteObject
         {
             isHit = true;
             isHolding = true;
-            spriteRenderer.color = new Color(1, 1, 1, 0.0f);
-            spriteRenderer.sprite = noteHitSprites[spriteIndex];
+
+            //spriteRenderer.color = new Color(1, 1, 1, 0.0f);
+            tailRenderer.sprite = noteHitSprites[spriteIndex];
             NoteManager.Instance.SetActiveLongNote(data.lane, this);
 
             if (diff <= JudgeManager.perfect)

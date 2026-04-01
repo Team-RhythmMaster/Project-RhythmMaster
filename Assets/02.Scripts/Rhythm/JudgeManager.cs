@@ -81,22 +81,27 @@ public class JudgeManager : MonoBehaviour
         {
             case JudgeType.Perfect:
                 combo++;
-                score += perfectScore;
+                score += perfectScore * FeverManager.Instance.GetMultiplier();
+                FeverManager.Instance.AddGauge(5f);
                 break;
             case JudgeType.Great:
                 combo++;
-                score += greatScore;
+                score += greatScore * FeverManager.Instance.GetMultiplier();
+                FeverManager.Instance.AddGauge(3f);
                 break;
             case JudgeType.Good:
                 combo++;
-                score += goodScore;
+                score += goodScore * FeverManager.Instance.GetMultiplier();
+                FeverManager.Instance.AddGauge(1f);
                 break;
             case JudgeType.Bad:
                 combo = 0;
-                score += badScore;
+                score += badScore * FeverManager.Instance.GetMultiplier();
+                FeverManager.Instance.AddGauge(-5f);
                 break;
             case JudgeType.Miss:
                 combo = 0;
+                FeverManager.Instance.AddGauge(-10f);
                 break;
         }
 

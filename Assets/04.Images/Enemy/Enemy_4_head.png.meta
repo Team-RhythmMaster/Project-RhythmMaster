@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: afcf73dbc8dff314c8eab9970bca7250
+guid: 1020e94b385057a4381b4cbb28c40fc0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7996185795655494482
-    second: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_0"
-  - first:
-      213: 7175442831926761544
-    second: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_1"
+      213: 7891862485072698725
+    second: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_4_head_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_0"
+      name: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_4_head_0"
       rect:
         serializedVersion: 2
-        x: 7
-        y: 2
-        width: 41
-        height: 59
+        x: 3
+        y: 3
+        width: 61
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea41eeb6267d70190800000000000000
-      internalID: -7996185795655494482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_1"
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 19
-        width: 21
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8481e1f0d3b449360800000000000000
-      internalID: 7175442831926761544
+      spriteID: 56d5df60e17858d60800000000000000
+      internalID: 7891862485072698725
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_0": -7996185795655494482
-      "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_2_\uD310\uC815_1": 7175442831926761544
+      "\uB178\uD2B8(\uBAAC\uC2A4\uD130)_4_head_0": 7891862485072698725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -45,4 +45,10 @@ namespace Utils.EnumType
         Bad,
         Miss
     }
+
+    public enum FeverState
+    {
+        Normal,
+        Fever
+    }
 }

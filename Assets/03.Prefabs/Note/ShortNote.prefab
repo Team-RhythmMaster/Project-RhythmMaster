@@ -141,9 +141,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b69eb4e20bbdf27468ab658a0793d104, type: 3}
   - {fileID: 21300000, guid: de8878f197b7af546899cc96b4faaf10, type: 3}
   - {fileID: 21300000, guid: 2e95c6cda95c04e4c809d244fab55fb4, type: 3}
-  - {fileID: 21300000, guid: f084e305132f0514b8bb22d740167268, type: 3}
+  - {fileID: 21300000, guid: 1020e94b385057a4381b4cbb28c40fc0, type: 3}
   noteHitSprites:
   - {fileID: 21300000, guid: 305b915fd87324b4aa12dcea0a6d9eb9, type: 3}
   - {fileID: 21300000, guid: afcf73dbc8dff314c8eab9970bca7250, type: 3}
   - {fileID: 21300000, guid: c3570d2c99d1c2b46a3ceb1f9c663e2a, type: 3}
-  - {fileID: 21300000, guid: c7434185fea3f064f8788920b29f78e1, type: 3}
+  - {fileID: 21300000, guid: 0946bb30598bd714e9a346f838fef489, type: 3}
