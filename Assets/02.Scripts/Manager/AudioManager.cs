@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Utils.EnumType;
 
 public class AudioManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get { return instance; } }
 
     private NoteGenerator noteGenerator;
+    private Slider songTimeSlider;
 
     public AudioSource audioSource;
     public MusicState state = MusicState.Stop;
@@ -42,8 +44,14 @@ public class AudioManager : MonoBehaviour
         Init();
     }
 
+    private void Update()
+    {
+        songTimeSlider.value = songTime / audioSource.clip.length;
+    }
+
     private void Init()
     {
+        songTimeSlider = GameObject.Find("SongTimeSlider").GetComponent<Slider>();
         noteGenerator = FindAnyObjectByType<NoteGenerator>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -55,6 +63,7 @@ public class AudioManager : MonoBehaviour
 
         songStartDspTime = AudioSettings.dspTime + noteTravelTime;
         audioSource.PlayScheduled(songStartDspTime);
+        songTimeSlider.value = 0;
     }
 
     // 일시정지
@@ -76,16 +85,6 @@ public class AudioManager : MonoBehaviour
     {
         state = MusicState.Stop;
         audioSource.Stop();
-    }
-
-    public void MovePosition(float time)
-    {
-        float currentTime = audioSource.time;
-
-        currentTime += time;
-        currentTime = Mathf.Clamp(currentTime, 0f, audioSource.clip.length - 0.0001f);
-
-        audioSource.time = currentTime;
     }
 
     public void Insert(AudioClip clip)

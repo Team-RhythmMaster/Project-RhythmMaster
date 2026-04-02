@@ -14,7 +14,9 @@ public class JudgeManager : MonoBehaviour
     private Transform parentTransform;
     private Queue<JudgmentUI> judgePool = new Queue<JudgmentUI>();
 
+    private PlayerController playerController;
     private Text scoreText;
+
     // lane별 판정 UI 생성 위치
     private Vector2[] lanePositions = { new Vector2(-480.0f, 290.0f), new Vector2(-480.0f, -35.0f) };
 
@@ -35,6 +37,7 @@ public class JudgeManager : MonoBehaviour
     private const int greatScore = 500;
     private const int goodScore = 250;
     private const int badScore = 100;
+    private const int missScore = 5;
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class JudgeManager : MonoBehaviour
     private void Init()
     {
         parentTransform = GameObject.Find("JudgePool").transform;
+        playerController = FindAnyObjectByType<PlayerController>();
         scoreText = GameObject.Find("ScoreText").GetComponentInChildren<Text>();
     }
 
@@ -82,12 +86,12 @@ public class JudgeManager : MonoBehaviour
             case JudgeType.Perfect:
                 combo++;
                 score += perfectScore * FeverManager.Instance.GetMultiplier();
-                FeverManager.Instance.AddGauge(5f);
+                FeverManager.Instance.AddGauge(3f);
                 break;
             case JudgeType.Great:
                 combo++;
                 score += greatScore * FeverManager.Instance.GetMultiplier();
-                FeverManager.Instance.AddGauge(3f);
+                FeverManager.Instance.AddGauge(2f);
                 break;
             case JudgeType.Good:
                 combo++;
@@ -102,6 +106,7 @@ public class JudgeManager : MonoBehaviour
             case JudgeType.Miss:
                 combo = 0;
                 FeverManager.Instance.AddGauge(-10f);
+                playerController.OnDamage(missScore);
                 break;
         }
 

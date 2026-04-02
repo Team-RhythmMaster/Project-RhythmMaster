@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils.EnumType;
@@ -10,7 +11,7 @@ public class FeverManager : MonoBehaviour
     private FeverState state = FeverState.Normal;
 
     private Slider gaugeSlider;
-    private Text gaugeText;
+    public Text gaugeText;
     private GameObject flame;
 
     [Header("Gauge")]
@@ -43,7 +44,7 @@ public class FeverManager : MonoBehaviour
     private void Init()
     {
         gaugeSlider = GameObject.Find("FeverSlider").GetComponent<Slider>();
-        gaugeText = GameObject.Find("FeverText").GetComponent<Text>();
+        gaugeText = GameObject.Find("GaugeText").GetComponent<Text>();
         flame = gaugeSlider.transform.GetChild(4).gameObject;
     }
 
@@ -56,6 +57,7 @@ public class FeverManager : MonoBehaviour
             if (feverTimer <= 0f)
                 EndFever();
         }
+        gaugeText.text = string.Format("{0}/{1}", (int)gauge, (int)maxGauge);
     }
 
     // 게이지 증가/감소
@@ -66,8 +68,7 @@ public class FeverManager : MonoBehaviour
 
         gauge += amount;
         gauge = Mathf.Clamp(gauge, 0, maxGauge);
-        gaugeSlider.value = gauge / maxGauge;
-        gaugeText.text = $"{(int)gauge}/{(int)maxGauge}";
+        gaugeSlider.value = (float)(gauge / maxGauge);
 
         if (gauge >= maxGauge)
             StartFever();
@@ -81,9 +82,13 @@ public class FeverManager : MonoBehaviour
         feverTimer = feverDuration;
         gauge = 0;
 
+        Sequence seq = DOTween.Sequence();
+        seq.Append(flame.transform.DOScale(1.5f, 0.2f).SetEase(Ease.OutBack));
+        seq.Append(flame.transform.DOScale(1.0f, 0.2f).SetEase(Ease.InOutSine));
+        seq.SetLoops(-1);
+
         flame.SetActive(true);
-        gaugeSlider.value = gauge / maxGauge;
-        gaugeText.text = $"{(int)gauge}/{(int)maxGauge}";
+        gaugeSlider.value = (float)(gauge / maxGauge);
     }
 
     // 피버 종료
@@ -91,6 +96,10 @@ public class FeverManager : MonoBehaviour
     {
         state = FeverState.Normal;
         scoreMultiplier = normalMultiplier;
+
+        flame.transform.DOKill();
+        flame.transform.localScale = Vector3.one;
+
         flame.SetActive(false);
     }
 

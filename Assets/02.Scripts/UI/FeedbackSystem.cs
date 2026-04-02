@@ -45,26 +45,29 @@ public class FeedbackSystem : MonoBehaviour
         //hitEffect.Play(result.position, result.type);
 
         // 사운드
-        PlaySound(_type);
+        PlaySound(_type, _lane);
         // 화면 효과
         PlayScreenEffect(_type);
     }
 
-    private void PlaySound(JudgeType _type)
+    private void PlaySound(JudgeType _type, int _lane)
     {
         switch (_type)
         {
             case JudgeType.Perfect:
-                audioSource.PlayOneShot(punchSFX[0]);
+                audioSource.PlayOneShot(punchSFX[_lane]);
                 break;
             case JudgeType.Great:
-                audioSource.PlayOneShot(punchSFX[1]);
+                audioSource.PlayOneShot(punchSFX[_lane]);
                 break;
             case JudgeType.Good:
-                audioSource.PlayOneShot(punchSFX[2]);
+                audioSource.PlayOneShot(punchSFX[_lane]);
                 break;
             case JudgeType.Bad:
-                audioSource.PlayOneShot(punchSFX[3]);
+                audioSource.PlayOneShot(punchSFX[_lane]);
+                break;
+            case JudgeType.Miss:
+                audioSource.PlayOneShot(punchSFX[2]);
                 break;
         }
     }
@@ -75,9 +78,6 @@ public class FeedbackSystem : MonoBehaviour
         Camera.main.transform.position = new Vector3(0.0f, 0.0f, -10.0f);
 
         if (_type == JudgeType.Perfect)
-        {
-            Camera.main.transform
-                .DOShakePosition(0.1f, 0.2f);
-        }
+            Camera.main.transform.DOShakePosition(0.1f, 0.2f);
     }
 }
