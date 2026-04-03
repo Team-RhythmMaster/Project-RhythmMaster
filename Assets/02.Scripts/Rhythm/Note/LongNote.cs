@@ -76,8 +76,8 @@ public class LongNote : NoteObject
             isHit = true;
             isHolding = true;
 
-            //spriteRenderer.color = new Color(1, 1, 1, 0.0f);
-            tailRenderer.sprite = noteHitSprites[spriteIndex];
+            spriteRenderer.sprite = noteHitSprites[3];
+            tailRenderer.sprite = noteHitSprites[4];
             NoteManager.Instance.SetActiveLongNote(data.lane, this);
 
             if (diff <= JudgeManager.perfect)
