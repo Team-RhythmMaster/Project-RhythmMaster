@@ -1,10 +1,52 @@
 {
   "Songs": [
     {
-      "id": 1
+      "id": 1,
+      "title": "Pixel Galaxy",
+      "artist": "Artist1",
+      "difficulty": 0,
+      "bpm": 120,
+      "offset": 0.5,
+      "audioClip": "Pixel Galaxy - Snail's House",
+      "songSprite": "BG",
+      "notes": [
+        {
+          "lane": 0,
+          "time": 1.0,
+          "endTime": 1.0,
+          "IsLong": false
+        },
+        {
+          "lane": 0,
+          "time": 1.0,
+          "endTime": 1.5,
+          "IsLong": true
+        }
+      ]
     },
     {
-      "id": 2
+      "id": 2,
+      "title": "Chik Chak",
+      "artist": "Artist2",
+      "difficulty": 1,
+      "bpm": 180,
+      "offset": 0.5,
+      "audioClip": "[Muse Dash] Buro Exorcist Master Character Theme【Music】 - Chik Chak",
+      "songSprite": "BG",
+      "notes": [
+        {
+          "lane": 0,
+          "time": 1.0,
+          "endTime": 1.0,
+          "IsLong": false
+        },
+        {
+          "lane": 0,
+          "time": 1.0,
+          "endTime": 1.5,
+          "IsLong": true
+        }
+      ]
     }
   ]
 }

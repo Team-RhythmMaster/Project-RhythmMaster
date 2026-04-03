@@ -12,9 +12,9 @@ public class PatternGenerator : MonoBehaviour
     private const float longNoteLengthMin = 1.0f;
     private const float longNoteLenghtMax = 5.0f;
 
-    private float noteSpawnDelay = 4f;  // Note 셍성 딜레이 시간
-    private float longNoteRate = 0.2f;  // longNote 생성 비율
-    private float minInterval = 1.5f;   // 같은 레인에서 노트 간 최소 간격 (초 단위)
+    private float noteSpawnDelay = 4f; // Note 셍성 딜레이 시간
+    private float longNoteRate = 0.2f; // longNote 생성 비율
+    private float minInterval = 1.5f;  // 같은 레인에서 노트 간 최소 간격 (초 단위)
 
     private void Awake()
     {

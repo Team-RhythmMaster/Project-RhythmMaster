@@ -1,7 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
 using Utils.EnumType;
-using Utils.ClassUtility;
 
 public class FeedbackSystem : MonoBehaviour
 {

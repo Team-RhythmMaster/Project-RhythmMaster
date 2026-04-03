@@ -1,20 +1,21 @@
 using UnityEngine;
+using Utils.EnumType;
 using Utils.ClassUtility;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "SongData", menuName = "Rhythm/SongData")]
-public class SongData : ScriptableObject
+public class SongDataSO : ScriptableObject
 {
     // Description
     public string title;
     public string artist;
+    public Difficulty difficulty;
 
     // Audio
     public int bpm;
-    public int offset;
-    public int[] signature;
+    public float offset;
 
     public List<NoteData> notes = new List<NoteData>();
-    public AudioClip clip;
-    public Sprite img;
+    public AudioClip audioClip;
+    public Sprite songSprite;
 }

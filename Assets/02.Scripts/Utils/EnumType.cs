@@ -46,6 +46,7 @@ namespace Utils.EnumType
         Miss
     }
 
+    // 피버 상태
     public enum FeverState
     {
         Normal,
