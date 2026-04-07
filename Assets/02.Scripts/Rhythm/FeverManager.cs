@@ -1,5 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
 using System.Linq;
 using UnityEngine.UI;
 using Utils.EnumType;
@@ -18,13 +17,16 @@ public class FeverManager : MonoBehaviour
     public Sprite[] normalBG;
     public Sprite[] feverBG;
 
+    private Transform[] clouds;
+    private Transform[] stars;
+
     [Header("Gauge")]
     private float gauge = 0f;      // 현재 게이지
     private float maxGauge = 100f; // 피버 발동 기준값
 
     [Header("Fever")]
     private float feverDuration = 15f; // 피버 지속 시간
-    private float feverTimer = 0f;   // 남은 시간 (카운트다운용)
+    private float feverTimer = 0f;     // 남은 시간 (카운트다운용)
 
     [Header("Multiplier")]
     private int scoreMultiplier = 1;  // 현재 적용 중인 배율 (노말: 1, 피버: 2)
@@ -50,6 +52,9 @@ public class FeverManager : MonoBehaviour
         gaugeSlider = GameObject.Find("FeverSlider").GetComponent<Slider>();
         gaugeText = GameObject.Find("GaugeText").GetComponent<Text>();
         bg = GameObject.Find("BG").GetComponentsInChildren<SpriteRenderer>().Take(2).ToArray();
+
+        clouds = GameObject.Find("Cloud").GetComponentsInChildren<Transform>().Skip(1).ToArray();
+        stars = GameObject.Find("Star").GetComponentsInChildren<Transform>(true).Skip(1).ToArray();
     }
 
     private void Update()
@@ -81,6 +86,9 @@ public class FeverManager : MonoBehaviour
     // 피버 시작
     void StartFever()
     {
+        CloudActive(false);
+        StarActive(true);
+
         bg[0].sprite = feverBG[0];
         bg[1].sprite = feverBG[1];
 
@@ -95,6 +103,9 @@ public class FeverManager : MonoBehaviour
     // 피버 종료
     void EndFever()
     {
+        CloudActive(true);
+        StarActive(false);
+
         bg[0].sprite = normalBG[0];
         bg[1].sprite = normalBG[1];
 
@@ -106,5 +117,21 @@ public class FeverManager : MonoBehaviour
     public int GetMultiplier()
     {
         return scoreMultiplier;
+    }
+
+    public void CloudActive(bool _isActive)
+    {
+        for(int i = 0; i < clouds.Length; i++)
+        {
+            clouds[i].gameObject.SetActive(_isActive);
+        }
+    }
+
+    public void StarActive(bool _isActive)
+    {
+        for (int i = 0; i < stars.Length; i++)
+        {
+            stars[i].gameObject.SetActive(_isActive);
+        }
     }
 }

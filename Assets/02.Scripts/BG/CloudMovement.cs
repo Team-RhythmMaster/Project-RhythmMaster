@@ -8,7 +8,7 @@ public class CloudMovement : MonoBehaviour
     private float resetX = -13f;  // 구름이 화면 밖으로 나갔을 때 도착할 위치
     private float startX = 13f;   // 다시 시작할 위치 (오른쪽 바깥)
 
-    private void Start()
+    private void OnEnable()
     {
         Move();
     }
@@ -27,7 +27,7 @@ public class CloudMovement : MonoBehaviour
             .SetEase(Ease.Linear) // 일정 속도 유지
             .OnComplete(() =>
             {
-                transform.position = new Vector3(startX, Random.Range(0.2f, 3f), 0);
+                transform.position = new Vector3(startX, Random.Range(0f, 3f), 0);
                 Move();
             });
     }
