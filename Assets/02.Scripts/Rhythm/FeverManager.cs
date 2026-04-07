@@ -1,5 +1,6 @@
-using DG.Tweening;
 using UnityEngine;
+using DG.Tweening;
+using System.Linq;
 using UnityEngine.UI;
 using Utils.EnumType;
 
@@ -11,8 +12,11 @@ public class FeverManager : MonoBehaviour
     private FeverState state = FeverState.Normal;
 
     private Slider gaugeSlider;
-    public Text gaugeText;
-    private GameObject flame;
+    private Text gaugeText;
+
+    private SpriteRenderer[] bg;
+    public Sprite[] normalBG;
+    public Sprite[] feverBG;
 
     [Header("Gauge")]
     private float gauge = 0f;      // 현재 게이지
@@ -45,7 +49,7 @@ public class FeverManager : MonoBehaviour
     {
         gaugeSlider = GameObject.Find("FeverSlider").GetComponent<Slider>();
         gaugeText = GameObject.Find("GaugeText").GetComponent<Text>();
-        flame = gaugeSlider.transform.GetChild(4).gameObject;
+        bg = GameObject.Find("BG").GetComponentsInChildren<SpriteRenderer>().Take(2).ToArray();
     }
 
     private void Update()
@@ -77,30 +81,25 @@ public class FeverManager : MonoBehaviour
     // 피버 시작
     void StartFever()
     {
+        bg[0].sprite = feverBG[0];
+        bg[1].sprite = feverBG[1];
+
         state = FeverState.Fever;
         scoreMultiplier = feverMultiplier;
         feverTimer = feverDuration;
         gauge = 0;
 
-        Sequence seq = DOTween.Sequence();
-        seq.Append(flame.transform.DOScale(1.5f, 0.2f).SetEase(Ease.OutBack));
-        seq.Append(flame.transform.DOScale(1.0f, 0.2f).SetEase(Ease.InOutSine));
-        seq.SetLoops(-1);
-
-        flame.SetActive(true);
         gaugeSlider.value = (float)(gauge / maxGauge);
     }
 
     // 피버 종료
     void EndFever()
     {
+        bg[0].sprite = normalBG[0];
+        bg[1].sprite = normalBG[1];
+
         state = FeverState.Normal;
         scoreMultiplier = normalMultiplier;
-
-        flame.transform.DOKill();
-        flame.transform.localScale = Vector3.one;
-
-        flame.SetActive(false);
     }
 
     // 현재 배율 반환
