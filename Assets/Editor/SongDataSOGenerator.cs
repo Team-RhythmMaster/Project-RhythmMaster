@@ -40,7 +40,6 @@ public class SongDataSOGenerator
             }
 
             string savePath = $"Assets/08.ScriptableObjects/Songs/{so.title}.asset";
-            // ScriptableObject를 실제 에셋 파일로 생성
             AssetDatabase.CreateAsset(so, savePath);
         }
 

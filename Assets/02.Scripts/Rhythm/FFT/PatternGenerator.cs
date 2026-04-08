@@ -64,6 +64,6 @@ public class PatternGenerator : MonoBehaviour
             lastLaneTime[lane] = time;
         }
 
-        noteGenerator.AddNote(note);
+        //noteGenerator.AddNote(note);
     }
 }

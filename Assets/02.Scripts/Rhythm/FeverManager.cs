@@ -17,8 +17,8 @@ public class FeverManager : MonoBehaviour
     public Sprite[] normalBG;
     public Sprite[] feverBG;
 
-    private Transform[] clouds;
-    private Transform[] stars;
+    private CloudMovement[] clouds;
+    private StarMovement[] stars;
 
     [Header("Gauge")]
     private float gauge = 0f;      // 현재 게이지
@@ -53,8 +53,8 @@ public class FeverManager : MonoBehaviour
         gaugeText = GameObject.Find("GaugeText").GetComponent<Text>();
         bg = GameObject.Find("BG").GetComponentsInChildren<SpriteRenderer>().Take(2).ToArray();
 
-        clouds = GameObject.Find("Cloud").GetComponentsInChildren<Transform>().Skip(1).ToArray();
-        stars = GameObject.Find("Star").GetComponentsInChildren<Transform>(true).Skip(1).ToArray();
+        clouds = GameObject.Find("Cloud").GetComponentsInChildren<CloudMovement>();
+        stars = GameObject.Find("Star").GetComponentsInChildren<StarMovement>(true);
     }
 
     private void Update()
@@ -123,6 +123,8 @@ public class FeverManager : MonoBehaviour
     {
         for(int i = 0; i < clouds.Length; i++)
         {
+            if (_isActive)
+                clouds[i].RandomReset();
             clouds[i].gameObject.SetActive(_isActive);
         }
     }

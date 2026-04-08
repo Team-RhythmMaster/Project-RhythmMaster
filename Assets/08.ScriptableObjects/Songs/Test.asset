@@ -10,21 +10,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a97fbe011d90fe4388e55fccc1f62c8, type: 3}
-  m_Name: Chik Chak
+  m_Name: Test
   m_EditorClassIdentifier: 
-  title: Chik Chak
-  artist: Artist2
-  difficulty: 1
-  bpm: 180
+  title: Test
+  artist: Artist1
+  difficulty: 0
+  bpm: 120
   offset: 0.5
   notes:
   - lane: 0
     speed: 0
     time: 1
     endTime: 1
-  - lane: 0
+  - lane: 1
     speed: 0
     time: 1
     endTime: 1.5
-  audioClip: {fileID: 8300000, guid: 457c4e864b1a9f44080d26d75206f6d0, type: 3}
+  - lane: 0
+    speed: 0
+    time: 1
+    endTime: 1
+  - lane: 1
+    speed: 0
+    time: 1
+    endTime: 1.5
+  - lane: 0
+    speed: 0
+    time: 1
+    endTime: 1
+  - lane: 1
+    speed: 0
+    time: 1
+    endTime: 1.5
+  - lane: 0
+    speed: 0
+    time: 1
+    endTime: 1
+  - lane: 1
+    speed: 0
+    time: 1
+    endTime: 1.5
+  - lane: 0
+    speed: 0
+    time: 1
+    endTime: 1
+  - lane: 1
+    speed: 0
+    time: 1
+    endTime: 1.5
+  audioClip: {fileID: 8300000, guid: 896aaf20fefb9b04b96bb6f165bb2e2e, type: 3}
   songSprite: {fileID: 21300000, guid: 9b3eb33f68ace5f438cf7b6e4faa7df0, type: 3}

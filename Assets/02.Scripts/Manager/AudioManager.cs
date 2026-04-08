@@ -7,7 +7,6 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     public static AudioManager Instance { get { return instance; } }
 
-    private NoteGenerator noteGenerator;
     private Slider songTimeSlider;
 
     public AudioSource audioSource;
@@ -52,7 +51,6 @@ public class AudioManager : MonoBehaviour
     private void Init()
     {
         songTimeSlider = GameObject.Find("SongTimeSlider").GetComponent<Slider>();
-        noteGenerator = FindAnyObjectByType<NoteGenerator>();
         audioSource = GetComponent<AudioSource>();
     }
 

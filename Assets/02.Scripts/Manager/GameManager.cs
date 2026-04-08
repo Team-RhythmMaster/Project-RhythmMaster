@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         // 모든 초기화 끝날 때까지 한 프레임 대기
         yield return null;
-        noteGenerator.Init();
+        //noteGenerator.Init();
         AudioManager.Instance.Play();
     }
 

@@ -16,7 +16,7 @@ namespace Utils.ClassUtility
         public string artist;      // 아티스트 이름
         public int difficulty;     // 난이도 (0: Easy, 1: Normal, 2: Hard)
 
-        public int bpm;          // BPM (Beats Per Minute)
+        public int bpm;            // BPM (Beats Per Minute)
         public float offset;       // 판정선 도착 시간 보정값
 
         public NoteData[] notes;   // 노트 정보 배열
@@ -34,7 +34,7 @@ namespace Utils.ClassUtility
         public bool IsLong => endTime > time; // longNote 여부 확인
     }
 
-    // Runtime Data (실행 데이터)
+    // Runtime Data (실행 데이터 → 저장 X)
     [Serializable]
     public class ScoreData
     {
@@ -49,7 +49,7 @@ namespace Utils.ClassUtility
         public int miss;
     }
 
-    // persistent Data (저장 데이터)
+    // persistent Data (저장 데이터 → 저장 O)
     [Serializable]
     public class SaveData
     {
