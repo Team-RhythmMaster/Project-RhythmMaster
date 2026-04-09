@@ -14,73 +14,388 @@
           "lane": 0,
           "time": 1.0,
           "endTime": 1.0
-        },
-        {
-          "lane": 1,
-          "time": 1.0,
-          "endTime": 1.5
-        },
-        {
-          "lane": 0,
-          "time": 1.0,
-          "endTime": 1.0
-        },
-        {
-          "lane": 1,
-          "time": 1.0,
-          "endTime": 1.5
-        },
-        {
-          "lane": 0,
-          "time": 1.0,
-          "endTime": 1.0
-        },
-        {
-          "lane": 1,
-          "time": 1.0,
-          "endTime": 1.5
-        },
-        {
-          "lane": 0,
-          "time": 1.0,
-          "endTime": 1.0
-        },
-        {
-          "lane": 1,
-          "time": 1.0,
-          "endTime": 1.5
-        },
-        {
-          "lane": 0,
-          "time": 1.0,
-          "endTime": 1.0
-        },
-        {
-          "lane": 1,
-          "time": 1.0,
-          "endTime": 1.5
         }
       ]
     },
     {
       "id": 2,
-      "title": "Chik Chak",
-      "artist": "Artist2",
+      "title": "나아질 거야",
+      "artist": "김현욱",
       "difficulty": 1,
-      "bpm": 180,
-      "offset": 0.5,
-      "audioClip": "[Muse Dash] Buro Exorcist Master Character Theme【Music】 - Chik Chak",
+      "bpm": 92.285,
+      "offset": 0.571,
+      "audioClip": "김현욱 - 나아질 거야",
       "songSprite": "BG",
       "notes": [
         {
-          "lane": 0,
-          "time": 1.0,
-          "endTime": 1.0
+          "lane": 1,
+          "time": 3.32,
+          "endTime": 4.389
+        },
+        {
+          "lane": 1,
+          "time": 5.921,
+          "endTime": 5.921
+        },
+        {
+          "lane": 1,
+          "time": 7.221,
+          "endTime": 7.221
         },
         {
           "lane": 0,
-          "time": 1.0,
-          "endTime": 1.5
+          "time": 9.845,
+          "endTime": 9.845
+        },
+        {
+          "lane": 1,
+          "time": 11.494,
+          "endTime": 11.494
+        },
+        {
+          "lane": 1,
+          "time": 12.446,
+          "endTime": 13.696
+        },
+        {
+          "lane": 1,
+          "time": 13.746,
+          "endTime": 13.746
+        },
+        {
+          "lane": 0,
+          "time": 15.047,
+          "endTime": 15.999
+        },
+        {
+          "lane": 1,
+          "time": 16.37,
+          "endTime": 16.37
+        },
+        {
+          "lane": 0,
+          "time": 17.67,
+          "endTime": 18.921
+        },
+        {
+          "lane": 0,
+          "time": 18.971,
+          "endTime": 18.971
+        },
+        {
+          "lane": 0,
+          "time": 19.621,
+          "endTime": 20.434
+        },
+        {
+          "lane": 1,
+          "time": 20.944,
+          "endTime": 21.521
+        },
+        {
+          "lane": 1,
+          "time": 21.571,
+          "endTime": 22.171
+        },
+        {
+          "lane": 1,
+          "time": 22.221,
+          "endTime": 22.221
+        },
+        {
+          "lane": 0,
+          "time": 24.195,
+          "endTime": 24.195
+        },
+        {
+          "lane": 0,
+          "time": 24.845,
+          "endTime": 24.845
+        },
+        {
+          "lane": 0,
+          "time": 25.496,
+          "endTime": 25.496
+        },
+        {
+          "lane": 1,
+          "time": 26.796,
+          "endTime": 26.796
+        },
+        {
+          "lane": 1,
+          "time": 27.446,
+          "endTime": 27.446
+        },
+        {
+          "lane": 0,
+          "time": 28.096,
+          "endTime": 28.096
+        },
+        {
+          "lane": 0,
+          "time": 28.746,
+          "endTime": 28.746
+        },
+        {
+          "lane": 0,
+          "time": 29.396,
+          "endTime": 29.396
+        },
+        {
+          "lane": 1,
+          "time": 30.697,
+          "endTime": 31.297
+        },
+        {
+          "lane": 0,
+          "time": 31.347,
+          "endTime": 31.347
+        },
+        {
+          "lane": 1,
+          "time": 37.895,
+          "endTime": 38.499
+        },
+        {
+          "lane": 1,
+          "time": 39.845,
+          "endTime": 39.845
+        },
+        {
+          "lane": 1,
+          "time": 41.749,
+          "endTime": 43.046
+        },
+        {
+          "lane": 0,
+          "time": 43.096,
+          "endTime": 43.096
+        },
+        {
+          "lane": 0,
+          "time": 62.02,
+          "endTime": 62.02
+        },
+        {
+          "lane": 1,
+          "time": 63.483,
+          "endTime": 63.483
+        },
+        {
+          "lane": 1,
+          "time": 65.202,
+          "endTime": 66.107
+        },
+        {
+          "lane": 1,
+          "time": 66.572,
+          "endTime": 66.572
+        },
+        {
+          "lane": 0,
+          "time": 68.545,
+          "endTime": 68.545
+        },
+        {
+          "lane": 0,
+          "time": 69.172,
+          "endTime": 69.772
+        },
+        {
+          "lane": 0,
+          "time": 69.822,
+          "endTime": 70.446
+        },
+        {
+          "lane": 1,
+          "time": 70.496,
+          "endTime": 70.496
+        },
+        {
+          "lane": 1,
+          "time": 71.146,
+          "endTime": 71.146
+        },
+        {
+          "lane": 1,
+          "time": 72.446,
+          "endTime": 72.446
+        },
+        {
+          "lane": 0,
+          "time": 73.096,
+          "endTime": 73.697
+        },
+        {
+          "lane": 0,
+          "time": 73.747,
+          "endTime": 73.747
+        },
+        {
+          "lane": 0,
+          "time": 74.397,
+          "endTime": 75.233
+        },
+        {
+          "lane": 1,
+          "time": 76.37,
+          "endTime": 76.928
+        },
+        {
+          "lane": 0,
+          "time": 77.021,
+          "endTime": 77.021
+        },
+        {
+          "lane": 0,
+          "time": 77.671,
+          "endTime": 77.671
+        },
+        {
+          "lane": 0,
+          "time": 78.971,
+          "endTime": 78.971
+        },
+        {
+          "lane": 1,
+          "time": 79.621,
+          "endTime": 80.221
+        },
+        {
+          "lane": 0,
+          "time": 80.271,
+          "endTime": 80.271
+        },
+        {
+          "lane": 0,
+          "time": 80.922,
+          "endTime": 80.922
+        },
+        {
+          "lane": 0,
+          "time": 81.409,
+          "endTime": 81.409
+        },
+        {
+          "lane": 1,
+          "time": 82.106,
+          "endTime": 82.845
+        },
+        {
+          "lane": 0,
+          "time": 82.895,
+          "endTime": 82.895
+        },
+        {
+          "lane": 0,
+          "time": 84.196,
+          "endTime": 84.196
+        },
+        {
+          "lane": 1,
+          "time": 84.846,
+          "endTime": 84.846
+        },
+        {
+          "lane": 0,
+          "time": 85.496,
+          "endTime": 86.096
+        },
+        {
+          "lane": 0,
+          "time": 86.146,
+          "endTime": 86.75
+        },
+        {
+          "lane": 1,
+          "time": 91.371,
+          "endTime": 91.371
+        },
+        {
+          "lane": 1,
+          "time": 96.549,
+          "endTime": 97.826
+        },
+        {
+          "lane": 1,
+          "time": 104.234,
+          "endTime": 105.094
+        },
+        {
+          "lane": 0,
+          "time": 108.275,
+          "endTime": 108.275
+        },
+        {
+          "lane": 1,
+          "time": 109.784,
+          "endTime": 112.454
+        },
+        {
+          "lane": 1,
+          "time": 113.476,
+          "endTime": 114.146
+        },
+        {
+          "lane": 1,
+          "time": 114.196,
+          "endTime": 116.096
+        },
+        {
+          "lane": 0,
+          "time": 116.146,
+          "endTime": 116.146
+        },
+        {
+          "lane": 1,
+          "time": 118.747,
+          "endTime": 119.347
+        },
+        {
+          "lane": 1,
+          "time": 119.397,
+          "endTime": 119.397
+        },
+        {
+          "lane": 1,
+          "time": 120.721,
+          "endTime": 121.321
+        },
+        {
+          "lane": 0,
+          "time": 121.371,
+          "endTime": 121.371
+        },
+        {
+          "lane": 1,
+          "time": 123.971,
+          "endTime": 124.571
+        },
+        {
+          "lane": 1,
+          "time": 124.621,
+          "endTime": 124.621
+        },
+        {
+          "lane": 0,
+          "time": 125.272,
+          "endTime": 125.272
+        },
+        {
+          "lane": 0,
+          "time": 130.496,
+          "endTime": 130.496
+        },
+        {
+          "lane": 0,
+          "time": 135.721,
+          "endTime": 135.721
+        },
+        {
+          "lane": 1,
+          "time": 136.533,
+          "endTime": 136.533
         }
       ]
     }

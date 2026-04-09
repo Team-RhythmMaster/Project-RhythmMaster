@@ -350,10 +350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31398ec2e8387674d9b66283f5497cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenLeft: 0
-  screenRight: 0
-  screenTop: 0
-  screenBottom: 0
 --- !u!1 &69104469
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,10 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31398ec2e8387674d9b66283f5497cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenLeft: 0
-  screenRight: 0
-  screenTop: 0
-  screenBottom: 0
 --- !u!212 &69104472
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -873,7 +865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &193558284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1429,10 +1421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31398ec2e8387674d9b66283f5497cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenLeft: 0
-  screenRight: 0
-  screenTop: 0
-  screenBottom: 0
 --- !u!212 &421202376
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2339,7 +2327,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6157909132694481830, guid: 973f403e853fe7c4a8947e0189ebaca5, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 896aaf20fefb9b04b96bb6f165bb2e2e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8bc200ea368732b4a922922cb665714b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2774,8 +2762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -100, y: -100}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -70, y: -90}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &928464297
 MonoBehaviour:
@@ -2841,8 +2829,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 6ed27ca1c04bdca43b90342113cefb19, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3187,6 +3175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notes: []
+  songData: {fileID: 11400000, guid: 02359b5c36b0e8045a0434e8dbe28982, type: 2}
 --- !u!1 &1100667425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,10 +3912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31398ec2e8387674d9b66283f5497cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenLeft: 0
-  screenRight: 0
-  screenTop: 0
-  screenBottom: 0
 --- !u!212 &1398605134
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4887,10 +4872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31398ec2e8387674d9b66283f5497cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenLeft: 0
-  screenRight: 0
-  screenTop: 0
-  screenBottom: 0
 --- !u!1 &1967328425
 GameObject:
   m_ObjectHideFlags: 0
@@ -5007,7 +4988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2059812600
 Transform:
   m_ObjectHideFlags: 0

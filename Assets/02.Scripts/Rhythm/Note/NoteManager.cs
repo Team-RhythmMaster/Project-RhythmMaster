@@ -33,16 +33,13 @@ public class NoteManager : MonoBehaviour
         {
             instance = this;
         }
-    }
 
-    private void Start()
-    {
         Init();
     }
 
     private void Init()
     {
-        // lane 초기화 : lane 개수만큼 큐 생성
+        // lane 초기화 → lane 개수만큼 큐 생성
         for (int i = 0; i < laneY.Length; i++)
             lanes[i] = new Queue<NoteObject>();
 
