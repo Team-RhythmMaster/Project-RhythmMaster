@@ -52,4 +52,15 @@ namespace Utils.EnumType
         Normal,
         Fever
     }
+
+    // ³ë·¡ ·©Å©
+    public enum RankType
+    {
+        S,
+        A,
+        B,
+        c,
+        D,
+        F
+    }
 }

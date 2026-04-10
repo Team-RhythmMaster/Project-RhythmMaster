@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     public SceneType sceneType = SceneType.Intro;
-    public GameState state = GameState.Game;
-
     private NoteGenerator noteGenerator;
 
     private void Awake()
@@ -26,17 +24,6 @@ public class GameManager : MonoBehaviour
         }
 
         Init();
-    }
-
-    private IEnumerator Start()
-    {
-        // 모든 초기화 끝날 때까지 한 프레임 대기
-        noteGenerator.Init();
-        AudioManager.Instance.Play();
-
-        yield return new WaitForSeconds(AudioManager.Instance.noteTravelTime);
-
-        noteGenerator.isSpawning = true;
     }
 
     private void OnEnable()

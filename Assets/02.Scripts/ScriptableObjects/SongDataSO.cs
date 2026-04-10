@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class SongDataSO : ScriptableObject
 {
     // Description
+    public string id;
     public string title;
     public string artist;
     public Difficulty difficulty;

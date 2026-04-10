@@ -21,9 +21,7 @@ public class JudgeManager : MonoBehaviour
     private Vector2[] lanePositions = { new Vector2(-480.0f, 290.0f), new Vector2(-480.0f, -35.0f) };
 
     // 점수 데이터
-    public ScoreData data;
-    public int combo = 0;
-    public int score = 0;
+    public ScoreData scoreData;
 
     // 판정 범위
     public const float perfect = 0.05f;
@@ -72,7 +70,7 @@ public class JudgeManager : MonoBehaviour
         return Instantiate(judgePrefab, parentTransform);
     }
 
-    public void Return(JudgmentUI _obj)
+    public void JudgementUIReturn(JudgmentUI _obj)
     {
         _obj.gameObject.SetActive(false);
         judgePool.Enqueue(_obj);
@@ -84,27 +82,27 @@ public class JudgeManager : MonoBehaviour
         switch (_result)
         {
             case JudgeType.Perfect:
-                combo++;
-                score += perfectScore * FeverManager.Instance.GetMultiplier();
+                scoreData.combo++;
+                scoreData.score += perfectScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(3f);
                 break;
             case JudgeType.Great:
-                combo++;
-                score += greatScore * FeverManager.Instance.GetMultiplier();
+                scoreData.combo++;
+                scoreData.score += greatScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(2f);
                 break;
             case JudgeType.Good:
-                combo++;
-                score += goodScore * FeverManager.Instance.GetMultiplier();
+                scoreData.combo++;
+                scoreData.score += goodScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(1f);
                 break;
             case JudgeType.Bad:
-                combo = 0;
-                score += badScore * FeverManager.Instance.GetMultiplier();
+                scoreData.combo = 0;
+                scoreData.score += badScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(-5f);
                 break;
             case JudgeType.Miss:
-                combo = 0;
+                scoreData.combo = 0;
                 FeverManager.Instance.AddGauge(-10f);
                 playerController.OnDamage(missScore);
                 break;
@@ -118,5 +116,18 @@ public class JudgeManager : MonoBehaviour
     {
         JudgmentUIGet().Play(_data, lanePositions[_lane]);
         scoreText.text = _score.ToString();
+    }
+
+    public float ReturnScore()
+    {
+        float maxScore = RhythmPartManager.Instance.songData.notes.Count * perfectScore;
+        float currentScore =
+            scoreData.perfect * perfectScore +
+            scoreData.great * greatScore +
+            scoreData.good * goodScore +
+            scoreData.bad * badScore +
+            scoreData.miss * missScore;
+
+        return (float)currentScore / maxScore;
     }
 }

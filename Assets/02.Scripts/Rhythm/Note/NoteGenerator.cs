@@ -4,8 +4,6 @@ using Utils.ClassUtility;
 // 노트 생성 및 타이밍 제어
 public class NoteGenerator : MonoBehaviour
 {
-    public SongDataSO songData;
-
     public float speed { get { return noteSpeed; } }
     private float noteSpeed = 3.5f;
 
@@ -21,12 +19,12 @@ public class NoteGenerator : MonoBehaviour
         if (!isSpawning) 
             return;
 
-        while (spawnIndex < songData.notes.Count)
+        while (spawnIndex < RhythmPartManager.Instance.songData.notes.Count)
         {
             // 도착 시간 - 이동 시간 = 생성 시간
-            if (songData.notes[spawnIndex].time <= AudioManager.Instance.songTime + spawnAheadTime)
+            if (RhythmPartManager.Instance.songData.notes[spawnIndex].time <= AudioManager.Instance.songTime + spawnAheadTime)
             {
-                Spawn(songData.notes[spawnIndex]);
+                Spawn(RhythmPartManager.Instance.songData.notes[spawnIndex]);
                 spawnIndex++;
             }
             else
@@ -34,9 +32,10 @@ public class NoteGenerator : MonoBehaviour
         }
     }
 
+    // 초기화
     public void Init()
     {
-        songData.notes.Sort((a, b) => a.time.CompareTo(b.time));
+        RhythmPartManager.Instance.songData.notes.Sort((a, b) => a.time.CompareTo(b.time));
 
         rightEdge = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, 0)).x;
         spawnX = rightEdge + 3.0f;
@@ -44,11 +43,11 @@ public class NoteGenerator : MonoBehaviour
         spawnAheadTime = ((spawnX - NoteManager.hitLineX) / speed) + 1.0f;
 
         // 초기 생성 → 게임 시작 시 이미 보여야 할 노트들 미리 생성
-        while (spawnIndex < songData.notes.Count)
+        while (spawnIndex < RhythmPartManager.Instance.songData.notes.Count)
         {
-            if (songData.notes[spawnIndex].time <= AudioManager.Instance.songTime + spawnAheadTime)
+            if (RhythmPartManager.Instance.songData.notes[spawnIndex].time <= AudioManager.Instance.songTime + spawnAheadTime)
             {
-                Spawn(songData.notes[spawnIndex]);
+                Spawn(RhythmPartManager.Instance.songData.notes[spawnIndex]);
                 spawnIndex++;
             }
             else
@@ -64,6 +63,12 @@ public class NoteGenerator : MonoBehaviour
 
         note.transform.position = new Vector3(spawnX, y, 0);
         note.Init(_data, speed);
+    }
+
+    // 모든 노트가 활성화 되었는지 확인
+    public bool IsAllNotesActivated()
+    {
+        return spawnIndex >= RhythmPartManager.Instance.songData.notes.Count;
     }
 
     // 노트 리스트에 추가

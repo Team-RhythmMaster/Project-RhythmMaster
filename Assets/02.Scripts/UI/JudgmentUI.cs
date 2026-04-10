@@ -42,7 +42,7 @@ public class JudgmentUI : MonoBehaviour
 
         seq.OnComplete(() =>
         {
-            JudgeManager.Instance.Return(this);
+            JudgeManager.Instance.JudgementUIReturn(this);
         });
     }
 

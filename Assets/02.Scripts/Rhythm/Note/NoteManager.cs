@@ -111,14 +111,33 @@ public class NoteManager : MonoBehaviour
             ln.SetHold(_holding);
     }
 
+    // 활성화 longNote 추가
     public void SetActiveLongNote(int _lane, LongNote _note)
     {
         activeLong[_lane] = _note;
     }
 
+    // 활성화 longNote 제거
     public void ClearActiveLongNote(int _lane)
     {
         activeLong.Remove(_lane);
+    }
+
+    // 모든 노트 처리가 끝났는지 확인
+    public bool IsAllNotesCleared()
+    {
+        // 1lane 큐에 남아있는 노트 있는지 확인
+        foreach (var kv in lanes)
+        {
+            if (kv.Value.Count > 0)
+                return false;
+        }
+
+        // 롱노트 아직 눌리고 있는지 확인
+        if (activeLong.Count > 0)
+            return false;
+
+        return true;
     }
 
     // lane 위치 반환

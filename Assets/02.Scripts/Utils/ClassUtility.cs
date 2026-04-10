@@ -1,4 +1,5 @@
 using System;
+using Utils.EnumType;
 using System.Collections.Generic;
 
 namespace Utils.ClassUtility
@@ -12,6 +13,7 @@ namespace Utils.ClassUtility
     [Serializable]
     public class SongData
     {
+        public string id;          // 곡 고유 ID
         public string title;       // 곡 제목
         public string artist;      // 아티스트 이름
         public int difficulty;     // 난이도 (0: Easy, 1: Normal, 2: Hard)
@@ -57,11 +59,13 @@ namespace Utils.ClassUtility
         public float masterVolume;
     }
 
+    // 곡별 기록 데이터
     [Serializable]
     public class SongRecord
     {
         public string songID;
-        public int highScore;
+        public RankType rank;
+        public int maxScore;
         public int maxCombo;
         public bool isUnlocked;
     }

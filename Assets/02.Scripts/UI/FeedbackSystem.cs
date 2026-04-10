@@ -37,9 +37,9 @@ public class FeedbackSystem : MonoBehaviour
     public void PlayFeedback(JudgeType _type, int _lane)
     {
         // ÆÇÁ¤ UI
-        JudgeManager.Instance.ShowJudge(_type, _lane, JudgeManager.Instance.score);
+        JudgeManager.Instance.ShowJudge(_type, _lane, JudgeManager.Instance.scoreData.score);
         // ÄÞº¸ UI
-        comboUI.UpdateCombo(JudgeManager.Instance.combo);
+        comboUI.UpdateCombo(JudgeManager.Instance.scoreData.combo);
         // Å¸°Ý ÀÌÆåÆ®
         //hitEffect.Play(result.position, result.type);
 

@@ -85,14 +85,10 @@ public class AudioManager : MonoBehaviour
         audioSource.Stop();
     }
 
+    // °î »ðÀÔ
     public void Insert(AudioClip clip)
     {
         audioSource.clip = clip;
-    }
-
-    public float GetMilliSec()
-    {
-        return audioSource.time * 1000;
     }
 
     public bool IsPlaying()

@@ -15,8 +15,10 @@ public class DataManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        instance = this;
+        else
+        {
+            instance = this;
+        }
     }
 
     // 데이터 호출

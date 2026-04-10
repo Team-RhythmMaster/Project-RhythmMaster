@@ -33,7 +33,7 @@ public class ComboUI : MonoBehaviour
         comboText.text = _combo.ToString();
 
         // 커졌다가 돌아오는 애니메이션 (타격감)
-        rect.DOScale(1.3f, 0.1f)        // 1.3배로 확대
+        rect.DOScale(1.3f, 0.1f)
             .SetLoops(2, LoopType.Yoyo) // 왕복 (커졌다가 다시 작아짐)
             .SetEase(Ease.OutCubic);    // 부드럽게 감속
     }
