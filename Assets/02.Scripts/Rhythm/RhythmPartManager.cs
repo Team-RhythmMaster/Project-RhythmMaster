@@ -87,15 +87,13 @@ public class RhythmPartManager : MonoBehaviour
 
     }
 
-    public string SetRank()
+    public string GetRank(float _accuracy)
     {
-        float accuracy = JudgeManager.Instance.ReturnScore();
-
-        if (accuracy >= 0.98f) return "S";
-        if (accuracy >= 0.95f) return "A";
-        if (accuracy >= 0.90f) return "B";
-        if (accuracy >= 0.80f) return "C";
-        if (accuracy >= 0.70f) return "D";
+        if (_accuracy >= 0.98f) return "S";
+        if (_accuracy >= 0.95f) return "A";
+        if (_accuracy >= 0.90f) return "B";
+        if (_accuracy >= 0.80f) return "C";
+        if (_accuracy >= 0.70f) return "D";
         return "F";
     }
 }

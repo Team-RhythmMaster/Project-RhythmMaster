@@ -118,16 +118,21 @@ public class JudgeManager : MonoBehaviour
         scoreText.text = _score.ToString();
     }
 
-    public float ReturnScore()
+    // 정확도 계산
+    public float CalculateAccuracy()
     {
-        float maxScore = RhythmPartManager.Instance.songData.notes.Count * perfectScore;
-        float currentScore =
-            scoreData.perfect * perfectScore +
-            scoreData.great * greatScore +
-            scoreData.good * goodScore +
-            scoreData.bad * badScore +
-            scoreData.miss * missScore;
+        if (RhythmPartManager.Instance.songData.notes.Count == 0) 
+            return 0f;
 
-        return (float)currentScore / maxScore;
+        // 가증치합 = (판정별 개수 × 판정별 가중치)
+        float weightedSum =
+            scoreData.perfect * 1.0f +
+            scoreData.great * 0.8f +
+            scoreData.good * 0.5f +
+            scoreData.bad * 0.2f +
+            scoreData.miss * 0f;
+
+        // 정확도 = (가중치합 / 전체 노트 수) × 100
+        return (weightedSum / RhythmPartManager.Instance.songData.notes.Count) * 100f;
     }
 }
