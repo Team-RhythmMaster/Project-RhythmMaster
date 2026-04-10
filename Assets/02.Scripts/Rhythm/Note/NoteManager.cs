@@ -56,6 +56,9 @@ public class NoteManager : MonoBehaviour
         }
     }
 
+    // lane 위치 반환
+    public float GetLaneY(int _lane) => laneY[_lane];
+
     // 오브젝트풀에서 Note 가져오기
     public NoteObject GetNote(NoteData _data)
     {
@@ -139,7 +142,4 @@ public class NoteManager : MonoBehaviour
 
         return true;
     }
-
-    // lane 위치 반환
-    public float GetLaneY(int _lane) => laneY[_lane];
 }
