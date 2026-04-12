@@ -12,307 +12,1488 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a97fbe011d90fe4388e55fccc1f62c8, type: 3}
   m_Name: "\uB098\uC544\uC9C8 \uAC70\uC57C"
   m_EditorClassIdentifier: 
+  id: 
   title: "\uB098\uC544\uC9C8 \uAC70\uC57C"
   artist: "\uAE40\uD604\uC6B1"
   difficulty: 1
   bpm: 92
-  offset: 0.571
+  offset: 0
   notes:
-  - lane: 1
-    speed: 0
-    time: 3.32
-    endTime: 4.389
-  - lane: 1
-    speed: 0
-    time: 5.921
-    endTime: 5.921
-  - lane: 1
-    speed: 0
-    time: 7.221
-    endTime: 7.221
   - lane: 0
     speed: 0
-    time: 9.845
-    endTime: 9.845
+    time: 1.5
+    endTime: 1.5
   - lane: 1
     speed: 0
-    time: 11.494
-    endTime: 11.494
+    time: 1.8
+    endTime: 1.8
+  - lane: 0
+    speed: 0
+    time: 2
+    endTime: 2
   - lane: 1
     speed: 0
-    time: 12.446
-    endTime: 13.696
+    time: 2.2
+    endTime: 2.2
+  - lane: 0
+    speed: 0
+    time: 2.6
+    endTime: 2.6
   - lane: 1
     speed: 0
-    time: 13.746
-    endTime: 13.746
+    time: 3
+    endTime: 3
   - lane: 0
     speed: 0
-    time: 15.047
-    endTime: 15.999
+    time: 3.2
+    endTime: 3.2
   - lane: 1
     speed: 0
-    time: 16.37
-    endTime: 16.37
+    time: 3.5
+    endTime: 3.5
   - lane: 0
     speed: 0
-    time: 17.67
-    endTime: 18.921
-  - lane: 0
-    speed: 0
-    time: 18.971
-    endTime: 18.971
-  - lane: 0
-    speed: 0
-    time: 19.621
-    endTime: 20.434
+    time: 3.9
+    endTime: 3.9
   - lane: 1
     speed: 0
-    time: 20.944
-    endTime: 21.521
+    time: 4.3
+    endTime: 4.3
+  - lane: 0
+    speed: 0
+    time: 4.5
+    endTime: 4.5
   - lane: 1
     speed: 0
-    time: 21.571
-    endTime: 22.171
+    time: 4.8
+    endTime: 4.8
+  - lane: 0
+    speed: 0
+    time: 5.2
+    endTime: 5.2
   - lane: 1
     speed: 0
-    time: 22.221
-    endTime: 22.221
+    time: 5.6
+    endTime: 5.6
   - lane: 0
     speed: 0
-    time: 24.195
-    endTime: 24.195
-  - lane: 0
-    speed: 0
-    time: 24.845
-    endTime: 24.845
-  - lane: 0
-    speed: 0
-    time: 25.496
-    endTime: 25.496
+    time: 5.8
+    endTime: 5.8
   - lane: 1
     speed: 0
-    time: 26.796
-    endTime: 26.796
+    time: 6.1
+    endTime: 6.1
+  - lane: 0
+    speed: 0
+    time: 6.5
+    endTime: 6.5
   - lane: 1
     speed: 0
-    time: 27.446
-    endTime: 27.446
+    time: 6.9
+    endTime: 6.9
   - lane: 0
     speed: 0
-    time: 28.096
-    endTime: 28.096
-  - lane: 0
-    speed: 0
-    time: 28.746
-    endTime: 28.746
-  - lane: 0
-    speed: 0
-    time: 29.396
-    endTime: 29.396
+    time: 7.1
+    endTime: 7.1
   - lane: 1
     speed: 0
-    time: 30.697
-    endTime: 31.297
+    time: 7.3
+    endTime: 7.3
   - lane: 0
     speed: 0
-    time: 31.347
-    endTime: 31.347
+    time: 7.8
+    endTime: 7.8
   - lane: 1
     speed: 0
-    time: 37.895
-    endTime: 38.499
-  - lane: 1
-    speed: 0
-    time: 39.845
-    endTime: 39.845
-  - lane: 1
-    speed: 0
-    time: 41.749
-    endTime: 43.046
+    time: 8.1
+    endTime: 8.1
   - lane: 0
     speed: 0
-    time: 43.096
-    endTime: 43.096
-  - lane: 0
-    speed: 0
-    time: 62.02
-    endTime: 62.02
+    time: 8.3
+    endTime: 8.3
   - lane: 1
     speed: 0
-    time: 63.483
-    endTime: 63.483
+    time: 8.6
+    endTime: 8.6
+  - lane: 0
+    speed: 0
+    time: 9.1
+    endTime: 9.1
   - lane: 1
     speed: 0
-    time: 65.202
-    endTime: 66.107
+    time: 9.5
+    endTime: 9.5
+  - lane: 0
+    speed: 0
+    time: 9.6
+    endTime: 9.6
   - lane: 1
     speed: 0
-    time: 66.572
-    endTime: 66.572
-  - lane: 0
-    speed: 0
-    time: 68.545
-    endTime: 68.545
-  - lane: 0
-    speed: 0
-    time: 69.172
-    endTime: 69.772
-  - lane: 0
-    speed: 0
-    time: 69.822
-    endTime: 70.446
+    time: 10
+    endTime: 10
   - lane: 1
     speed: 0
-    time: 70.496
-    endTime: 70.496
+    time: 10.5
+    endTime: 10.5
+  - lane: 0
+    speed: 0
+    time: 10.5
+    endTime: 10.5
+  - lane: 0
+    speed: 0
+    time: 11.8
+    endTime: 12.8
   - lane: 1
     speed: 0
-    time: 71.146
-    endTime: 71.146
+    time: 14.4
+    endTime: 15.4
+  - lane: 0
+    speed: 0
+    time: 17
+    endTime: 18
   - lane: 1
     speed: 0
-    time: 72.446
-    endTime: 72.446
-  - lane: 0
-    speed: 0
-    time: 73.096
-    endTime: 73.697
-  - lane: 0
-    speed: 0
-    time: 73.747
-    endTime: 73.747
-  - lane: 0
-    speed: 0
-    time: 74.397
-    endTime: 75.233
+    time: 19.6
+    endTime: 20.6
   - lane: 1
     speed: 0
-    time: 76.37
-    endTime: 76.928
+    time: 22.2
+    endTime: 22.2
   - lane: 0
     speed: 0
-    time: 77.021
-    endTime: 77.021
+    time: 22.2
+    endTime: 22.2
   - lane: 0
     speed: 0
-    time: 77.671
-    endTime: 77.671
-  - lane: 0
-    speed: 0
-    time: 78.971
-    endTime: 78.971
+    time: 22.9
+    endTime: 22.9
   - lane: 1
     speed: 0
-    time: 79.621
-    endTime: 80.221
+    time: 22.9
+    endTime: 22.9
   - lane: 0
     speed: 0
-    time: 80.271
-    endTime: 80.271
+    time: 23.4
+    endTime: 23.4
+  - lane: 1
+    speed: 0
+    time: 23.8
+    endTime: 23.8
   - lane: 0
     speed: 0
-    time: 80.922
-    endTime: 80.922
+    time: 24
+    endTime: 24
+  - lane: 1
+    speed: 0
+    time: 24.4
+    endTime: 24.4
   - lane: 0
     speed: 0
-    time: 81.409
-    endTime: 81.409
+    time: 25.2
+    endTime: 25.2
   - lane: 1
     speed: 0
-    time: 82.106
-    endTime: 82.845
+    time: 25.2
+    endTime: 25.2
+  - lane: 1
+    speed: 0
+    time: 25.5
+    endTime: 25.5
   - lane: 0
     speed: 0
-    time: 82.895
-    endTime: 82.895
+    time: 25.5
+    endTime: 25.5
+  - lane: 1
+    speed: 0
+    time: 26.1
+    endTime: 26.1
   - lane: 0
     speed: 0
-    time: 84.196
-    endTime: 84.196
+    time: 26.3
+    endTime: 26.3
   - lane: 1
     speed: 0
-    time: 84.846
-    endTime: 84.846
+    time: 26.6
+    endTime: 26.6
+  - lane: 1
+    speed: 0
+    time: 27.4
+    endTime: 27.4
   - lane: 0
     speed: 0
-    time: 85.496
-    endTime: 86.096
+    time: 27.4
+    endTime: 27.4
   - lane: 0
     speed: 0
-    time: 86.146
-    endTime: 86.75
+    time: 28.1
+    endTime: 28.1
   - lane: 1
     speed: 0
-    time: 91.371
-    endTime: 91.371
-  - lane: 1
-    speed: 0
-    time: 96.549
-    endTime: 97.826
-  - lane: 1
-    speed: 0
-    time: 104.234
-    endTime: 105.094
+    time: 28.1
+    endTime: 28.1
   - lane: 0
     speed: 0
-    time: 108.275
-    endTime: 108.275
+    time: 28.4
+    endTime: 28.4
   - lane: 1
     speed: 0
-    time: 109.784
-    endTime: 112.454
-  - lane: 1
-    speed: 0
-    time: 113.476
-    endTime: 114.146
-  - lane: 1
-    speed: 0
-    time: 114.196
-    endTime: 116.096
+    time: 28.6
+    endTime: 28.6
   - lane: 0
     speed: 0
-    time: 116.146
-    endTime: 116.146
+    time: 28.8
+    endTime: 28.8
   - lane: 1
     speed: 0
-    time: 118.747
-    endTime: 119.347
-  - lane: 1
-    speed: 0
-    time: 119.397
-    endTime: 119.397
-  - lane: 1
-    speed: 0
-    time: 120.721
-    endTime: 121.321
+    time: 29
+    endTime: 29
   - lane: 0
     speed: 0
-    time: 121.371
-    endTime: 121.371
+    time: 29.4
+    endTime: 29.4
   - lane: 1
     speed: 0
-    time: 123.971
-    endTime: 124.571
+    time: 29.4
+    endTime: 29.4
   - lane: 1
     speed: 0
-    time: 124.621
-    endTime: 124.621
+    time: 30.1
+    endTime: 30.1
   - lane: 0
     speed: 0
-    time: 125.272
-    endTime: 125.272
+    time: 30.1
+    endTime: 30.1
   - lane: 0
     speed: 0
-    time: 130.496
-    endTime: 130.496
-  - lane: 0
-    speed: 0
-    time: 135.721
-    endTime: 135.721
+    time: 31.3
+    endTime: 31.3
   - lane: 1
     speed: 0
-    time: 136.533
-    endTime: 136.533
+    time: 31.4
+    endTime: 31.4
+  - lane: 0
+    speed: 0
+    time: 32.7
+    endTime: 32.7
+  - lane: 1
+    speed: 0
+    time: 33
+    endTime: 33
+  - lane: 0
+    speed: 0
+    time: 33.4
+    endTime: 33.4
+  - lane: 1
+    speed: 0
+    time: 33.7
+    endTime: 33.7
+  - lane: 0
+    speed: 0
+    time: 34
+    endTime: 34
+  - lane: 1
+    speed: 0
+    time: 34.3
+    endTime: 34.3
+  - lane: 0
+    speed: 0
+    time: 34.6
+    endTime: 34.6
+  - lane: 1
+    speed: 0
+    time: 34.8
+    endTime: 34.8
+  - lane: 0
+    speed: 0
+    time: 35.2
+    endTime: 35.2
+  - lane: 1
+    speed: 0
+    time: 35.5
+    endTime: 35.5
+  - lane: 0
+    speed: 0
+    time: 35.9
+    endTime: 35.9
+  - lane: 1
+    speed: 0
+    time: 36.2
+    endTime: 36.2
+  - lane: 0
+    speed: 0
+    time: 36.5
+    endTime: 36.5
+  - lane: 1
+    speed: 0
+    time: 36.8
+    endTime: 36.8
+  - lane: 0
+    speed: 0
+    time: 37.2
+    endTime: 37.2
+  - lane: 1
+    speed: 0
+    time: 37.5
+    endTime: 37.5
+  - lane: 0
+    speed: 0
+    time: 37.9
+    endTime: 37.9
+  - lane: 1
+    speed: 0
+    time: 37.9
+    endTime: 37.9
+  - lane: 1
+    speed: 0
+    time: 38.2
+    endTime: 38.2
+  - lane: 0
+    speed: 0
+    time: 38.2
+    endTime: 38.2
+  - lane: 1
+    speed: 0
+    time: 38.5
+    endTime: 38.5
+  - lane: 0
+    speed: 0
+    time: 38.5
+    endTime: 38.5
+  - lane: 0
+    speed: 0
+    time: 38.8
+    endTime: 38.8
+  - lane: 1
+    speed: 0
+    time: 38.8
+    endTime: 38.8
+  - lane: 0
+    speed: 0
+    time: 39.1
+    endTime: 39.1
+  - lane: 1
+    speed: 0
+    time: 39.1
+    endTime: 39.1
+  - lane: 0
+    speed: 0
+    time: 39.4
+    endTime: 39.4
+  - lane: 1
+    speed: 0
+    time: 39.5
+    endTime: 39.5
+  - lane: 1
+    speed: 0
+    time: 39.7
+    endTime: 39.7
+  - lane: 0
+    speed: 0
+    time: 39.8
+    endTime: 39.8
+  - lane: 0
+    speed: 0
+    time: 40.1
+    endTime: 40.1
+  - lane: 1
+    speed: 0
+    time: 40.1
+    endTime: 40.1
+  - lane: 0
+    speed: 0
+    time: 40.4
+    endTime: 40.4
+  - lane: 1
+    speed: 0
+    time: 40.5
+    endTime: 40.5
+  - lane: 0
+    speed: 0
+    time: 41.1
+    endTime: 41.1
+  - lane: 1
+    speed: 0
+    time: 41.8
+    endTime: 41.8
+  - lane: 0
+    speed: 0
+    time: 42
+    endTime: 42
+  - lane: 1
+    speed: 0
+    time: 42.1
+    endTime: 42.1
+  - lane: 0
+    speed: 0
+    time: 42.3
+    endTime: 42.3
+  - lane: 1
+    speed: 0
+    time: 42.4
+    endTime: 42.4
+  - lane: 0
+    speed: 0
+    time: 43.2
+    endTime: 43.2
+  - lane: 1
+    speed: 0
+    time: 43.5
+    endTime: 43.5
+  - lane: 0
+    speed: 0
+    time: 43.7
+    endTime: 43.7
+  - lane: 1
+    speed: 0
+    time: 43.9
+    endTime: 43.9
+  - lane: 0
+    speed: 0
+    time: 44.3
+    endTime: 44.3
+  - lane: 1
+    speed: 0
+    time: 44.6
+    endTime: 44.6
+  - lane: 0
+    speed: 0
+    time: 44.9
+    endTime: 44.9
+  - lane: 1
+    speed: 0
+    time: 45.2
+    endTime: 45.2
+  - lane: 0
+    speed: 0
+    time: 45.7
+    endTime: 45.7
+  - lane: 1
+    speed: 0
+    time: 45.8
+    endTime: 45.8
+  - lane: 1
+    speed: 0
+    time: 46.1
+    endTime: 46.1
+  - lane: 0
+    speed: 0
+    time: 46.3
+    endTime: 46.3
+  - lane: 1
+    speed: 0
+    time: 46.6
+    endTime: 46.6
+  - lane: 0
+    speed: 0
+    time: 46.9
+    endTime: 46.9
+  - lane: 1
+    speed: 0
+    time: 47.2
+    endTime: 47.2
+  - lane: 0
+    speed: 0
+    time: 47.5
+    endTime: 47.5
+  - lane: 1
+    speed: 0
+    time: 47.9
+    endTime: 47.9
+  - lane: 0
+    speed: 0
+    time: 48.3
+    endTime: 48.3
+  - lane: 1
+    speed: 0
+    time: 48.4
+    endTime: 48.4
+  - lane: 0
+    speed: 0
+    time: 48.7
+    endTime: 48.7
+  - lane: 1
+    speed: 0
+    time: 48.8
+    endTime: 48.8
+  - lane: 0
+    speed: 0
+    time: 49.2
+    endTime: 49.2
+  - lane: 1
+    speed: 0
+    time: 49.5
+    endTime: 49.5
+  - lane: 0
+    speed: 0
+    time: 49.8
+    endTime: 49.8
+  - lane: 1
+    speed: 0
+    time: 50.1
+    endTime: 50.1
+  - lane: 0
+    speed: 0
+    time: 50.5
+    endTime: 50.5
+  - lane: 1
+    speed: 0
+    time: 51
+    endTime: 51
+  - lane: 0
+    speed: 0
+    time: 51
+    endTime: 51
+  - lane: 1
+    speed: 0
+    time: 51.6
+    endTime: 51.6
+  - lane: 0
+    speed: 0
+    time: 51.6
+    endTime: 51.6
+  - lane: 1
+    speed: 0
+    time: 52.2
+    endTime: 52.2
+  - lane: 0
+    speed: 0
+    time: 52.2
+    endTime: 52.2
+  - lane: 0
+    speed: 0
+    time: 52.9
+    endTime: 52.9
+  - lane: 1
+    speed: 0
+    time: 53
+    endTime: 53
+  - lane: 1
+    speed: 0
+    time: 53.9
+    endTime: 53.9
+  - lane: 0
+    speed: 0
+    time: 54.1
+    endTime: 54.1
+  - lane: 1
+    speed: 0
+    time: 54.4
+    endTime: 54.4
+  - lane: 0
+    speed: 0
+    time: 54.7
+    endTime: 54.7
+  - lane: 1
+    speed: 0
+    time: 55
+    endTime: 55
+  - lane: 0
+    speed: 0
+    time: 55.3
+    endTime: 55.3
+  - lane: 1
+    speed: 0
+    time: 55.6
+    endTime: 55.6
+  - lane: 0
+    speed: 0
+    time: 56.1
+    endTime: 56.1
+  - lane: 1
+    speed: 0
+    time: 56.1
+    endTime: 56.1
+  - lane: 0
+    speed: 0
+    time: 56.5
+    endTime: 56.5
+  - lane: 1
+    speed: 0
+    time: 56.7
+    endTime: 56.7
+  - lane: 0
+    speed: 0
+    time: 57
+    endTime: 57
+  - lane: 1
+    speed: 0
+    time: 57.3
+    endTime: 57.3
+  - lane: 0
+    speed: 0
+    time: 57.6
+    endTime: 57.6
+  - lane: 1
+    speed: 0
+    time: 58
+    endTime: 58
+  - lane: 0
+    speed: 0
+    time: 58.3
+    endTime: 58.3
+  - lane: 0
+    speed: 0
+    time: 58.8
+    endTime: 58.8
+  - lane: 1
+    speed: 0
+    time: 58.8
+    endTime: 58.8
+  - lane: 1
+    speed: 0
+    time: 59.1
+    endTime: 59.1
+  - lane: 0
+    speed: 0
+    time: 59.3
+    endTime: 59.3
+  - lane: 1
+    speed: 0
+    time: 59.6
+    endTime: 59.6
+  - lane: 0
+    speed: 0
+    time: 59.9
+    endTime: 59.9
+  - lane: 1
+    speed: 0
+    time: 60.3
+    endTime: 60.3
+  - lane: 0
+    speed: 0
+    time: 60.6
+    endTime: 60.6
+  - lane: 1
+    speed: 0
+    time: 60.9
+    endTime: 60.9
+  - lane: 0
+    speed: 0
+    time: 61.4
+    endTime: 61.4
+  - lane: 1
+    speed: 0
+    time: 61.4
+    endTime: 61.4
+  - lane: 0
+    speed: 0
+    time: 62
+    endTime: 62
+  - lane: 1
+    speed: 0
+    time: 62
+    endTime: 62
+  - lane: 1
+    speed: 0
+    time: 62.6
+    endTime: 62.6
+  - lane: 0
+    speed: 0
+    time: 62.7
+    endTime: 62.7
+  - lane: 0
+    speed: 0
+    time: 62.9
+    endTime: 62.9
+  - lane: 0
+    speed: 0
+    time: 63.2
+    endTime: 63.2
+  - lane: 0
+    speed: 0
+    time: 63.5
+    endTime: 63.5
+  - lane: 1
+    speed: 0
+    time: 63.6
+    endTime: 63.6
+  - lane: 0
+    speed: 0
+    time: 66.8
+    endTime: 66.8
+  - lane: 1
+    speed: 0
+    time: 67
+    endTime: 67
+  - lane: 0
+    speed: 0
+    time: 67.3
+    endTime: 67.3
+  - lane: 1
+    speed: 0
+    time: 67.6
+    endTime: 67.6
+  - lane: 0
+    speed: 0
+    time: 67.9
+    endTime: 67.9
+  - lane: 1
+    speed: 0
+    time: 68.2
+    endTime: 68.2
+  - lane: 0
+    speed: 0
+    time: 68.5
+    endTime: 68.5
+  - lane: 1
+    speed: 0
+    time: 68.9
+    endTime: 68.9
+  - lane: 0
+    speed: 0
+    time: 69.2
+    endTime: 69.2
+  - lane: 1
+    speed: 0
+    time: 69.2
+    endTime: 69.2
+  - lane: 0
+    speed: 0
+    time: 69.5
+    endTime: 69.5
+  - lane: 1
+    speed: 0
+    time: 69.8
+    endTime: 69.8
+  - lane: 0
+    speed: 0
+    time: 70.2
+    endTime: 70.2
+  - lane: 1
+    speed: 0
+    time: 70.3
+    endTime: 70.3
+  - lane: 0
+    speed: 0
+    time: 70.6
+    endTime: 70.6
+  - lane: 1
+    speed: 0
+    time: 70.8
+    endTime: 70.8
+  - lane: 0
+    speed: 0
+    time: 71.1
+    endTime: 71.1
+  - lane: 0
+    speed: 0
+    time: 71.8
+    endTime: 71.8
+  - lane: 1
+    speed: 0
+    time: 71.8
+    endTime: 71.8
+  - lane: 0
+    speed: 0
+    time: 72.1
+    endTime: 72.1
+  - lane: 1
+    speed: 0
+    time: 72.4
+    endTime: 72.4
+  - lane: 0
+    speed: 0
+    time: 72.7
+    endTime: 72.7
+  - lane: 1
+    speed: 0
+    time: 72.9
+    endTime: 72.9
+  - lane: 0
+    speed: 0
+    time: 73.2
+    endTime: 73.2
+  - lane: 1
+    speed: 0
+    time: 73.4
+    endTime: 73.4
+  - lane: 0
+    speed: 0
+    time: 73.7
+    endTime: 73.7
+  - lane: 1
+    speed: 0
+    time: 73.7
+    endTime: 73.7
+  - lane: 1
+    speed: 0
+    time: 74.4
+    endTime: 74.4
+  - lane: 0
+    speed: 0
+    time: 74.7
+    endTime: 74.7
+  - lane: 1
+    speed: 0
+    time: 75.1
+    endTime: 75.1
+  - lane: 0
+    speed: 0
+    time: 75.4
+    endTime: 75.4
+  - lane: 1
+    speed: 0
+    time: 75.6
+    endTime: 75.6
+  - lane: 0
+    speed: 0
+    time: 75.8
+    endTime: 75.8
+  - lane: 1
+    speed: 0
+    time: 76
+    endTime: 76
+  - lane: 1
+    speed: 0
+    time: 76.3
+    endTime: 76.3
+  - lane: 0
+    speed: 0
+    time: 76.4
+    endTime: 76.4
+  - lane: 0
+    speed: 0
+    time: 77
+    endTime: 77
+  - lane: 1
+    speed: 0
+    time: 77.7
+    endTime: 77.7
+  - lane: 0
+    speed: 0
+    time: 78.4
+    endTime: 78.4
+  - lane: 1
+    speed: 0
+    time: 78.6
+    endTime: 78.6
+  - lane: 0
+    speed: 0
+    time: 78.8
+    endTime: 78.8
+  - lane: 1
+    speed: 0
+    time: 79
+    endTime: 79
+  - lane: 1
+    speed: 0
+    time: 79.6
+    endTime: 79.6
+  - lane: 0
+    speed: 0
+    time: 79.6
+    endTime: 79.6
+  - lane: 1
+    speed: 0
+    time: 80
+    endTime: 80
+  - lane: 0
+    speed: 0
+    time: 80.3
+    endTime: 80.3
+  - lane: 1
+    speed: 0
+    time: 80.6
+    endTime: 80.6
+  - lane: 0
+    speed: 0
+    time: 80.8
+    endTime: 80.8
+  - lane: 1
+    speed: 0
+    time: 81.1
+    endTime: 81.1
+  - lane: 0
+    speed: 0
+    time: 81.2
+    endTime: 81.2
+  - lane: 0
+    speed: 0
+    time: 81.6
+    endTime: 81.6
+  - lane: 1
+    speed: 0
+    time: 81.6
+    endTime: 81.6
+  - lane: 0
+    speed: 0
+    time: 82.3
+    endTime: 82.3
+  - lane: 1
+    speed: 0
+    time: 82.6
+    endTime: 82.6
+  - lane: 0
+    speed: 0
+    time: 82.9
+    endTime: 82.9
+  - lane: 1
+    speed: 0
+    time: 83.2
+    endTime: 83.2
+  - lane: 0
+    speed: 0
+    time: 83.4
+    endTime: 83.4
+  - lane: 1
+    speed: 0
+    time: 83.7
+    endTime: 83.7
+  - lane: 0
+    speed: 0
+    time: 83.9
+    endTime: 83.9
+  - lane: 0
+    speed: 0
+    time: 84.2
+    endTime: 84.2
+  - lane: 1
+    speed: 0
+    time: 84.2
+    endTime: 84.2
+  - lane: 1
+    speed: 0
+    time: 84.8
+    endTime: 84.8
+  - lane: 0
+    speed: 0
+    time: 85
+    endTime: 85
+  - lane: 0
+    speed: 0
+    time: 86.1
+    endTime: 86.1
+  - lane: 1
+    speed: 0
+    time: 86.2
+    endTime: 86.2
+  - lane: 0
+    speed: 0
+    time: 86.5
+    endTime: 86.5
+  - lane: 1
+    speed: 0
+    time: 86.8
+    endTime: 86.8
+  - lane: 0
+    speed: 0
+    time: 87.5
+    endTime: 87.5
+  - lane: 1
+    speed: 0
+    time: 87.8
+    endTime: 87.8
+  - lane: 0
+    speed: 0
+    time: 88.1
+    endTime: 88.1
+  - lane: 1
+    speed: 0
+    time: 88.5
+    endTime: 88.5
+  - lane: 0
+    speed: 0
+    time: 88.8
+    endTime: 88.8
+  - lane: 1
+    speed: 0
+    time: 89.1
+    endTime: 89.1
+  - lane: 0
+    speed: 0
+    time: 89.4
+    endTime: 89.4
+  - lane: 1
+    speed: 0
+    time: 89.8
+    endTime: 89.8
+  - lane: 0
+    speed: 0
+    time: 90.1
+    endTime: 90.1
+  - lane: 1
+    speed: 0
+    time: 90.4
+    endTime: 90.4
+  - lane: 0
+    speed: 0
+    time: 90.7
+    endTime: 90.7
+  - lane: 1
+    speed: 0
+    time: 91.1
+    endTime: 91.1
+  - lane: 0
+    speed: 0
+    time: 91.4
+    endTime: 91.4
+  - lane: 1
+    speed: 0
+    time: 91.7
+    endTime: 91.7
+  - lane: 0
+    speed: 0
+    time: 92.1
+    endTime: 92.1
+  - lane: 1
+    speed: 0
+    time: 92.4
+    endTime: 92.4
+  - lane: 0
+    speed: 0
+    time: 92.7
+    endTime: 92.7
+  - lane: 1
+    speed: 0
+    time: 92.7
+    endTime: 92.7
+  - lane: 0
+    speed: 0
+    time: 93
+    endTime: 93
+  - lane: 1
+    speed: 0
+    time: 93
+    endTime: 93
+  - lane: 0
+    speed: 0
+    time: 93.3
+    endTime: 93.3
+  - lane: 1
+    speed: 0
+    time: 93.4
+    endTime: 93.4
+  - lane: 0
+    speed: 0
+    time: 93.7
+    endTime: 93.7
+  - lane: 1
+    speed: 0
+    time: 93.7
+    endTime: 93.7
+  - lane: 0
+    speed: 0
+    time: 94
+    endTime: 94
+  - lane: 1
+    speed: 0
+    time: 94
+    endTime: 94
+  - lane: 0
+    speed: 0
+    time: 94.3
+    endTime: 94.3
+  - lane: 1
+    speed: 0
+    time: 94.3
+    endTime: 94.3
+  - lane: 1
+    speed: 0
+    time: 94.6
+    endTime: 94.6
+  - lane: 0
+    speed: 0
+    time: 94.7
+    endTime: 94.7
+  - lane: 1
+    speed: 0
+    time: 94.9
+    endTime: 94.9
+  - lane: 0
+    speed: 0
+    time: 94.9
+    endTime: 94.9
+  - lane: 0
+    speed: 0
+    time: 95.3
+    endTime: 95.3
+  - lane: 1
+    speed: 0
+    time: 95.3
+    endTime: 95.3
+  - lane: 1
+    speed: 0
+    time: 95.9
+    endTime: 95.9
+  - lane: 0
+    speed: 0
+    time: 96.6
+    endTime: 96.6
+  - lane: 1
+    speed: 0
+    time: 96.8
+    endTime: 96.8
+  - lane: 0
+    speed: 0
+    time: 98.1
+    endTime: 99.1
+  - lane: 1
+    speed: 0
+    time: 98.1
+    endTime: 99.1
+  - lane: 1
+    speed: 0
+    time: 100.7
+    endTime: 101.7
+  - lane: 0
+    speed: 0
+    time: 100.7
+    endTime: 101.7
+  - lane: 0
+    speed: 0
+    time: 103.1
+    endTime: 104.1
+  - lane: 1
+    speed: 0
+    time: 103.1
+    endTime: 104.1
+  - lane: 0
+    speed: 0
+    time: 105.5
+    endTime: 105.5
+  - lane: 1
+    speed: 0
+    time: 105.7
+    endTime: 105.7
+  - lane: 1
+    speed: 0
+    time: 106.8
+    endTime: 106.8
+  - lane: 0
+    speed: 0
+    time: 107.4
+    endTime: 107.4
+  - lane: 1
+    speed: 0
+    time: 107.9
+    endTime: 107.9
+  - lane: 1
+    speed: 0
+    time: 108.3
+    endTime: 108.3
+  - lane: 0
+    speed: 0
+    time: 108.3
+    endTime: 108.3
+  - lane: 0
+    speed: 0
+    time: 109.6
+    endTime: 109.6
+  - lane: 1
+    speed: 0
+    time: 109.7
+    endTime: 109.7
+  - lane: 0
+    speed: 0
+    time: 110.9
+    endTime: 112.9
+  - lane: 1
+    speed: 0
+    time: 110.9
+    endTime: 112.9
+  - lane: 0
+    speed: 0
+    time: 114
+    endTime: 114
+  - lane: 1
+    speed: 0
+    time: 114.4
+    endTime: 114.4
+  - lane: 0
+    speed: 0
+    time: 115
+    endTime: 115
+  - lane: 1
+    speed: 0
+    time: 115.1
+    endTime: 115.1
+  - lane: 0
+    speed: 0
+    time: 115.3
+    endTime: 115.3
+  - lane: 1
+    speed: 0
+    time: 115.4
+    endTime: 115.4
+  - lane: 0
+    speed: 0
+    time: 115.6
+    endTime: 115.6
+  - lane: 1
+    speed: 0
+    time: 115.6
+    endTime: 115.6
+  - lane: 0
+    speed: 0
+    time: 116.2
+    endTime: 116.2
+  - lane: 1
+    speed: 0
+    time: 116.5
+    endTime: 116.5
+  - lane: 0
+    speed: 0
+    time: 116.7
+    endTime: 116.7
+  - lane: 1
+    speed: 0
+    time: 117
+    endTime: 117
+  - lane: 0
+    speed: 0
+    time: 117.3
+    endTime: 117.3
+  - lane: 1
+    speed: 0
+    time: 117.6
+    endTime: 117.6
+  - lane: 0
+    speed: 0
+    time: 117.9
+    endTime: 117.9
+  - lane: 1
+    speed: 0
+    time: 118.3
+    endTime: 118.3
+  - lane: 0
+    speed: 0
+    time: 118.8
+    endTime: 118.8
+  - lane: 1
+    speed: 0
+    time: 118.8
+    endTime: 118.8
+  - lane: 1
+    speed: 0
+    time: 119.2
+    endTime: 119.2
+  - lane: 0
+    speed: 0
+    time: 119.3
+    endTime: 119.3
+  - lane: 1
+    speed: 0
+    time: 119.6
+    endTime: 119.6
+  - lane: 0
+    speed: 0
+    time: 119.9
+    endTime: 119.9
+  - lane: 1
+    speed: 0
+    time: 120.2
+    endTime: 120.2
+  - lane: 0
+    speed: 0
+    time: 120.6
+    endTime: 120.6
+  - lane: 1
+    speed: 0
+    time: 120.9
+    endTime: 120.9
+  - lane: 1
+    speed: 0
+    time: 121.4
+    endTime: 121.4
+  - lane: 0
+    speed: 0
+    time: 121.4
+    endTime: 121.4
+  - lane: 0
+    speed: 0
+    time: 121.8
+    endTime: 121.8
+  - lane: 1
+    speed: 0
+    time: 121.9
+    endTime: 121.9
+  - lane: 0
+    speed: 0
+    time: 122.2
+    endTime: 122.2
+  - lane: 1
+    speed: 0
+    time: 122.5
+    endTime: 122.5
+  - lane: 0
+    speed: 0
+    time: 122.9
+    endTime: 122.9
+  - lane: 1
+    speed: 0
+    time: 123.1
+    endTime: 123.1
+  - lane: 0
+    speed: 0
+    time: 123.5
+    endTime: 123.5
+  - lane: 0
+    speed: 0
+    time: 124
+    endTime: 124
+  - lane: 1
+    speed: 0
+    time: 124
+    endTime: 124
+  - lane: 1
+    speed: 0
+    time: 124.6
+    endTime: 124.6
+  - lane: 0
+    speed: 0
+    time: 124.6
+    endTime: 124.6
+  - lane: 1
+    speed: 0
+    time: 125.2
+    endTime: 125.2
+  - lane: 0
+    speed: 0
+    time: 125.2
+    endTime: 125.2
+  - lane: 1
+    speed: 0
+    time: 125.9
+    endTime: 125.9
+  - lane: 0
+    speed: 0
+    time: 126
+    endTime: 126
+  - lane: 0
+    speed: 0
+    time: 126.9
+    endTime: 126.9
+  - lane: 1
+    speed: 0
+    time: 127.1
+    endTime: 127.1
+  - lane: 0
+    speed: 0
+    time: 127.4
+    endTime: 127.4
+  - lane: 1
+    speed: 0
+    time: 127.7
+    endTime: 127.7
+  - lane: 0
+    speed: 0
+    time: 128.1
+    endTime: 128.1
+  - lane: 1
+    speed: 0
+    time: 128.4
+    endTime: 128.4
+  - lane: 0
+    speed: 0
+    time: 128.7
+    endTime: 128.7
+  - lane: 0
+    speed: 0
+    time: 129.2
+    endTime: 129.2
+  - lane: 1
+    speed: 0
+    time: 129.2
+    endTime: 129.2
+  - lane: 1
+    speed: 0
+    time: 129.6
+    endTime: 129.6
+  - lane: 0
+    speed: 0
+    time: 129.7
+    endTime: 129.7
+  - lane: 1
+    speed: 0
+    time: 130
+    endTime: 130
+  - lane: 0
+    speed: 0
+    time: 130.3
+    endTime: 130.3
+  - lane: 1
+    speed: 0
+    time: 130.7
+    endTime: 130.7
+  - lane: 0
+    speed: 0
+    time: 131
+    endTime: 131
+  - lane: 1
+    speed: 0
+    time: 131.3
+    endTime: 131.3
+  - lane: 0
+    speed: 0
+    time: 131.8
+    endTime: 131.8
+  - lane: 1
+    speed: 0
+    time: 131.8
+    endTime: 131.8
+  - lane: 0
+    speed: 0
+    time: 132.1
+    endTime: 132.1
+  - lane: 1
+    speed: 0
+    time: 132.3
+    endTime: 132.3
+  - lane: 0
+    speed: 0
+    time: 132.6
+    endTime: 132.6
+  - lane: 1
+    speed: 0
+    time: 132.9
+    endTime: 132.9
+  - lane: 0
+    speed: 0
+    time: 133.3
+    endTime: 133.3
+  - lane: 1
+    speed: 0
+    time: 133.6
+    endTime: 133.6
+  - lane: 0
+    speed: 0
+    time: 133.9
+    endTime: 133.9
+  - lane: 1
+    speed: 0
+    time: 134.4
+    endTime: 134.4
+  - lane: 0
+    speed: 0
+    time: 134.5
+    endTime: 134.5
+  - lane: 1
+    speed: 0
+    time: 135
+    endTime: 135
+  - lane: 0
+    speed: 0
+    time: 135.1
+    endTime: 135.1
+  - lane: 0
+    speed: 0
+    time: 135.7
+    endTime: 135.7
+  - lane: 1
+    speed: 0
+    time: 135.8
+    endTime: 135.8
+  - lane: 0
+    speed: 0
+    time: 136.1
+    endTime: 136.1
+  - lane: 1
+    speed: 0
+    time: 136.5
+    endTime: 136.5
+  - lane: 1
+    speed: 0
+    time: 136.7
+    endTime: 136.7
   audioClip: {fileID: 8300000, guid: 8bc200ea368732b4a922922cb665714b, type: 3}
   songSprite: {fileID: 21300000, guid: 9b3eb33f68ace5f438cf7b6e4faa7df0, type: 3}
