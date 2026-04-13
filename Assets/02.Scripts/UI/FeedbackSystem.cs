@@ -36,16 +36,12 @@ public class FeedbackSystem : MonoBehaviour
 
     public void PlayFeedback(JudgeType _type, int _lane)
     {
-        // 판정 UI
-        JudgeManager.Instance.ShowJudge(_type, _lane, JudgeManager.Instance.scoreData.score);
-        // 콤보 UI
-        comboUI.UpdateCombo(JudgeManager.Instance.scoreData.combo);
         // 타격 이펙트
         //hitEffect.Play(result.position, result.type);
+        JudgeManager.Instance.ShowJudge(_type, _lane, JudgeManager.Instance.scoreData.score);
+        comboUI.UpdateCombo(JudgeManager.Instance.scoreData.combo);
 
-        // 사운드
         PlaySound(_type, _lane);
-        // 화면 효과
         PlayScreenEffect(_type);
     }
 

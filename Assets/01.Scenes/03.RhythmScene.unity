@@ -980,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 371609028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.1, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1350,10 +1350,10 @@ AudioSource:
   m_GameObject: {fileID: 438022642}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8525728811568507916, guid: 973f403e853fe7c4a8947e0189ebaca5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1500,7 +1500,7 @@ Transform:
   m_GameObject: {fileID: 438022642}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.2, y: -1.6, z: 0}
+  m_LocalPosition: {x: -6.2, y: -1.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1567,7 +1567,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.032990456, y: 0.91765654}
+  m_Offset: {x: -0.032990456, y: 0.9383421}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1577,7 +1577,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9964285, y: 1.8882053}
+  m_Size: {x: 0.9964285, y: 1.8468342}
   m_EdgeRadius: 0
 --- !u!1 &457151055
 GameObject:
@@ -2590,9 +2590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punchSFX:
-  - {fileID: 8300000, guid: b5c391160c4d6bc438fa9c679e36fe42, type: 3}
   - {fileID: 8300000, guid: e5fb4e64aaa23fb49925767c5ae78312, type: 3}
-  - {fileID: 8300000, guid: 1e84aa44868df9149a572154d449557e, type: 3}
+  - {fileID: 8300000, guid: e5fb4e64aaa23fb49925767c5ae78312, type: 3}
+  - {fileID: 8300000, guid: d1cefbc28045c0d429e3ba8e33b58ef0, type: 3}
 --- !u!4 &859614135
 Transform:
   m_ObjectHideFlags: 0
@@ -2620,7 +2620,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 8525728811568507916, guid: 973f403e853fe7c4a8947e0189ebaca5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

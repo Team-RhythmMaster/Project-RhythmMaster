@@ -18,7 +18,7 @@ public class ComboUI : MonoBehaviour
 
     public void UpdateCombo(int _combo)
     {
-        // 기존 틔윈 전부 제거 (중복 방지)
+        // 기존 틔윈 전부 제거
         rect.DOKill();
         canvasGroup.DOKill();
 

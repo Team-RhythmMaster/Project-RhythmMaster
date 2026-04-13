@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using Utils.EnumType;
 
 public class UIManager : MonoBehaviour
 {

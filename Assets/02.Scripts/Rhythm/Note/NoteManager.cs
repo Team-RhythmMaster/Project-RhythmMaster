@@ -65,9 +65,9 @@ public class NoteManager : MonoBehaviour
         NoteObject note;
 
         if (_data.IsLong)
-            note = (longPool.Count > 0) ? longPool.Dequeue() : Instantiate(longPrefab);
+            note = (longPool.Count > 0) ? longPool.Dequeue() : Instantiate(longPrefab, poolParent);
         else
-            note = (shortPool.Count > 0) ? shortPool.Dequeue() : Instantiate(shortPrefab);
+            note = (shortPool.Count > 0) ? shortPool.Dequeue() : Instantiate(shortPrefab, poolParent);
 
         note.gameObject.SetActive(true);
         return note;

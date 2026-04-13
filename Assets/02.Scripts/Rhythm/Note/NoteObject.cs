@@ -12,7 +12,7 @@ public abstract class NoteObject : MonoBehaviour
     protected NoteData data;
     protected float yPos = 0.0f;       // 노트 y 위치 (lane 위치)
     protected float diff = 0.0f;       // longNote 시작점과 끝점 시간 차이
-    protected float offset = -0.2f;    // 싱크 보정값
+    protected float offset = 0.0f;    // 싱크 보정값
     protected float currentTime = 0.0f;// 현재 노트 시간 (판정 시점)
 
     protected bool isHit = false;

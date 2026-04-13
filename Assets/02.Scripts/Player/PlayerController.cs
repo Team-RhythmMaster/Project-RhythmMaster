@@ -1,11 +1,12 @@
 using Spine.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private SkeletonAnimation skeletonAnimation;
     private Rigidbody2D rb;
+    private SkeletonAnimation skeletonAnimation;
 
     public AnimationReferenceAsset idleAnim;
     public AnimationReferenceAsset jumpAnim;
@@ -14,17 +15,24 @@ public class PlayerController : MonoBehaviour
     private Text hpGuageText;
 
     private float currentHP = 100f;
-    private float jumpVelocity = 12f;
-    private float fallMultiplier = 3.0f;
-    private float gravityUp = 2f;
 
+    private float jumpHeight = 13f;
+    private float apexCutoff = 0.5f;       // 정점 근처 감속 타이밍
+
+    private float fallMultiplier = 6.0f;   // 추락 중력 가속도
+    private float riseMultiplier = 4.5f;   // 상승 중력 가속도
+    private float apexSlowMultiplier = 4f; // 정점 감속 가속도
+
+    private float landingTimer = 0f;
+    private float landingDelay = 0.2f;
+
+    private bool isLanding = false;
     private bool isGrounded = true;
 
     private void Awake()
     {
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
         rb = GetComponent<Rigidbody2D>();
-
+        skeletonAnimation = GetComponent<SkeletonAnimation>();
         hpSlider = GameObject.Find("HPSlider").GetComponent<Slider>();
         hpGuageText = GameObject.Find("HPGaugeText").GetComponent<Text>();
     }
@@ -37,37 +45,62 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckLanding();
+        ApplyBetterJump();
     }
 
-    // 점프 처리
     private void Jump()
     {
         isGrounded = false;
-        rb.gravityScale = gravityUp;
-        SetAnim(jumpAnim, false, 2.0f);
+        SetAnim(jumpAnim, false, 3.0f);
+
+        float gravity = Physics2D.gravity.y * rb.gravityScale;
+        float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
     }
 
-    // 착지 체크
+    // 중력 가속도 적용
+    private void ApplyBetterJump()
+    {
+        float gravity = Physics2D.gravity.y;
+
+        // 초반 빠르게 상승
+        if (rb.linearVelocity.y > 0)
+            rb.linearVelocity += Vector2.up * gravity * (riseMultiplier - 1) * Time.deltaTime;
+
+        // 정점에서 강제로 높이 유지
+        if (rb.linearVelocity.y > 0 && rb.linearVelocity.y < apexCutoff)
+            rb.linearVelocity += Vector2.up * gravity * (apexSlowMultiplier - 1) * Time.deltaTime;
+
+        // 하강 빠르게
+        if (rb.linearVelocity.y < 0)
+            rb.linearVelocity += Vector2.up * gravity * (fallMultiplier - 1) * Time.deltaTime;
+    }
+
+    // 땅에 닿았는지 체크
     private void CheckLanding()
     {
-        // 착지 체크
         if (!isGrounded && rb.linearVelocity.y <= 0)
         {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-
-            // 바닥 체크
             if (IsGrounded())
             {
-                Debug.Log(":: IsGround ::");
                 isGrounded = true;
-                rb.gravityScale = 1.0f;
+                isLanding = true;
+                landingTimer = landingDelay;
+            }
+        }
+
+        if (isLanding)
+        {
+            landingTimer -= Time.deltaTime;
+
+            if (landingTimer <= 0f)
+            {
+                isLanding = false;
                 SetAnim(idleAnim, true);
             }
         }
     }
 
-    // 데미지 처리
     public void OnDamage(float _damage)
     {
         currentHP -= _damage;
@@ -78,22 +111,20 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0f)
         {
-             Debug.Log("Game Over!");
+            Debug.Log(":: Game Over ::");
         }
     }
 
-    // 애니메이션 에셋 변경
+    // 애니메이션 설정
     private void SetAnim(AnimationReferenceAsset _anim, bool _loop, float _timeScale = 1.0f)
     {
         var entry = skeletonAnimation.AnimationState.SetAnimation(0, _anim, _loop);
         entry.TimeScale = _timeScale;
     }
 
-    // 바닥 체크
     private bool IsGrounded()
     {
-        Vector2 origin = (Vector2)transform.position + Vector2.down * 0.5f;
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         return hit.collider != null;
     }
 }

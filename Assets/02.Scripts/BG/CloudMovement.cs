@@ -35,7 +35,6 @@ public class CloudMovement : MonoBehaviour
     public void RandomReset()
     {
         speed = Random.Range(0.6f, 1.3f);
-        float scale = Random.Range(0.5f, 1.5f);
-        transform.localScale = Vector3.one * scale;
+        transform.localScale = Vector3.one * Random.Range(0.5f, 1.5f);
     }
 }

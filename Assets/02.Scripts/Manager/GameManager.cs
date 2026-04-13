@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     public SceneType sceneType = SceneType.Intro;
-    private NoteGenerator noteGenerator;
 
     private void Awake()
     {
@@ -27,12 +26,12 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoad;
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoad;
     }
 
     // √ ±‚»≠
@@ -40,24 +39,23 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 65;
         Screen.SetResolution(1920, 1080, true);
-        noteGenerator = FindAnyObjectByType<NoteGenerator>();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoad(Scene _scene, LoadSceneMode _mode)
     {
-        if (scene.name == "01.TitleScene")
+        if (_scene.name == "01.TitleScene")
         {
             sceneType = SceneType.Title;
         }
-        else if (scene.name == "02.MainScene")
+        else if (_scene.name == "02.MainScene")
         {
             sceneType = SceneType.Main;
         }
-        else if (scene.name == "03.RhythmScene")
+        else if (_scene.name == "03.RhythmScene")
         {
             sceneType = SceneType.Rhythm;
         }
-        else if (scene.name == "04.NurtureScene")
+        else if (_scene.name == "04.NurtureScene")
         {
             sceneType = SceneType.Nurture;
         }

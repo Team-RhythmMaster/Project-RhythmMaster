@@ -20,15 +20,12 @@ public class FeverManager : MonoBehaviour
     private CloudMovement[] clouds;
     private StarMovement[] stars;
 
-    [Header("Gauge")]
     private float gauge = 0f;      // 현재 게이지
     private float maxGauge = 100f; // 피버 발동 기준값
 
-    [Header("Fever")]
     private float feverDuration = 15f; // 피버 지속 시간
     private float feverTimer = 0f;     // 남은 시간 (카운트다운용)
 
-    [Header("Multiplier")]
     private int scoreMultiplier = 1;  // 현재 적용 중인 배율 (노말: 1, 피버: 2)
     private int normalMultiplier = 1; // 노말 상태일 때 적용되는 배율
     private int feverMultiplier = 2;  // 피버 상태일 때 적용되는 배율
@@ -70,12 +67,12 @@ public class FeverManager : MonoBehaviour
     }
 
     // 게이지 증가/감소
-    public void AddGauge(float amount)
+    public void AddGauge(float _amount)
     {
         if (state == FeverState.Fever)
             return;
 
-        gauge += amount;
+        gauge += _amount;
         gauge = Mathf.Clamp(gauge, 0, maxGauge);
         gaugeSlider.value = (float)(gauge / maxGauge);
 
