@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            if (isLanding)
+                return;
+
             Jump();
         }
 
@@ -110,7 +113,8 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0f)
         {
-            RhythmPartManager.Instance.EndGame();
+            // Game Over Ã³¸®
+            //RhythmPartManager.Instance.EndGame();
         }
     }
 

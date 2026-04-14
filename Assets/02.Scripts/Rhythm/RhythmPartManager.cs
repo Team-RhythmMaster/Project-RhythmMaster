@@ -9,7 +9,7 @@ public class RhythmPartManager : MonoBehaviour
     public static RhythmPartManager Instance {get { return instance; } }
 
     private NoteGenerator noteGenerator;
-    public GameObject gameEndPhanel;
+    private GameObject gameEndPhanel;
 
     public SaveData saveData;
     public SongDataSO songData;
@@ -59,7 +59,6 @@ public class RhythmPartManager : MonoBehaviour
     // 게임 종료 처리
     public void EndGame()
     {
-        Debug.Log("::: Game Ended :::");
         isGameEnded = true;
         noteGenerator.isSpawning = false;
         AudioManager.Instance.Stop();
