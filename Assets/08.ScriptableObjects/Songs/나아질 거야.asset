@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a97fbe011d90fe4388e55fccc1f62c8, type: 3}
   m_Name: "\uB098\uC544\uC9C8 \uAC70\uC57C"
   m_EditorClassIdentifier: 
-  id: 
+  id: 1
+  bpm: 92
   title: "\uB098\uC544\uC9C8 \uAC70\uC57C"
   artist: "\uAE40\uD604\uC6B1"
   difficulty: 1
-  bpm: 92
-  offset: 0
   notes:
   - lane: 0
     speed: 0

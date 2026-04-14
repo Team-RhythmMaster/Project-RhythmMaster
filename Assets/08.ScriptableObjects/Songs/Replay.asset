@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a97fbe011d90fe4388e55fccc1f62c8, type: 3}
   m_Name: Replay
   m_EditorClassIdentifier: 
-  id: 
+  id: 2
+  bpm: 130
   title: Replay
   artist: "\uAE40\uD604\uC6B1"
   difficulty: 1
-  bpm: 130
-  offset: 0
   notes:
   - lane: 0
     speed: 0

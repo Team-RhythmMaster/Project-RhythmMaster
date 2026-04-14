@@ -53,11 +53,10 @@ public class DataManager : MonoBehaviour
     // 데이터 저장
     public void SaveJson<T>(T _data, string _fileName)
     {
-        string path = Path.Combine(Application.persistentDataPath, "/", _fileName);
+        string path = Path.Combine(Application.persistentDataPath, _fileName + ".json");
         string json = JsonUtility.ToJson(_data, true);
 
-        // 데이터 암호화
-        // json 문자열을 8비트 부호없는 정수로 변환
+        // 데이터 암호화 Base64 인코딩
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(json);
         // 변환된 바이트배열을 base-64 인코딩된 문자열로 변환
         string encodedJson = System.Convert.ToBase64String(bytes);

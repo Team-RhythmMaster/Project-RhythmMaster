@@ -1,6 +1,5 @@
-using Spine.Unity;
-using Unity.VisualScripting;
 using UnityEngine;
+using Spine.Unity;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -111,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0f)
         {
-            Debug.Log(":: Game Over ::");
+            RhythmPartManager.Instance.EndGame();
         }
     }
 

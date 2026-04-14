@@ -37,6 +37,19 @@ public class InputManager : MonoBehaviour
             CheckInput(0, KeyCode.F);
             CheckInput(1, KeyCode.J);
         }
+        SelectSong();
+    }
+
+    private void SelectSong()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+
+        }
     }
 
     private void CheckInput(int _lane, KeyCode _key)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils.EnumType;
 using Utils.ClassUtility;
 using System.Collections;
 
@@ -7,11 +8,12 @@ public class RhythmPartManager : MonoBehaviour
     private static RhythmPartManager instance;
     public static RhythmPartManager Instance {get { return instance; } }
 
+    private NoteGenerator noteGenerator;
+    public GameObject gameEndPhanel;
+
     public SaveData saveData;
     public SongDataSO songData;
-    public SongRecord songRecord;
 
-    private NoteGenerator noteGenerator;
     private bool isGameEnded = false;
 
     private void Awake()
@@ -51,40 +53,45 @@ public class RhythmPartManager : MonoBehaviour
     private void Init()
     {
         noteGenerator = FindAnyObjectByType<NoteGenerator>();
+        gameEndPhanel = GameObject.Find("MainCanvas").transform.GetChild(1).gameObject;
     }
 
     // 게임 종료 처리
-    void EndGame()
+    public void EndGame()
     {
+        Debug.Log("::: Game Ended :::");
         isGameEnded = true;
+        noteGenerator.isSpawning = false;
+        AudioManager.Instance.Stop();
+
         ShowResultUI();
-        SaveResult(songRecord.songID, JudgeManager.Instance.scoreData.score, JudgeManager.Instance.scoreData.combo);
+        SaveResult(songData.id, JudgeManager.Instance.scoreData.score, JudgeManager.Instance.scoreData.combo, JudgeManager.Instance.CalculateAccuracy());
     }
 
-    public void SaveResult(string songID, int score, int combo)
+    public void SaveResult(int _songID, int _score, int _combo, float _accuracy)
     {
         var record = saveData.songRecords
-            .Find(r => r.songID == songID);
+            .Find(r => r.songID == _songID);
 
         if (record == null)
         {
             record = new SongRecord();
-            record.songID = songID;
+            record.songID = _songID;
            saveData.songRecords.Add(record);
         }
 
-        if (score > record.maxScore)
-            record.maxScore = score;
+        RankType newRank = (RankType)System.Enum.Parse(typeof(RankType), GetRank(_accuracy));
 
-        if (combo > record.maxCombo)
-            record.maxCombo = combo;
+        if (newRank > record.rank)
+            record.rank = newRank;
 
-        DataManager.Instance.SaveJson(saveData, "Song");
-    }
+        if (_score > record.maxScore)
+            record.maxScore = _score;
 
-    public void ShowResultUI()
-    {
+        if (_combo > record.maxCombo)
+            record.maxCombo = _combo;
 
+        DataManager.Instance.SaveJson(saveData, "SongDatabase");
     }
 
     public string GetRank(float _accuracy)
@@ -95,5 +102,10 @@ public class RhythmPartManager : MonoBehaviour
         if (_accuracy >= 0.80f) return "C";
         if (_accuracy >= 0.70f) return "D";
         return "F";
+    }
+
+    public void ShowResultUI()
+    {
+        gameEndPhanel.SetActive(true);
     }
 }

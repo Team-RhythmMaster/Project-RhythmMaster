@@ -2,11 +2,10 @@
   "Songs": [
     {
       "id": 1,
+      "bpm": 92,
       "title": "나아질 거야",
       "artist": "김현욱",
       "difficulty": 1,
-      "bpm": 92,
-      "offset": 0,
       "audioClip": "김현욱 - 나아질 거야",
       "songSprite": "BG",
       "notes": [
@@ -1859,11 +1858,10 @@
     },
     {
       "id": 2,
+      "bpm": 130,
       "title": "Replay",
       "artist": "김현욱",
       "difficulty": 1,
-      "bpm": 130,
-      "offset": 0,
       "audioClip": "김현욱 - Replay",
       "songSprite": "BG",
       "notes": [
