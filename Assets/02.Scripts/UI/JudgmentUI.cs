@@ -2,27 +2,36 @@ using UnityEngine;
 using DG.Tweening;
 using Utils.EnumType;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // 판정 텍스트 View
 public class JudgmentUI : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
     private RectTransform rect;
-    private Text judgeText;
+    private Image judgeImage;
+    public Sprite[] judges;
+
+    private Dictionary<int, Vector2> judgeScales = new Dictionary<int, Vector2>();
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         rect = GetComponent<RectTransform>();
-        judgeText = GetComponent<Text>();
+        judgeImage = GetComponent<Image>();
+
+        judgeScales.Add(0, new Vector2(508, 216));
+        judgeScales.Add(1, new Vector2(376, 106));
+        judgeScales.Add(2, new Vector2(336, 98));
+        judgeScales.Add(3, new Vector2(248, 108));
+        judgeScales.Add(4, new Vector2(280, 96));
     }
 
     public void Play(JudgeType _type, Vector2 _pos)
     {
         gameObject.SetActive(true);
-
-        judgeText.text = _type.ToString();
-        judgeText.color = GetColor(_type);
+        judgeImage.sprite = judges[(int)_type];
+        rect.sizeDelta = judgeScales[(int)_type] * 0.5f;
 
         // 초기화
         canvasGroup.alpha = 0f;
@@ -44,22 +53,5 @@ public class JudgmentUI : MonoBehaviour
         {
             JudgeManager.Instance.JudgementUIReturn(this);
         });
-    }
-
-    private Color GetColor(JudgeType _type)
-    {
-        switch (_type)
-        {
-            case JudgeType.Perfect:
-                return Color.yellow;
-            case JudgeType.Great:
-                return Color.green;
-            case JudgeType.Good:
-                return Color.blue;
-            case JudgeType.Bad:
-                return Color.gray;
-            default:
-                return Color.red;
-        }
     }
 }

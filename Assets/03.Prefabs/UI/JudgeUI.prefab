@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 8746142556079306204}
   - component: {fileID: 5909747500032080409}
   - component: {fileID: 7129964077637137750}
-  - component: {fileID: 4532039829912092259}
-  - component: {fileID: 7365703880473098379}
+  - component: {fileID: 7703065690452570746}
   - component: {fileID: 5449814518899461233}
   m_Layer: 5
   m_Name: JudgeUI
@@ -38,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -482, y: 328}
-  m_SizeDelta: {x: 400, y: 150}
+  m_SizeDelta: {x: 280, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5909747500032080409
 CanvasRenderer:
@@ -60,7 +59,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &4532039829912092259
+--- !u!114 &7703065690452570746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,46 +68,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 9065667535464023279}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 92ec896868b2f9c47b05b75678435fff, type: 3}
-    m_FontSize: 60
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Perfect
---- !u!114 &7365703880473098379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9065667535464023279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
+  m_Sprite: {fileID: 21300000, guid: 6b1ed6861a80c854c8fa9c5cb9944d5f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5449814518899461233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,3 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef7747f687b1b545926a7fc76f977a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  judges:
+  - {fileID: 21300000, guid: 6b1ed6861a80c854c8fa9c5cb9944d5f, type: 3}
+  - {fileID: 21300000, guid: c15aff1871909604797dfe2ff97d3740, type: 3}
+  - {fileID: 21300000, guid: 1aaf5f928fc277346af080af7c9a9dd6, type: 3}
+  - {fileID: 21300000, guid: bae7f8a03e82c5540a8a82271016a895, type: 3}
+  - {fileID: 21300000, guid: a2b3e2352771e6e43ae9a2271ad01c79, type: 3}

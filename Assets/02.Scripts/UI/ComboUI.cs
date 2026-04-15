@@ -13,7 +13,7 @@ public class ComboUI : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
         rect = GetComponent<RectTransform>();
-        comboText = GetComponentsInChildren<Text>().Skip(1).FirstOrDefault();
+        comboText = GetComponentInChildren<Text>();
     }
 
     public void UpdateCombo(int _combo)
@@ -33,7 +33,7 @@ public class ComboUI : MonoBehaviour
         comboText.text = _combo.ToString();
 
         // 커졌다가 돌아오는 애니메이션 (타격감)
-        rect.DOScale(1.3f, 0.1f)
+        rect.DOScale(1.15f, 0.1f)
             .SetLoops(2, LoopType.Yoyo) // 왕복 (커졌다가 다시 작아짐)
             .SetEase(Ease.OutCubic);    // 부드럽게 감속
     }

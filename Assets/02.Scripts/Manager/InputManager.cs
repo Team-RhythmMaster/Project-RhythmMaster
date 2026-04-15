@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
             CheckInput(0, KeyCode.F);
             CheckInput(1, KeyCode.J);
         }
-        SelectSong();
+        //SelectSong();
     }
 
     private void SelectSong()
