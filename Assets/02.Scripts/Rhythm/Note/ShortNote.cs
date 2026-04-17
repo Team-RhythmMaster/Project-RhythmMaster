@@ -13,18 +13,18 @@ public class ShortNote : NoteObject
     {
         diff = Mathf.Abs(data.time - currentTime);
 
-        if (diff <= JudgeManager.bad)
+        if (diff <= ScoreManager.bad)
         {
             isHit = true;
 
-            if (diff <= JudgeManager.perfect)
-                JudgeManager.Instance.Judgment(JudgeType.Perfect, this);
-            else if (diff <= JudgeManager.great)
-                JudgeManager.Instance.Judgment(JudgeType.Great, this);
-            else if (diff <= JudgeManager.good)
-                JudgeManager.Instance.Judgment(JudgeType.Good, this);
+            if (diff <= ScoreManager.perfect)
+                ScoreManager.Instance.Judgment(JudgeType.Perfect, this);
+            else if (diff <= ScoreManager.great)
+                ScoreManager.Instance.Judgment(JudgeType.Great, this);
+            else if (diff <= ScoreManager.good)
+                ScoreManager.Instance.Judgment(JudgeType.Good, this);
             else
-                JudgeManager.Instance.Judgment(JudgeType.Bad, this);
+                ScoreManager.Instance.Judgment(JudgeType.Bad, this);
 
             StartCoroutine(OnHit());
         }

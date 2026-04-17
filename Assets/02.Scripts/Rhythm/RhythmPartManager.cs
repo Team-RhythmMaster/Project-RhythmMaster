@@ -64,7 +64,7 @@ public class RhythmPartManager : MonoBehaviour
         AudioManager.Instance.Stop();
 
         ShowResultUI();
-        SaveResult(songData.id, JudgeManager.Instance.scoreData.score, JudgeManager.Instance.scoreData.combo, JudgeManager.Instance.CalculateAccuracy());
+        SaveResult(songData.id, ScoreManager.Instance.scoreData.score, ScoreManager.Instance.scoreData.combo, ScoreManager.Instance.CalculateAccuracy());
     }
 
     public void SaveResult(int _songID, int _score, int _combo, float _accuracy)

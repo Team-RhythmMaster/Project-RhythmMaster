@@ -13,10 +13,10 @@ namespace Utils.EnumType
     // 게임 현재 상태
     public enum GameState
     {
-        Game,
-        Edit,
-        MainMenu,
-        GameOver
+        Intro,
+        Playing,
+        Ending,
+        Loading
     }
 
     // 노래 재생 상태

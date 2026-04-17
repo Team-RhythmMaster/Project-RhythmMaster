@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get { return instance; } }
 
     public SceneType sceneType = SceneType.Intro;
+    public GameState currentState;
 
     private void Awake()
     {

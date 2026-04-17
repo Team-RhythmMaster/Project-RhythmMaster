@@ -20,15 +20,15 @@ public class FeverManager : MonoBehaviour
     private CloudMovement[] clouds;
     private StarMovement[] stars;
 
-    private float gauge = 0f;      // 현재 게이지
-    private float maxGauge = 100f; // 피버 발동 기준값
+    private float gauge = 0f;          // 현재 게이지
+    private float maxGauge = 100f;     // 피버 발동 기준값
 
     private float feverDuration = 15f; // 피버 지속 시간
     private float feverTimer = 0f;     // 남은 시간 (카운트다운용)
 
-    private int scoreMultiplier = 1;  // 현재 적용 중인 배율 (노말: 1, 피버: 2)
-    private int normalMultiplier = 1; // 노말 상태일 때 적용되는 배율
-    private int feverMultiplier = 2;  // 피버 상태일 때 적용되는 배율
+    private int scoreMultiplier = 1;   // 현재 적용 중인 배율 (노말: 1, 피버: 2)
+    private int normalMultiplier = 1;  // 노말 상태일 때 적용되는 배율
+    private int feverMultiplier = 2;   // 피버 상태일 때 적용되는 배율
 
     private void Awake()
     {
@@ -116,6 +116,7 @@ public class FeverManager : MonoBehaviour
         return scoreMultiplier;
     }
 
+    // 구름 활성화
     public void CloudActive(bool _isActive)
     {
         for(int i = 0; i < clouds.Length; i++)
@@ -126,6 +127,7 @@ public class FeverManager : MonoBehaviour
         }
     }
 
+    // 별 활성화
     public void StarActive(bool _isActive)
     {
         for (int i = 0; i < stars.Length; i++)

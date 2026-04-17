@@ -8,8 +8,9 @@ public class NoteManager : MonoBehaviour
     private static NoteManager instance;
     public static NoteManager Instance { get { return instance; } }
 
-    private Dictionary<int, Queue<NoteObject>> lanes = new();  // 각 lane별 판정 대기열
-    private Dictionary<int, LongNote> activeLong = new();      // 현재 누르고 있는 longNote
+    private List<NoteObject> activeNotes = new List<NoteObject>();// 현재 활성화된 노트 전체 리스트
+    private Dictionary<int, Queue<NoteObject>> lanes = new();     // 각 lane별 판정 대기열
+    private Dictionary<int, LongNote> activeLong = new();         // 현재 누르고 있는 longNote
 
     private Queue<ShortNote> shortPool = new Queue<ShortNote>();
     private Queue<LongNote> longPool = new Queue<LongNote>();
@@ -56,6 +57,26 @@ public class NoteManager : MonoBehaviour
         }
     }
 
+    // 게임 종료 시 노트 초기화
+    public void ResetNotes()
+    {
+        // 모든 노트 풀 반환
+        for (int i = activeNotes.Count - 1; i >= 0; i--)
+        {
+            var note = activeNotes[i];
+
+            if (note != null)
+                ReturnNote(note);
+        }
+
+        // lane 큐 초기화
+        foreach (var lane in lanes)
+            lane.Value.Clear();
+
+        activeLong.Clear();
+        activeNotes.Clear();
+    }
+
     // lane 위치 반환
     public float GetLaneY(int _lane) => laneY[_lane];
 
@@ -70,6 +91,7 @@ public class NoteManager : MonoBehaviour
             note = (shortPool.Count > 0) ? shortPool.Dequeue() : Instantiate(shortPrefab, poolParent);
 
         note.gameObject.SetActive(true);
+        activeNotes.Add(note);
         return note;
     }
 
@@ -77,6 +99,7 @@ public class NoteManager : MonoBehaviour
     public void ReturnNote(NoteObject _note)
     {
         _note.gameObject.SetActive(false);
+        activeNotes.Remove(_note);
 
         if (_note is LongNote l)
             longPool.Enqueue(l);

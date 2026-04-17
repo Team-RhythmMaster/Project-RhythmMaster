@@ -62,9 +62,9 @@ public abstract class NoteObject : MonoBehaviour
     protected virtual void CheckMiss(float _currentTime)
     {
         // 현재 시간 - 노트 시간 > Miss 판정 허용 오차
-        if (!isHit && _currentTime - data.time > JudgeManager.miss)
+        if (!isHit && _currentTime - data.time > ScoreManager.miss)
         {
-            JudgeManager.Instance.Judgment(JudgeType.Miss, this);
+            ScoreManager.Instance.Judgment(JudgeType.Miss, this);
             Remove();
         }
     }

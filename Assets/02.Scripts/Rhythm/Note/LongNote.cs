@@ -71,7 +71,7 @@ public class LongNote : NoteObject
     {
         diff = Mathf.Abs(data.time - currentTime);
 
-        if (diff <= JudgeManager.bad)
+        if (diff <= ScoreManager.bad)
         {
             isHit = true;
             isHolding = true;
@@ -80,11 +80,11 @@ public class LongNote : NoteObject
             tailRenderer.sprite = noteHitSprites[4];
             NoteManager.Instance.SetActiveLongNote(data.lane, this);
 
-            if (diff <= JudgeManager.perfect)
+            if (diff <= ScoreManager.perfect)
                 judge = JudgeType.Perfect;
-            else if (diff <= JudgeManager.great)
+            else if (diff <= ScoreManager.great)
                 judge = JudgeType.Great;
-            else if (diff <= JudgeManager.good)
+            else if (diff <= ScoreManager.good)
                 judge = JudgeType.Good;
             else
                 judge = JudgeType.Bad;
@@ -93,14 +93,14 @@ public class LongNote : NoteObject
 
     void Complete()
     {
-        JudgeManager.Instance.Judgment(judge, this);
+        ScoreManager.Instance.Judgment(judge, this);
         NoteManager.Instance.ClearActiveLongNote(data.lane);
         Remove();
     }
 
     void Fail()
     {
-        JudgeManager.Instance.Judgment(JudgeType.Miss, this);
+        ScoreManager.Instance.Judgment(JudgeType.Miss, this);
         NoteManager.Instance.ClearActiveLongNote(data.lane);
         Remove();
     }

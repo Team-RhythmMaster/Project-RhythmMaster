@@ -2,23 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils.EnumType;
 using Utils.ClassUtility;
-using System.Collections.Generic;
 
-public class JudgeManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-    private static JudgeManager instance;
-    public static JudgeManager Instance { get { return instance; } }
-
-    // UI 오브젝트풀
-    public JudgmentUI judgePrefab;
-    private Transform parentTransform;
-    private Queue<JudgmentUI> judgePool = new Queue<JudgmentUI>();
+    private static ScoreManager instance;
+    public static ScoreManager Instance { get { return instance; } }
 
     private PlayerController playerController;
     private Text scoreText;
-
-    // lane별 판정 UI 생성 위치
-    private Vector2[] lanePositions = { new Vector2(-480.0f, 290.0f), new Vector2(-480.0f, -35.0f) };
 
     // 점수 데이터
     public ScoreData scoreData;
@@ -53,27 +44,8 @@ public class JudgeManager : MonoBehaviour
 
     private void Init()
     {
-        parentTransform = GameObject.Find("JudgePool").transform;
         playerController = FindAnyObjectByType<PlayerController>();
         scoreText = GameObject.Find("ScoreText").GetComponentInChildren<Text>();
-    }
-
-    public JudgmentUI JudgmentUIGet()
-    {
-        if (judgePool.Count > 0)
-        {
-            var obj = judgePool.Dequeue();
-            obj.gameObject.SetActive(true);
-            return obj;
-        }
-
-        return Instantiate(judgePrefab, parentTransform);
-    }
-
-    public void JudgementUIReturn(JudgmentUI _obj)
-    {
-        _obj.gameObject.SetActive(false);
-        judgePool.Enqueue(_obj);
     }
 
     // 판정 결과 처리
@@ -108,14 +80,7 @@ public class JudgeManager : MonoBehaviour
                 break;
         }
 
-        FeedbackSystem.Instance.PlayFeedback(_result, _note.GetLane());
-    }
-
-    // 판정 UI 생성 및 콤보 UI 업데이트
-    public void ShowJudge(JudgeType _data, int _lane, int _score)
-    {
-        JudgmentUIGet().Play(_data, lanePositions[_lane]);
-        scoreText.text = _score.ToString();
+        JudgeManager.Instance.PlayFeedback(_result, _note.GetLane());
     }
 
     // 정확도 계산
@@ -134,5 +99,10 @@ public class JudgeManager : MonoBehaviour
 
         // 정확도 = (가중치합 / 전체 노트 수) × 100
         return (weightedSum / RhythmPartManager.Instance.songData.notes.Count) * 100f;
+    }
+
+   public void SetScore(string _score)
+    {
+        scoreText.text = _score;
     }
 }

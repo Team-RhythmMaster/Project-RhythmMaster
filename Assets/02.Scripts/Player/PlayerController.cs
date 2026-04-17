@@ -1,14 +1,12 @@
-using UnityEngine;
 using Spine.Unity;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private SkeletonAnimation skeletonAnimation;
-
-    public AnimationReferenceAsset idleAnim;
-    public AnimationReferenceAsset jumpAnim;
+    private SkeletonAnimation currentCharacter;
+    public SkeletonDataAsset[] charactersData;
 
     private Slider hpSlider;
     private Text hpGuageText;
@@ -31,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        skeletonAnimation = GetComponent<SkeletonAnimation>();
+        currentCharacter = GetComponent<SkeletonAnimation>();
         hpSlider = GameObject.Find("HPSlider").GetComponent<Slider>();
         hpGuageText = GameObject.Find("HPGaugeText").GetComponent<Text>();
     }
@@ -50,10 +48,24 @@ public class PlayerController : MonoBehaviour
         ApplyBetterJump();
     }
 
+    // 플레이어 상태 초기화
+    public void ResetState()
+    {
+        isGrounded = true;
+        isLanding = false;
+
+        rb.linearVelocity = Vector2.zero;
+
+        currentCharacter.ClearState();
+        currentCharacter.Skeleton.SetToSetupPose();
+
+        currentCharacter.AnimationState.SetAnimation(0, "idle", true);
+    }
+
     private void Jump()
     {
         isGrounded = false;
-        SetAnim(jumpAnim, false, 3.0f);
+        SetAnim("jump", false, 3.0f);
 
         float gravity = Physics2D.gravity.y * rb.gravityScale;
         float jumpVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -98,7 +110,7 @@ public class PlayerController : MonoBehaviour
             if (landingTimer <= 0f)
             {
                 isLanding = false;
-                SetAnim(idleAnim, true);
+                SetAnim("idle", true);
             }
         }
     }
@@ -118,16 +130,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 애니메이션 설정
-    private void SetAnim(AnimationReferenceAsset _anim, bool _loop, float _timeScale = 1.0f)
-    {
-        var entry = skeletonAnimation.AnimationState.SetAnimation(0, _anim, _loop);
-        entry.TimeScale = _timeScale;
-    }
-
     private bool IsGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         return hit.collider != null;
+    }
+
+    // 애니메이션 변경
+    private void SetAnim(string _animName, bool _loop, float _timeScale = 1.0f)
+    {
+        var anim = currentCharacter.Skeleton.Data.FindAnimation(_animName);
+
+        if (anim == null)
+            return;
+
+        var entry = currentCharacter.AnimationState.SetAnimation(0, _animName, _loop);
+        entry.TimeScale = _timeScale;
+    }
+
+    // 캐릭터 변경 → CharacterManager로 이동
+    public void ChangeCharacter(int _index)
+    {
+        if (_index < 0 || _index >= charactersData.Length)
+            return;
+
+        currentCharacter.ClearState();
+        currentCharacter.skeletonDataAsset = charactersData[_index];
+        currentCharacter.Initialize(true);
+
+        currentCharacter.AnimationState.SetAnimation(0, "idle", true);
     }
 }
