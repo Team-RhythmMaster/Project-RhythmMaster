@@ -59,7 +59,7 @@ namespace Utils.EnumType
         S,
         A,
         B,
-        c,
+        C,
         D,
         F
     }

@@ -38,14 +38,19 @@ public class ScoreManager : MonoBehaviour
         {
             instance = this;
         }
-
-        Init();
     }
 
-    private void Init()
+    private void Start()
     {
+        scoreData = new ScoreData();
         playerController = FindAnyObjectByType<PlayerController>();
         scoreText = GameObject.Find("ScoreText").GetComponentInChildren<Text>();
+    }
+
+    // 초기화
+    private void Init()
+    {
+        scoreData = new ScoreData();
     }
 
     // 판정 결과 처리
@@ -55,26 +60,33 @@ public class ScoreManager : MonoBehaviour
         {
             case JudgeType.Perfect:
                 scoreData.combo++;
+                scoreData.perfect++;
                 scoreData.score += perfectScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(3f);
                 break;
             case JudgeType.Great:
                 scoreData.combo++;
+                scoreData.great++;
                 scoreData.score += greatScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(2f);
                 break;
             case JudgeType.Good:
                 scoreData.combo++;
+                scoreData.good++;
                 scoreData.score += goodScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(1f);
                 break;
             case JudgeType.Bad:
+                scoreData.maxCombo = (scoreData.maxCombo < scoreData.combo) ? scoreData.combo : scoreData.maxCombo;
                 scoreData.combo = 0;
+                scoreData.bad++;
                 scoreData.score += badScore * FeverManager.Instance.GetMultiplier();
                 FeverManager.Instance.AddGauge(-5f);
                 break;
             case JudgeType.Miss:
+                scoreData.maxCombo = (scoreData.maxCombo < scoreData.combo) ? scoreData.combo : scoreData.maxCombo;
                 scoreData.combo = 0;
+                scoreData.miss++;
                 FeverManager.Instance.AddGauge(-10f);
                 playerController.OnDamage(missScore);
                 break;

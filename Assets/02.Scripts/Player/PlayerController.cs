@@ -125,8 +125,8 @@ public class PlayerController : MonoBehaviour
 
         if (currentHP <= 0f)
         {
-            // Game Over 처리
-            //RhythmPartManager.Instance.EndGame();
+            // Game Over 처리 → 게임 오버로 변경 예정
+            RhythmPartManager.Instance.EndGame();
         }
     }
 

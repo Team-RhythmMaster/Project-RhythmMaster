@@ -9,7 +9,7 @@ public class RhythmPartManager : MonoBehaviour
     public static RhythmPartManager Instance {get { return instance; } }
 
     private NoteGenerator noteGenerator;
-    private GameObject gameEndPhanel;
+    private ResultUI resultUI;
 
     public SaveData saveData;
     public SongDataSO songData;
@@ -52,8 +52,8 @@ public class RhythmPartManager : MonoBehaviour
 
     private void Init()
     {
+        resultUI = GameObject.Find("MainCanvas").transform.GetChild(1).GetComponent<ResultUI>();
         noteGenerator = FindAnyObjectByType<NoteGenerator>();
-        gameEndPhanel = GameObject.Find("MainCanvas").transform.GetChild(1).gameObject;
     }
 
     // 게임 종료 처리
@@ -63,7 +63,6 @@ public class RhythmPartManager : MonoBehaviour
         noteGenerator.isSpawning = false;
         AudioManager.Instance.Stop();
 
-        ShowResultUI();
         SaveResult(songData.id, ScoreManager.Instance.scoreData.score, ScoreManager.Instance.scoreData.combo, ScoreManager.Instance.CalculateAccuracy());
     }
 
@@ -90,6 +89,7 @@ public class RhythmPartManager : MonoBehaviour
         if (_combo > record.maxCombo)
             record.maxCombo = _combo;
 
+        resultUI.ShowResultUI(record);
         DataManager.Instance.SaveJson(saveData, "SongDatabase");
     }
 
@@ -101,10 +101,5 @@ public class RhythmPartManager : MonoBehaviour
         if (_accuracy >= 0.80f) return "C";
         if (_accuracy >= 0.70f) return "D";
         return "F";
-    }
-
-    public void ShowResultUI()
-    {
-        gameEndPhanel.SetActive(true);
     }
 }
